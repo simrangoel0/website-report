@@ -146,12 +146,11 @@
       <div class="persona-container">
         <div class="persona">
           <p>Persona 1: Landon (CS Student @ a Hackathon)</p>
-          <img src="requirements-assets/Persona 1.png" alt="Landon">
+          <img src="Persona 1.png" alt="Landon">
         </div>
         <div class="persona">
           <p>Persona 2: Emma (Project Manager)</p>
-          <img src="requirements-assets/Persona 2.png" alt="Emma">
-
+          <img src="Persona 2.png" alt="Emma">
         </div>
       </div>
     </section>
@@ -375,13 +374,129 @@
           </table>
         </div>
       </div>
+
+      <img src="UseCasediagram.drawio (1).png" alt="Landon">
     </section>
 
     <section id="moscow" class="mb-5">
-      <h2>MoSCoW Requirements</h2>
-      <p>Your MoSCoW requirements content...</p>
-      <p>Functional Requirements</p>
+      <p>MoSCoW Requirements
+      <p>
+      <p>
+      <h2 style="font-family:Arial, sans-serif;">Functional Requirements</h2>
+      <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif;">
+        <thead>
+          <tr>
+            <th style="background-color:#007bff; color:#fff; padding:10px; width:25%; text-align:left;">Must Have</th>
+            <th style="background-color:#28a745; color:#fff; padding:10px; width:25%; text-align:left;">Should Have</th>
+            <th style="background-color:#ffc107; color:#000; padding:10px; width:25%; text-align:left;">Could Have</th>
+            <th style="background-color:#dc3545; color:#fff; padding:10px; width:25%; text-align:left;">Won't Have</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Must Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>Upload a screenshot and generate a corresponding CraftJS layout using AI.</li>
+                <li>Users describe a webpage in natural language, and AI generates a CraftJS layout.</li>
+                <li>Modify design attributes, add features, and receive context-aware AI suggestions.</li>
+                <li>Generate frontend code that is exportable in different languages and frameworks.</li>
+                <li>AI suggests refinements to colour schemes, layouts, and component alignment.</li>
+              </ol>
+            </td>
+            <!-- Should Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>AI generates complex, nested layouts based on user descriptions.</li>
+                <li>AI remembers user interactions and refines components/layouts accordingly.</li>
+                <li>AI generates meaningful comments for exported code to enhance readability.</li>
+                <li>Convert exported UI code into various frameworks as per the user’s choice.</li>
+              </ol>
+            </td>
+            <!-- Could Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>AI generates boilerplate code for quick integration with other projects.</li>
+                <li>Users describe animations in plain language, and AI generates CSS/JS code.</li>
+              </ol>
+            </td>
+            <!-- Won't Have (Renamed from "Would") -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>AI provides both natural language explanations and structured output for layouts.</li>
+              </ol>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
       <p>Non-Functional Requirements</p>
+      <p>
+
+      <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif;">
+        <thead>
+          <tr>
+            <th style="background-color:#007bff; color:#fff; padding:10px; width:25%; text-align:left;">Must Have</th>
+            <th style="background-color:#28a745; color:#fff; padding:10px; width:25%; text-align:left;">Should Have</th>
+            <th style="background-color:#ffc107; color:#000; padding:10px; width:25%; text-align:left;">Could Have</th>
+            <th style="background-color:#dc3545; color:#fff; padding:10px; width:25%; text-align:left;">Won't Have</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Must Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>
+                  <strong>Fast AI Processing (Performance):</strong>
+                  <br>UI generation must take less than 5 seconds to ensure an optimal user experience.
+                </li>
+                <li>
+                  <strong>Intuitive UI (Usability):</strong>
+                  <br>The interface must be easy to use so that users can generate and refine the UI with minimal
+                  learning curve.
+                </li>
+                <li>
+                  <strong>Data Privacy (Security):</strong>
+                  <br>The system must not store any user screenshots or input data externally.
+                </li>
+              </ol>
+            </td>
+            <!-- Should Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>
+                  <strong>Modular Codebase (Maintainability):</strong>
+                  <br>The code should be structured in a modular way to support easy updates and extensions.
+                </li>
+                <li>
+                  <strong>Plugin Support (Extensibility):</strong>
+                  <br>The platform should be designed to allow future extensions for additional AI models and IDEs
+                  beyond VSCode.
+                </li>
+              </ol>
+            </td>
+            <!-- Could Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <ol style="margin:0; padding-left:20px;">
+                <li>
+                  <strong>Community Contributions (Open Source):</strong>
+                  <br>The codebase could be made accessible for developers to contribute and improve the project,
+                  promoting a community-driven approach.
+                </li>
+              </ol>
+            </td>
+            <!-- Won't Have -->
+            <td style="vertical-align:top; padding:10px; border:1px solid #ccc;">
+              <p style="margin:0; padding-left:20px;">
+                <!-- No items listed for Won't Have -->
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
     </section>
   </main>
 
