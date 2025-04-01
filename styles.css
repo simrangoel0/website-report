@@ -5,7 +5,7 @@ body {
     padding: 0;
     background-color: #ffffff;
     color: #181f34;
-    font-size: 24px;
+    font-size: 22px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -14,9 +14,6 @@ body {
     box-sizing: border-box;
     /* Ensures consistent sizing */
 }
-html {
-    font-size: 0.75em; /* or 0.8em or whatever size you prefer */
-  }
   
 
 /* =================== Smooth Page Transitions =================== */
@@ -135,7 +132,7 @@ h1.my-5+p {
     /* Make subtitle text white */
     margin-left: 25px;
     /* make text samller*/
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 400;
     margin-top: -20px;
 
