@@ -1,0 +1,102 @@
+/********************************************************
+ * rubiks.css
+ * Prefixed class names with 'rubix-' to avoid collisions
+ ********************************************************/
+
+/* 
+  1) Wrapper that fills the screen with a dark background.
+  You can remove or change background if you prefer. 
+*/
+.rubix-loader-bg {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #181f34; /* dark theme color */
+    overflow: hidden;
+  }
+  
+  /* 
+    2) Center the Rubik’s cube in the middle of the wrapper 
+    without conflicting with any .container classes from Bootstrap
+  */
+  .rubix-cube-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px; /* for the 3D effect */
+  }
+  
+  /* 
+    3) The 3D cube itself, prefixed class 'rubix-cube' 
+  */
+  .rubix-cube {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform-style: preserve-3d;
+    animation: rubix-rotate-cube 5s linear infinite;
+  }
+  
+  /* 
+    4) Each face is 150×150, subdivided into 9 squares. 
+    .rubix-face ensures no clash with .face from other CSS.
+  */
+  .rubix-face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    transform: translateZ(75px);
+  }
+  
+  /* 
+    5) Single square: .rubix-square 
+    9 squares per face => 3×3
+  */
+  .rubix-square {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    transition: background-color 1s;
+    border: 1px solid #181f34; /* optional small border */
+  }
+  
+  /* 
+    6) Position faces around the cube
+    translateZ(75px) is half of 150 => centers each face 
+  */
+  .rubix-front  { transform: rotateY(0deg)   translateZ(75px);   }
+  .rubix-back   { transform: rotateX(180deg) translateZ(75px);   }
+  .rubix-right  { transform: rotateY(90deg)  translateZ(75px);   }
+  .rubix-left   { transform: rotateY(-90deg) translateZ(75px);   }
+  .rubix-top    { transform: rotateX(90deg)  translateZ(75px);   }
+  .rubix-bottom { transform: rotateX(-90deg) translateZ(75px);   }
+  
+  /* =======================
+     Cube Rotation
+  ======================= */
+  @keyframes rubix-rotate-cube {
+    0%   { transform: rotateX(0deg)    rotateY(0deg); }
+    50%  { transform: rotateX(180deg)  rotateY(180deg); }
+    100% { transform: rotateX(360deg)  rotateY(360deg); }
+  }
+  
+  /* =======================
+     Colors & "Solving" Logic 
+     (Optional simplified scramble/solve)
+  ======================= */
+  /* By default, we can color squares with theme colors. 
+     We'll do a simple pattern: Even/odd for variety. */
+  .rubix-face .rubix-square:nth-child(odd)  { background-color: #9eb7c6; }
+  .rubix-face .rubix-square:nth-child(even) { background-color: #edefd9; }
+  
+  /* 
+     If you prefer an animated scramble -> solve approach,
+     you can define keyframes for each face, 
+     e.g. rubix-front-solve, rubix-back-solve, etc. 
+     For now, let's keep it simpler. 
+  */
+  

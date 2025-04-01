@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Blueprint AI - Appendices</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand" href="index.html">
+          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+        </a>
+        <!-- Toggle for mobile view -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <!-- Home Link -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="requirements.html">Requirements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="research.html">Research</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ui-design.html">UI Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="system-design.html">System Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="implementation.html">Implementation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testing.html">Testing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="evaluation.html">Evaluation</a>
+            </li>
+
+            <!-- Appendices link marked as active with a dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active"
+                 href="appendices.html"
+                 id="appendicesDropdown"
+                 role="button"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                Appendices
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="appendicesDropdown">
+                <li><a class="dropdown-item" href="appendices.html#user-manual">User manual</a></li>
+                <li><a class="dropdown-item" href="appendices.html#deployment-manual">Deployment manual</a></li>
+                <li><a class="dropdown-item" href="appendices.html#legal-issues-and-processes">Legal issues and processes</a></li>
+              </ul>
+            </li>
+              
+            <li class="nav-item">
+                <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Title/Intro -->
+    <h1 class="my-5">Appendices</h1>
+    <p>Manuals to using our project, a link to our dev blog and our legal statement</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container flex-grow-1">
+    <!-- Sections inside the same container -->
+    <section id="user-manual" class="mb-5">
+      <h2>User manual</h2>
+      <p>Provide instructions or documentation for end users here.</p>
+    </section>
+
+    <section id="deployment-manual" class="mb-5">
+      <h2>Deployment manual</h2>
+      <p>Explain how to deploy the application or system.</p>
+    </section>
+
+    <section id="legal-issues-and-processes" class="mb-5">
+      <h2>Legal issues and processes</h2>
+      <p><strong>GDPR Compliance Statement</strong><br>
+        In compliance with the General Data Protection Regulation (GDPR) and applicable data protection laws, the Blueprint AI UI v1.0 extension explicitly declares that it does not independently store or process any personal data related to end users. All design interactions, preferences, and project states are maintained exclusively as anonymised JSON node trees stored locally on the user's device, thus safeguarding individual privacy. It is important to acknowledge, however, that third-party ReactJS libraries (such as CraftJS, FluentUI, and React Grid Layout), integrated into this extension might incidentally process transient user information. Any such incidental processing adheres strictly to GDPR principles and does not involve permanent storage or handling by Blueprint AI UI v1.0. <br><br>
+       <strong>Privacy Statement</strong><br>
+       Blueprint AI UI v1.0 maintains rigorous standards of transparency and accountability, ensuring users retain full visibility over how their design data is managed. All generated content, including AI-assisted layouts via GPT-4 and DALL-E 3, is performed without retaining personally identifiable user data, aligning with GDPR and the Data Protection Act 2018. Users have the right to inquire into the handling of data by integrated third-party libraries, and our documentation transparently details the minimal scope of data interactions. Thus, our system is fully GDPR-compliant, designed to foster trust and confidence among users through stringent adherence to lawful data processing practices and clear delineation of data-handling responsibilities.
+       For more details, please refer to the   
+       <a href="https://web.mit.edu/privacy/" target="_blank" rel="noopener noreferrer">
+        MIT Privacy Statement.
+      </a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto">
+    <div class="footer-logos d-flex justify-content-center align-items-center">
+      <a href="https://www.ucl.ac.uk" target="_blank">
+        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
+      </a>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank">
+        <i class="fa-brands fa-square-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional custom scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint AI - UI Design</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand" href="index.html">
+          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+        </a>
+        <!-- Toggle for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="requirements.html">Requirements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="research.html">Research</a>
+            </li>
+            <!-- UI Design link marked as 'active' with dropdown to its sections -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="ui-design.html" id="uiDesignDropdown"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                UI Design
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="uiDesignDropdown">
+                <li><a class="dropdown-item" href="ui-design.html#design-principles">Design Principles</a></li>
+                <li><a class="dropdown-item" href="ui-design.html#sketches">Sketches</a></li>
+                <li><a class="dropdown-item" href="ui-design.html#interactive-wireframe">Interactive Wireframe</a></li>
+                <li><a class="dropdown-item" href="ui-design.html#references">References</a></li>
+
+              </ul>
+            </li>
+            <!-- Other nav links -->
+            <li class="nav-item">
+              <a class="nav-link" href="system-design.html">System Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="implementation.html">Implementation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testing.html">Testing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="evaluation.html">Evaluation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appendices.html">Appendices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Title/Intro -->
+    <h1 class="my-5">User Interface Design</h1>
+    <p>This section outlines the front-end layout, design principles, and interactive prototypes ensuring an optimal user experience.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container flex-grow-1">
+
+    <!-- UI Design Overview -->
+    <section id="design-overview" class="mb-5">
+      <h2>UI Design Overview</h2>
+      <p>Given that our project is targeted to a wide range of users, from programmers to designers – all with different levels of experience; we had to design a UI that would cater to these different groups. A careful balance was considered to create a UI that allowed for experienced designers to have ample avenues to compose and customise but not inundate regular users with too many features. Similarly, the UI needed to be intuitive but at the same time, not compromise on the application’s capabilities.</p>
+      <p>We referenced highly popular design products such as Wix and Canva, using Jakob Nielson’s 10 Usability Heuristics for UI Design to guide our design process [1].</p>
+    </section>
+
+    <!-- Design Principles (with consistent sub-sectioning) -->
+    <section id="design-principles" class="mb-5">
+      <h2>Design Principles</h2>
+
+      <!-- Customisation Sidebar -->
+      <section id="customisation-sidebar" class="mb-4">
+        <p><strong>1. Customisation Sidebar</strong></p>
+        <p>Canva’s editing studio affords an elegant UI design that fulfills many of Nielson’s Usability Heuristics. In particular, the side tab which contains all the editing features—from adding elements to text—is clearly and concisely nested on the left. This creates a functional, non-cluttered layout. Additionally, the structure that side tabs afford allows for Information Architecture (IA) to be practised. IA is an essential design principle that breaks down complicated and complex interfaces into logical, useful components that users can use to accomplish their tasks [2]. Furthermore, we took heavy cues from a well-researched Medium article detailing the essential features a side tab must have, especially from its width and size – for space optimisation – and a quick search feature for maximum efficiency and convenience [3].</p>
+        <img src="ui-design-assets/canva_screenshot_1.svg" alt="Canva Screenshot 1" class="img-fluid custom-margin full-width-img">
+        <section class="usability-heuristics mt-4">
+          <h4>Usability Heuristics</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Design Feature</th>
+                  <th>Usability Heuristic</th>
+                  <th>Implementation into Blueprint AI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="3">Customisation sidebar</td>
+                  <td>Recognition rather than recall</td>
+                  <td>All fields and labels are visible and labelled on the left of the UI (adding elements, textboxes, etc). Makes it easy for the user to access.</td>
+                </tr>
+                <tr>
+                  <td>Flexibility and efficiency of use</td>
+                  <td>Users have many customisation and personalisation options as company logos, drawings can be uploaded and stored in the sidebar for use.</td>
+                </tr>
+                <tr>
+                  <td>Aesthetic and minimalist design</td>
+                  <td>Each section in the sidebar displays only relevant information, the sidebar is also portioned distinctly, ensuring key features are presented.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!-- Top Bar -->
+      <section id="top-bar" class="mb-4">
+        <p><strong>2. Top Bar</strong></p>
+        <p>We also took direction from the top bars of Wix and Canva. These bars contained crucial project-level information and essential functions needed for the user to save, publish, undo their work. The buttons were clearly labelled or had icons that were established and commonly recognised for users – which is highly effective in conveying important information to the user without taking up much space [4]. Additionally, on the top bar of the Wix page, the buttons to toggle between computer view and mobile phone view were ingeniously formatted – with this being a key feature of our project, we followed Wix’s stylish incorporation. This design was also incorporated into our sketches and eventually the final UI design of our project.</p>
+        <img src="ui-design-assets/canva_screenshot_2.svg" alt="Canva Screenshot 2" class="img-fluid custom-margin full-width-img">
+        <section class="usability-heuristics mt-4">
+          <h4>Usability Heuristics</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Design Feature</th>
+                  <th>Usability Heuristic</th>
+                  <th>Implementation into Blueprint AI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="4">Top Bar</td>
+                  <td>Visibility of system status</td>
+                  <td>Flags were added to let the user know if they are in editing mode and if their work was saved up to date.</td>
+                </tr>
+                <tr>
+                  <td>Match between the system and the real world</td>
+                  <td>Labels added and icons used are well-known, such as the undo-redo buttons, download button, etc.</td>
+                </tr>
+                <tr>
+                  <td>User controlled freedom</td>
+                  <td>Clearly marked undo-redo buttons and exit buttons were included.</td>
+                </tr>
+                <tr>
+                  <td>Consistency and standards</td>
+                  <td>Project layout is modelled after commonly used, industry-leading UIs such as Wix and Canva.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!-- AI Chatbot/AI Features -->
+      <section id="ai-chatbot" class="mb-4">
+        <p><strong>3. AI Chatbot/AI Features</strong></p>
+        <p>We improved and innovated on the AI features in Wix and Canva. Since one of the main selling points of Blueprint AI is the use and integration of AI into the UI development and design process, we expanded upon the AI functionality in the UI and revamped its visibility, usability and accessibility.</p>
+        <p>For Wix and Canva, AI was not a prominent feature and is relegated into the corner of the left sidebar, shifting the focus onto the user’s own input and customisation. Furthermore, the use of AI is severely limited and restricted. As we envisioned AI to be woven seamlessly and tailored into all aspects of UI creation, we deployed an AI chat bot system which is featured prominently in the UI whilst maintaining the main customisation features a user can apply. We ensured that the chat box design also adhered to key UI principles by relying on visual cues such as a <strong>‘Blueprint AI is typing…’</strong> indicator to alert the user that their prompt is being handled [5]. These subtle cues guide the user through using the chatbot effectively.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="ui-design-assets/canva_wix_screenshot_1.png" alt="Wix Screenshot 1" class="img-fluid custom-margin full-width-img">
+          </div>
+          <div class="col-md-6">
+            <img src="ui-design-assets/canva_wix_screenshot_2.png" alt="Wix Screenshot 2" class="img-fluid custom-margin full-width-img">
+          </div>
+        </div>
+        <section class="usability-heuristics mt-4">
+          <h4>Usability Heuristics</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Design Feature</th>
+                  <th>Usability Heuristic</th>
+                  <th>Implementation into Blueprint AI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="3">AI chatbot / AI features</td>
+                  <td>Error prevention</td>
+                  <td>Chatbot design allows recording of prompts and logs changes and conversations, allowing for previous builds to be re-generated prior to an error.</td>
+                </tr>
+                <tr>
+                  <td>Help users recognise, diagnose, and recover from errors</td>
+                  <td>AI suggestions highlight overflows and obscured elements clearly.</td>
+                </tr>
+                <tr>
+                  <td>Help and documentation</td>
+                  <td>Chatbot allows for easy search and retrieval of project features through querying the AI.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+    </section>
+
+    <!-- Sketches -->
+    <section id="sketches" class="mb-5">
+      <h2>Sketches</h2>
+      <p>Sketches were generated at the early conception stages of the project. These sketches were a quick way to actualise our ideas into concrete concepts without getting too carried away on the implementations of these ideas [6]. Revisions and edits could be done easily, which allowed us to gather user feedback faster and update our designs more efficiently.</p>
+      <p><strong class="fs-4">DESIGN A</strong></p>
+      <p>AI prompter at the side of the application, with portrait chat log. Direction: Chat bot-oriented design, similar to ChatGPT, with Blueprint AI responding on text alongside updating UI.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="ui-design-assets/designA_sketch1.jpg" alt="Design A Sketch 1" class="img-fluid custom-margin full-width-img">
+        </div>
+        <div class="col-md-6">
+          <img src="ui-design-assets/designA_sketch2.jpg" alt="Design A Sketch 2" class="img-fluid custom-margin full-width-img">
+        </div>
+      </div>
+      <p><strong class="fs-4">DESIGN B</strong></p>
+      <p>AI prompter located at the bottom of application; chat log can be viewed on clicking the 'history' button. Direction: One way communication, where prompts are processed and made directly into changes on the UI.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="ui-design-assets/designB_sketch1.jpg" alt="Design B Sketch 1" class="img-fluid custom-margin full-width-img">
+        </div>
+        <div class="col-md-6">
+          <img src="ui-design-assets/designB_sketch2.jpg" alt="Design B Sketch 2" class="img-fluid custom-margin full-width-img">
+        </div>
+      </div>
+      <p>We gathered feedback for our designs which allowed us to refine our sketches. Google Form surveys of 25 participants were used to get a quick, quantitative understanding of our sketches, while semi-structured interviews from a sample of surveyed participants were used to get deeper qualitative feedback.</p>
+      <p><strong>Design A</strong> was preferred as shown in Figure 1. Some users who preferred Design A wanted a clear response from the AI—similar to current AI chatbot designs such as ChatGPT and Copilot. This back and forth texting style interface would be more intuitive and recognisable.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="ui-design-assets/figure1.png" alt="Figure 1" class="img-fluid custom-margin same-height full-width-img">
+          <p><u>Figure 1. Pie chart showing design preference</u></p>
+        </div>
+        <div class="col-md-6">
+          <img src="ui-design-assets/figure2.png" alt="Figure 2" class="img-fluid custom-margin same-height full-width-img">
+          <p><u>Figure 2. Pie chart showing views on left side bar</u></p>
+        </div>
+      </div>
+      <p>Some users indicated the need for a confirmation button to preview changes proposed by the AI, instead of the AI making its own changes directly. Most users indicated that they would prefer having all the various buttons (download button, pages, widgets, etc) to be on one side of the page, to make the page less cluttered and cleaner. Most users agreed with the design of the customisation side panel (Figure 2), with some stating it was a much needed feature as it provided all the tools necessary for design. Those surveyed who disagreed with the design stated that a more concise, segmented design was needed.</p>
+      <p>We took into consideration all the feedback and updated our sketches to reflect this feedback in our improved sketches below.</p>
+      <p><strong class="fs-4">IMPROVED SKETCH</strong></p>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="ui-design-assets/improved_sketch1.jpg" alt="Improved Sketch 1" class="img-fluid custom-margin full-width-img">
+        </div>
+        <div class="col-md-6">
+          <img src="ui-design-assets/improved_sketch2.jpg" alt="Improved Sketch 2" class="img-fluid custom-margin full-width-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- Wireframe Prototype -->
+    <section id="wireframe-prototype" class="mb-5">
+      <h2>Wireframe Prototype</h2>
+      <p>Wireframes are an essential part of design, they allow for a greater sense of structure and cohesiveness of the design [7]. The following prototype was designed based on the improved sketch. This prototype allowed us to visualise our designs clearer and develop the design in a more concrete and realistic manner. With these wireframe prototypes, we were able to establish the flow for users of Blueprint AI.</p>
+      <img src="ui-design-assets/wireframe_prototype1.png" alt="Wireframe Prototype 1" class="img-fluid custom-margin">
+      <img src="ui-design-assets/wireframe_prototype2.png" alt="Wireframe Prototype 2" class="img-fluid custom-margin">
+      <p><strong class="fs-4">Evaluation of Sketches</strong></p>
+      <p>As no design is perfect, we evaluated the prototype to uphold the design thinking process. A heuristic evaluation consisting of parts of Nielsen’s 10 usability principles was utilised to evaluate our initial wireframe prototype. This allowed us to maintain user-centric thinking in the design process, such that Blueprint AI is kept on par with industry standards. We employed the use of a Severity Rating system taken from Nielson, to help us diagnose and prioritize which areas we needed to fix [8].</p>
+      <img src="ui-design-assets/severity_ratings.png" alt="Severity Ratings" class="img-fluid custom-margin">
+  
+      <div class="severity-key">
+        <p class="left-text"><u>Severity Ratings:</u></p>
+        0 = I don't agree that this is a usability problem at all || 
+        1 = Cosmetic problem: need not be fixed unless extra time is available || 
+        2 = Minor usability problem: fixing this should be given low priority || 
+        3 = Major usability problem: important to fix, so should be given high priority ||
+        4 = Usability catastrophe: imperative to fix before product can be released 
+      </div>
+      <p>Based on the evaluation, we improved on the wireframe prototype. This refined version proved to be substantial and finally suitable enough to begin developing Blueprint AI.</p>
+      <img src="ui-design-assets/wireframe_prototype3.png" alt="Wireframe Prototype 3" class="img-fluid custom-margin">
+    </section>
+
+    <!-- Interactive Wireframe -->
+    <section id="interactive-wireframe" class="mb-5">
+      <h2>Interactive Wireframe</h2>
+      <p>During the development process, user feedback was continuously sought. This enabled us to stay focused on the user, not only saving time but also improving the quality of the product [9]. The continuous input from fellow students, full-time software developers and project managers allowed us to shape Blueprint AI into a highly functional product that users can learn quickly, use effectively and deploy their frontend code effortlessly.</p>
+      <p>The final UI of Blueprint AI below is the result of these countless revisions.</p>
+      <div class="d-flex justify-content-around">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wireframe1Modal">
+          Open interactive wireframe!
+        </button>
+      </div>
+
+      <!-- Fix: Properly close modal structure -->
+      <div class="modal fade" id="wireframe1Modal" tabindex="-1" aria-labelledby="wireframe1ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="wireframe1ModalLabel">Interactive Wireframe</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body position-relative">
+              <img id="wireframeImage" src="ui-design-assets/1.png" alt="Wireframe Home Page" class="img-fluid">
+              <!-- Invisible clickable area with adjusted flag -->
+              <div id="clickableArea"
+                   style="position: absolute; top: 82%; left: 78%; transform: translateX(-50%); width: 160px; height: 40px;">
+                <button id="clickableButton" class="btn p-0"
+                        style="width: 100%; height: 100%; opacity: 0;"
+                        onclick="changeImage()">
+                </button>
+                <div class="position-absolute"
+                     style="top: -45px; left: 55%; transform: translateX(-50%); white-space: nowrap;">
+                  <span class="badge bg-danger" style="font-size: 0.75rem;">Click here</span>
+                  <div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #dc3545; margin-left: auto; margin-right: auto;"></div>
+                </div>
+              </div>
+              <!-- Start Over button (initially hidden) -->
+              <button id="startOverButton"
+                      class="btn btn-secondary"
+                      style="display: none; position: absolute; bottom: 20px; right: 20px;"
+                      onclick="resetImage()">
+                Start Over
+              </button>
+            </div> <!-- end .modal-body -->
+
+            <script>
+              let currentImage = 1;
+              function changeImage() {
+                const wireframeImage = document.getElementById('wireframeImage');
+                const clickableArea = document.getElementById('clickableArea');
+                const clickableButton = document.getElementById('clickableButton');
+                if (currentImage === 1) {
+                  wireframeImage.src = 'ui-design-assets/2.png';
+                  clickableArea.style.top = '85%';
+                  clickableArea.style.left = '90.5%';
+                  clickableButton.style.opacity = '1';
+                  clickableButton.style.borderRadius = '0%';
+                  clickableButton.style.width = '70px';
+                  clickableButton.style.height = '20px'; 
+                  currentImage = 2;
+                } else if (currentImage === 2) {
+                  wireframeImage.src = 'ui-design-assets/3.png';
+                  clickableArea.style.top = '84%';
+                  clickableArea.style.left = '4.8%';
+                  clickableButton.style.opacity = '1';
+                  clickableButton.style.borderRadius = '0%';
+                  clickableButton.style.width = '20px';
+                  clickableButton.style.height = '20px';
+                  document.querySelector('#clickableArea > div').style.left = '50%';
+                  currentImage = 3;
+                } else if (currentImage === 3) {
+                  wireframeImage.src = 'ui-design-assets/4.png';
+                  clickableArea.style.display = 'none'; // Hide the clickable area
+                  document.getElementById('startOverButton').style.display = 'block'; // Show the start over button
+                  currentImage = 4;
+                }
+              }
+              function resetImage() {
+                const wireframeImage = document.getElementById('wireframeImage');
+                const clickableArea = document.getElementById('clickableArea');
+                const clickableButton = document.getElementById('clickableButton');
+                const startOverButton = document.getElementById('startOverButton');
+                currentImage = 1;
+                wireframeImage.src = 'ui-design-assets/1.png';
+                // Reset clickable area back to its initial properties
+                clickableArea.style.display = 'block';
+                clickableArea.style.top = '82%';
+                clickableArea.style.left = '78%';
+                clickableButton.style.width = '100%';
+                clickableButton.style.height = '100%';
+                clickableButton.style.opacity = '0';
+                startOverButton.style.display = 'none';
+              }
+            </script>
+
+          </div><!-- end .modal-content -->
+        </div><!-- end .modal-dialog -->
+      </div><!-- end .modal -->
+
+    </section>
+
+    <!-- References -->
+    <section id="references" class="mb-5">
+      <h2>References</h2>
+      <p class="left-text">
+        [1] J. Nielsen, “10 Heuristics for User Interface Design,” Nielsen Norman Group, Apr. 24, 1994. 
+        <a href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank">
+          https://www.nngroup.com/articles/ten-usability-heuristics/
+        </a> <br><br>
+        [2] “What Is Information Architecture & Why Does It Matter?,” blog.hubspot.com, Sep. 13, 2022. 
+        <a href="https://blog.hubspot.com/website/information-architecture#what-information-architecture" target="_blank">
+          https://blog.hubspot.com/website/information-architecture#what-information-architecture
+        </a> <br><br>
+        [3] Dmitry Sergushkin, “Best UX Practices for Designing a Sidebar - UX Planet,” Medium, Dec. 23, 2024. 
+        <a href="https://uxplanet.org/best-ux-practices-for-designing-a-sidebar-9174ee0ecaa2" target="_blank">
+          https://uxplanet.org/best-ux-practices-for-designing-a-sidebar-9174ee0ecaa2
+        </a> (accessed Mar. 13, 2025). <br><br>
+        [4] Rajat Bagree, “Why is icon design important in UI design? - Procreator Blog,” ProCreator Blog: Design, Technology, Innovation, Feb. 04, 2024. 
+        <a href="https://procreator.design/blog/why-is-icon-design-important/" target="_blank">
+          https://procreator.design/blog/why-is-icon-design-important/
+        </a> (accessed Mar. 13, 2025). <br><br>
+        [5] “The Art of Conversational AI Chatbot Design: Key Principles and Techniques – Esse AI Blog,” Esse-ai.com, Jun. 05, 2023. 
+        <a href="https://esse-ai.com/blog/?p=430" target="_blank">
+          https://esse-ai.com/blog/?p=430
+        </a> (accessed Mar. 13, 2025). <br><br>
+        [6] Tamanna Tahera, “The Importance Of Sketching,” www.toscaleblog.co.uk. 
+        <a href="https://www.toscaleblog.co.uk/blog/the-importance-of-sketching" target="_blank">
+          https://www.toscaleblog.co.uk/blog/the-importance-of-sketching
+        </a> <br><br>
+        [7] N. Haas, “What Is a Wireframe? 7 Reasons Why Wireframing Is Important In Web Design,” Orbit Media Studios, Mar. 16, 2011. 
+        <a href="https://www.orbitmedia.com/blog/7-reasons-to-wireframe/" target="_blank">
+          https://www.orbitmedia.com/blog/7-reasons-to-wireframe/
+        </a> <br><br>
+        [8] J. Nielsen, “Severity Ratings for Usability Problems,” Nielsen Norman Group, Nov. 01, 1994. 
+        <a href="https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/" target="_blank">
+          https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/
+        </a> <br><br>
+        [9] Marek Strba, “User Feedback,” Guides - Learn user testing & UX research | UXtweak, Aug 2024. 
+        <a href="https://www.uxtweak.com/user-feedback/" target="_blank">
+          https://www.uxtweak.com/user-feedback/
+        </a> <br><br>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-4 mt-auto">
+    <div class="footer-logos d-flex justify-content-center align-items-center">
+      <a href="https://www.ucl.ac.uk" target="_blank">
+        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
+      </a>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank">
+        <i class="fa-brands fa-square-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional custom scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

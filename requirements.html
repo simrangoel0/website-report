@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint AI - Requirements</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo or brand -->
+        <a class="navbar-brand" href="index.html">
+          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+        </a>
+
+        <!-- Toggle button for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+
+            <!-- Home Link -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+
+            <!-- Requirements Link, marked as active -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="requirements.html" id="requirementsDropdown"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Requirements
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="requirementsDropdown">
+                <li><a class="dropdown-item" href="requirements.html#partner-intro">Introduction</a></li>
+                <li><a class="dropdown-item" href="requirements.html#project-goals">Project Goals</a></li>
+                <li><a class="dropdown-item" href="requirements.html#req-gathering">Requirement Gathering</a></li>
+                <li><a class="dropdown-item" href="requirements.html#personas">Personas</a></li>
+                <li><a class="dropdown-item" href="requirements.html#use-cases">Use Cases</a></li>
+                <li><a class="dropdown-item" href="requirements.html#moscow">MoSCoW Requirements</a></li>
+              </ul>
+            </li>
+
+            <!-- Remaining nav links -->
+            <li class="nav-item">
+              <a class="nav-link" href="research.html">Research</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ui-design.html">UI Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="system-design.html">System Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="implementation.html">Implementation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testing.html">Testing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="evaluation.html">Evaluation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appendices.html">Appendices</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1 class="my-5">Requirements</h1>
+    <p>Here we define the project scope, user needs, and key objectives that guide development.</p>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container flex-grow-1">
+    <!-- Sections inside the same container -->
+    <section id="partner-intro" class="mb-5">
+      <h2>Introduction</h2>
+      <p>We are Team 21, developing Blueprint AI, a VSCode extension that integrates AI-driven frontend UI generation.
+        We aim to simplify and accelerate UI development by enabling users to generate and customise frontend layouts
+        directly within VSCode.
+        The project was inspired by the challenges faced by hackathon participants, developers, and project managers who
+        need a fast, efficient, and flexible way to create frontend UIs without extensive manual coding.
+      </p>
+    </section>
+
+    <section id="project-goals" class="mb-5">
+      <h2>Project Goals</h2>
+      <p>Blueprint AI aims to:
+        Provide seamless UI generation using screenshots, sketches, or text prompts.
+        Allow no-code UI editing, making design accessible to both developers and non-developers.
+        Enable user to chat with AI on making changes to frontend design
+        Integrate AI-driven suggestions for design improvements
+        Enable exportable frontend code in multiple languages and frameworks.
+        Ensure a smooth development workflow within VSCode.
+      </p>
+    </section>
+
+    <section id="req-gathering" class="mb-5">
+      <h2>Requirement Gathering</h2>
+      <p>How We Collected Requirements
+        We gathered requirements through:
+        User interviews with developers, UI designers, and project managers.
+        Market research on existing tools like Microsoft PowerApps, Wix and Visily.
+        Feedback from industry professionals to understand development pain points.
+        Technical feasibility studies on AI-driven layout generation.
+        3.2 Surveys and Analysis
+        We designed a survey targeting:
+        Developers who need rapid UI development.
+        Project managers aiming for efficient team workflows.
+        UI/UX designers looking for AI-assisted design suggestions.
+        The survey included:
+        Multiple-choice questions on preferred development tools.
+        Ranking-based questions on UI generation needs.
+        Open-ended questions for feature suggestions.
+        Key Findings:
+        The main reason why people use AI tools is to save time on repetitive tasks (66.7% of people identified speed as
+        being extremely important in frontend development process) and generate design ideas. With most people already
+        using AI tools to assist in programming.
+        We found that improved accuracy, better customisation freedom and integration with popular frameworks and
+        libraries were key requirements in an AI front-end development tool.
+
+
+
+      </p>
+    </section>
+
+    <section id="personas" class="mb-5">
+      <h2>Personas</h2>
+      <div class="persona-container">
+        <div class="persona">
+          <p>Persona 1: Landon (CS Student @ a Hackathon)</p>
+          <img src="requirements-assets/Persona 1.png" alt="Landon">
+        </div>
+        <div class="persona">
+          <p>Persona 2: Emma (Project Manager)</p>
+          <img src="requirements-assets/Persona 2.png" alt="Emma">
+
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="mb-5">
+
+      <h2>Use Cases</h2>
+
+      <div class="use-cases-container">
+
+        <div class="use-case">
+
+          <h2>UC-01: Add API Key</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-01</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>Add API Key</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>User adds their OpenAI API key for AI calls.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. System prompts the user to enter an API key.<br>
+                2. User enters their OpenAI API key.<br>
+                3. System validates the key.<br>
+                4. If valid, system stores the key for future AI interactions.<br>
+                5. System confirms successful API key addition.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>API key successfully added, enabling AI functionalities.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="use-case">
+          <h2>UC-02: Screenshot-to-UI</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-02</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>Screenshot-to-UI</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>User uploads a screenshot, AI generates a UI layout.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. User selects the "Upload Screenshot" option.<br>
+                2. User uploads a UI screenshot.<br>
+                3. AI analyzes the image and extracts UI components.<br>
+                4. AI generates a structured UI layout.<br>
+                5. System displays the generated UI for review.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>The UI layout is successfully generated and ready for further editing or export.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="use-case">
+          <h2>UC-03: Text-to-UI</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-03</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>Text-to-UI</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>User describes UI in text, AI creates layout.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. User selects the "Text-to-UI" option.<br>
+                2. User enters a text description of the UI.<br>
+                3. AI processes the text and generates a UI layout.<br>
+                4. System displays the layout for user review.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>The UI layout is successfully created based on the user's text description.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="use-case">
+          <h2>UC-04: Asking AI to Make Edits</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-04</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>Asking AI to Make Edits</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>User modifies UI components using AI.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. User selects an AI-assisted editing option.<br>
+                2. User provides instructions (e.g., "Change button color to blue").<br>
+                3. AI processes the request and shows the user the updated UI.<br>
+                4. User validates the changes by clicking ‘Accept’ or ‘Reject’.<br>
+                5. System displays the modified UI accordingly.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>UI modifications are successfully applied based on user instructions.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="use-case">
+          <h2>UC-05: Manual Edits</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-05</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>Manual Edits</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>Taking control of the edits manually.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. User selects UI components.<br>
+                2. User makes manual changes (e.g., resizing, repositioning, modifying styles).<br>
+                3. System applies the changes.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>The UI components are successfully modified by the user.</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="use-case">
+          <h2>UC-06: UI Export</h2>
+          <table>
+            <tr>
+              <th>Use Case ID</th>
+              <td>UC-06</td>
+            </tr>
+            <tr>
+              <th>Use Case Name</th>
+              <td>UI Export</td>
+            </tr>
+            <tr>
+              <th>Actor(s)</th>
+              <td>User</td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>User exports generated UI as frontend code.</td>
+            </tr>
+            <tr>
+              <th>Basic Flow</th>
+              <td>
+                1. User selects the "Export UI" option.<br>
+                2. System presents export format choices (React, HTML, etc.).<br>
+                3. User selects the preferred format.<br>
+                4. System generates and downloads the UI code.
+              </td>
+            </tr>
+            <tr>
+              <th>Result</th>
+              <td>The UI is successfully exported in the selected frontend framework.</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="moscow" class="mb-5">
+      <h2>MoSCoW Requirements</h2>
+      <p>Your MoSCoW requirements content...</p>
+      <p>Functional Requirements</p>
+      <p>Non-Functional Requirements</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto">
+    <div class="footer-logos d-flex justify-content-center align-items-center">
+      <a href="https://www.ucl.ac.uk" target="_blank">
+        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
+      </a>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank">
+        <i class="fa-brands fa-square-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Your Custom Script (if any) -->
+  <script src="script.js"></script>
+</body>
+
+</html>

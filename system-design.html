@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint AI - System Design</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand" href="index.html">
+          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+        </a>
+        <!-- Toggle for mobile view -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <!-- Home Link -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="requirements.html">Requirements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="research.html">Research</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ui-design.html">UI Design</a>
+            </li>
+
+            <!-- System Design link marked as active with a dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active"
+                 href="system-design.html"
+                 id="systemDesignDropdown"
+                 role="button"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                System Design
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="systemDesignDropdown">
+                <li><a class="dropdown-item" href="system-design.html#system-architecture-diagram">System architecture diagram</a></li>
+                <li><a class="dropdown-item" href="system-design.html#site-map">Site Map</a></li>
+                <li><a class="dropdown-item" href="system-design.html#sequence-diagrams">Sequence Diagrams</a></li>
+                <li><a class="dropdown-item" href="system-design.html#design-patterns">Design Patterns</a></li>
+                <li><a class="dropdown-item" href="system-design.html#class-diagrams">Class Diagrams</a></li>
+                <li><a class="dropdown-item" href="system-design.html#data-storage">Data storage</a></li>
+                <li><a class="dropdown-item" href="system-design.html#packages-and-apis-defined">Packages and APIs defined</a></li>
+              </ul>
+            </li>
+
+            <!-- Remaining nav links -->
+            <li class="nav-item">
+              <a class="nav-link" href="implementation.html">Implementation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testing.html">Testing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="evaluation.html">Evaluation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appendices.html">Appendices</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Title/Intro -->
+    <h1 class="my-5">System Design</h1>
+    <p>Specifies the system architecture and structural components critical to the software’s functionality.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container flex-grow-1">
+    <!-- Sections inside the same container -->
+    <section id="system-architecture-diagram" class="mb-5">
+      <h2>System architecture diagram</h2>
+      <p>Add your system architecture diagram and explanation here.</p>
+    </section>
+
+    <section id="site-map" class="mb-5">
+      <h2>Site Map</h2>
+      <p>Show the overall navigation or sitemap structure here.</p>
+    </section>
+
+    <section id="sequence-diagrams" class="mb-5">
+      <h2>Sequence Diagrams</h2>
+      <p>Include any sequence diagrams representing interactions between components.</p>
+    </section>
+
+    <section id="design-patterns" class="mb-5">
+      <h2>Design Patterns</h2>
+      <p>Discuss the design patterns used in the project.</p>
+    </section>
+
+    <section id="class-diagrams" class="mb-5">
+      <h2>Class Diagrams</h2>
+      <p>Provide UML class diagrams or other diagrams representing your data structures.</p>
+    </section>
+
+    <section id="data-storage" class="mb-5">
+      <h2>Data storage</h2>
+      <p>Explain how and where your data is stored (database model, cloud storage, etc.).</p>
+    </section>
+
+    <section id="packages-and-apis-defined" class="mb-5">
+      <h2>Packages and APIs defined</h2>
+      <p>Detail the packages, modules, or APIs your system will expose or utilize.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto">
+    <div class="footer-logos d-flex justify-content-center align-items-center">
+      <a href="https://www.ucl.ac.uk" target="_blank">
+        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
+      </a>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank">
+        <i class="fa-brands fa-square-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional custom scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

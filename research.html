@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blueprint AI - Research</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    table,
+    table th,
+    table td {
+      border: 3px solid #bec1c3 !important;
+    }
+    table th,
+    table td {
+      text-align: left !important;
+    }
+    #references p {
+      text-align: left !important;
+    }
+  </style>
+  <!-- Font Awesome (if needed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <header>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <!-- Logo/Brand -->
+        <a class="navbar-brand" href="index.html">
+          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+        </a>
+        <!-- Toggle for mobile view -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <!-- Home Link -->
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="requirements.html">Requirements</a>
+            </li>
+
+            <!-- Research Link, marked as active -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active"
+                 href="research.html"
+                 id="researchDropdown"
+                 role="button"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                Research
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="researchDropdown">
+                <li><a class="dropdown-item" href="research.html#related-project-review">Related Project Review</a></li>
+                <li><a class="dropdown-item" href="research.html#technology-review">Technology Review</a></li>
+                <li><a class="dropdown-item" href="research.html#our-technical-decisions">Our Technical Decisions</a></li>
+                <li><a class="dropdown-item" href="research.html#references">References</a></li>
+              </ul>
+            </li>
+
+            <!-- Other nav links -->
+            <li class="nav-item">
+              <a class="nav-link" href="ui-design.html">UI Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="system-design.html">System Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="implementation.html">Implementation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="testing.html">Testing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="evaluation.html">Evaluation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="appendices.html">Appendices</a>
+            </li>    
+            <li class="nav-item">
+                <a class="nav-link" href="blog.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Title/Intro -->
+    <h1 class="my-5">Research</h1>
+    <p>We investigated existing solutions, relevant technologies, and theoretical frameworks to inform the project’s direction.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container flex-grow-1">
+
+    <section id="related-project-review" class="mb-5">
+      <h2>Related Project Review</h2>
+      <p>We reviewed several existing tools that share similarities with Blueprint AI:</p>
+
+      <h3>
+        <a href="#wixCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="wixCollapse" class="text-decoration-none">
+          Wix <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="wixCollapse">
+        <p>
+          Wix is a popular website builder that allows users to build all kinds of websites, 
+          ranging from personal blogs, company websites to storefronts. Website creation is done 
+          entirely through the editing studio, without the user needing to write code at all.  
+          Wix extends the website creation concept further by allowing users to host their websites 
+          on Wix’s domain, and review analytics such as viewer traffic. In 2016, Wix embarked on implementing 
+          AI for website design [1] and currently features AI tools that aid in section creation and text generation.
+        </p>
+  
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Our Evaluation</th>
+              <th>Include?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No code needed for designing</td>
+              <td>Allows for users to focus primarily on design and not worry about coding.</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Allow hosting websites on domain</td>
+              <td>Wix does not offer an exporting to code function, rather users host 
+                their websites on their domain. With the exporting feature of Blueprint AI 
+                into various GUI frameworks, this feature is counterintuitive as users would export
+                UI code to integrate with their own backend for greater control over publishing their product.</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>AI tools, multiple options generation</td>
+              <td>Wix's AI tools allow for text generation and also section creation.
+                This is highly versatile and useful. The AI also generates multiple design options 
+                for the user to choose from which is also very practical for the user.</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>
+        <a href="#powerPagesCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="powerPagesCollapse" class="text-decoration-none">
+          Microsoft Power Pages <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="powerPagesCollapse">
+        <p>
+          Microsoft PowerPages is a platform designed for rapid website development, offering a user-friendly drag-and-drop 
+          interface builder that enables users to create applications with ease. The platform leverages 
+          AI-assisted UI recommendations to enhance the design process. 
+          PowerPages seamlessly integrates with a variety of backend services such as its Dataverse 
+          storage capabilities, security authentication features and analytics functionalities [2]. 
+          One key feature of PowerPages that set it apart from more mainstream website creators is its ability to export the code in HTML, CSS and JavaScript, 
+          the user can then further edit the code [3].
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Our Evaluation</th>
+              <th>Include?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Backend services integration, security authentication</td>
+              <td>A useful feature that helps translate design into development and link front end to backend more easily. 
+                Takes the frontend development one step further. These features are locked behind a paywall 
+                and are subscription based - limiting the types of users who are willing and able to afford to use them.
+                Blueprint AI will be a free to use product for all users to use, with no tiered features </td>
+
+              <td>Partial inclusion in the form of exporting the code 
+                into GUI frameworks that allow for easier integration with backend.</td>
+            </tr>
+            <tr>
+              <td>Exporting of code.</td>
+              <td>Exporting is a standout feature that is important for website development. 
+                As for PowerPages, this feature is limited to exporting in HTML, CSS and JavaScript and 
+                is not integrated into an IDE, changes made on the IDE are not displayed on the 
+                PowerPages app and vice versa. This adds a layer of inconvenience that Blueprint AI aims to solve.</td>
+
+              <td>Yes. Aim to further increase exporting capabilities and VSCode integration for ease of use.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>
+        <a href="#figmaCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="figmaCollapse" class="text-decoration-none">
+          Figma <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="figmaCollapse">
+        <p>
+          Figma is a powerful web-based design tool known for its collaborative design interface. 
+          While Figma itself is not specifically tailored for frontend development like Blueprint AI, 
+          it offers robust UI design capabilities and can integrate with code-generation plugins.
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Our Evaluation</th>
+              <th>Include?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Collaborative Design Interface</td>
+              <td>Figma allows multiple users to design simultaneously, 
+                enhancing team collaboration. This is a standout feature for UI/UX teams.</td>
+
+              <td>Partial Inclusion — Potential for team collaboration features 
+                but simplified for Blueprint AI.</td>
+            </tr>
+
+            <tr>
+              <td>Prototyping and Animation</td>
+
+              <td>Figma allows for interactive prototypes and animated transitions directly in the tool.</td>
+
+              <td>No — This is better suited for design rather than code generation.</td>
+            </tr>
+
+            <tr>
+              <td>Code Export through Plugins</td>
+
+              <td>Figma supports third-party plugins that export designs into React, Flutter, or HTML/CSS code.</td>
+
+              <td>Yes — A similar feature for streamlined code export will be integrated in Blueprint AI.</td>
+            </tr>
+
+            <tr>
+              <td>Auto Layout</td>
+
+              <td>Auto Layout enables flexible design structures that adapt to content changes, improving design consistency.</td>
+
+              <td>Yes — This feature aligns well with Blueprint AI’s goal to generate adaptable UI designs.</td>
+            </tr>
+
+            <tr>
+              <td>AI-Powered Features</td>
+
+              <td>While Figma’s AI capabilities are still evolving, some plugins offer AI-assisted content generation.</td>
+
+              <td>Partial Inclusion — Blueprint AI’s AI will focus on complete frontend generation, including layout and design refinement.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>
+        <a href="#visilyCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="visilyCollapse" class="text-decoration-none">
+          Visily <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="visilyCollapse">
+        <p>
+          Visily is highly similar to other website builders like Wix but has much more capabilities and functionalities. 
+          Besides webpages, Visily can also create mobile phone pages, wireframes and mockups. The use of AI is also more prominent and 
+          wider in Visily as compared to Wix as Visily allows the user to upload screenshots of existing UI to kickstart the generation process, 
+          a welcomed feature from the usual description/ text based prompts that Wix offers. Visily supports multi-page generation and a
+          multi-page view as shown below which gives a more holistic view of the user’s design.
+        </p>
+
+        <img src="research-assets/visily_screenshot1.png" alt="Visily screenshot 1" class="img-fluid custom-margin" style="width: 100%;">
+        <p><br></p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Our Evaluation</th>
+              <th>Include?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Can create mobile pages</td>
+              <td>
+                 As there are more mobile phones than computers on this planet [4], the need for tailored mobile page
+                 front end design is apparent. Blueprint AI will thus need to include this feature so as to 
+                 increase its useability. 
+                </td>
+
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Use screenshots/ images as AI reference point</td>
+              <td>Screenshots are a quick and fantastic way to tell the AI exactly what you 
+                want generated as describing with text prompts can get too tedious and is 
+                also difficult to describe clearly to the AI.</td>
+
+              <td>Yes</td>
+            </tr>
+
+            <tr>
+              <td>Multi-page generation and editing</td>
+              <td>
+                Frontend development involves more than just one page, having AI and a studio that 
+                can view, edit and create multiple pages would be extremely useful in creating a 
+                cohesive and consistent frontend design for the user.
+                </td>
+
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>
+        <a href="#copilotCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="copilotCollapse" class="text-decoration-none">
+          Evaluating Microsoft Copilot v1.0 <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="copilotCollapse">
+        <p>
+          Our first project brief stated that we were to improve upon a project made by a group of 
+          UCL postgraduate students in 2024 for their IXN module titled Microsoft Copilot UI v1.0. 
+          The scope of this was largely similar to Blueprint AI, with the main feature of incorporating 
+          AI to generate, edit and export user interfaces all within a VSCode extension. 
+          Our initial brief wanted us to explore, using the existing codebase, other frameworks 
+          for exporting the frontend designs into frontend frameworks. <br><br>
+          The link to the entire repository can be found in [5], including a demo video of that project.
+        </p>
+
+        <p>
+          <strong>Overview of Microsoft Copilot UI v1.0</strong> <br><br>
+
+          Copilot UI v1.0 is a webview-based React editor integrated into a VSCode Extension, 
+          primarily written in Typescript. The main backend code, consisting of the main program 
+          logic (API calls, testing, JSON tree conversion) is located in the src directory while 
+          the frontend of v1.0 is found in the webview-ui directory.  The system architecture of 
+          v1.0 is shown in Figure 1, this is taken directly from the GitHub repository. The key 
+          features of the project and brief explanations are listed in the table below.
+        </p>
+
+        <img src="research-assets/v1_systemarchi.png" alt="Version 1 System Architecture" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u>Figure 1. Copilot UI v1.0 System Architecture </u></p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th><strong>Key Feature</strong></th>
+              <th><strong>Explanation</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>VSCode Extension Wrapper<br><br>
+
+                File reference:<br>
+                 .vscode
+                </td>
+              <td>
+                VSCode API interacts with the editor [6], workspace, and key storage. <br><br>
+
+                Entry point for users to interact with the system, such as opening the webview, saving/loading projects, and triggering AI generation.
+                </td>
+            </tr>
+            <tr>
+              <td>React Editor</td>
+              <td>Craft.js was used as a framework for building drag-and-drop page editors. <br><br>
+
+                FluentUI, Microsoft’s design system, was used for the editor's components like text boxes.<br><br>
+                
+                React Grid Layout was used to manage the layout of components within the editor, providing responsive and resizable grids.
+                </td>
+            </tr>
+            <tr>
+              <td>AI integration<br><br>
+
+                File references: <br><br>
+                src/generateImage <br>
+                src/generateLayout
+                </td>
+              <td>Azure, OpenAI GPT-4: Used for generating text layouts and processing natural language inputs such as the text prompts.<br><br>
+
+                DALL-E 3: Used for generating images based on user prompts or layout schemas like screenshots of websites.<br><br>
+                
+                <strong>Users input and use their own API keys.</strong>
+                </td>
+            </tr>
+            <tr>
+              <td>
+                Generated Layout Node Tree<br><br>
+
+                File reference:<br>
+                src/generateLayout/buildNodeTree.ts
+              </td>
+              <td>
+                The system uses AI (e.g., GPT-4) to interpret the input and generate a corresponding layout node tree.<br><br>
+                JSON-based tree structure representing the arrangement and properties of components in a design is generated and displayed in the editor.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Exporting Frameworks<br><br>
+
+                File references:<br>
+                src/HTML
+                src/WinUI
+              </td>
+              <td>
+                HTML + CSS: Converts the JSON node tree into HTML and CSS for web use. <br><br>
+
+                WinUI: Converts the design into WinUI format compatible with Windows applications [7].
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size: 1.5em;"><strong>Learning points</strong></p>
+        <p>
+          <u>1. Good system architecture</u><br><br>
+          The system architecture (Figure 1) is well-thought out and planned suitably to meet the requirements of the project. This gave us some semblance of structuring and organising such a complicated system.
+          The VSCode extension structure can be replicated and modeled for our version of the project as it relies on the existing, well-documented VSCode API library [6].
+          Figure 2 shows a code snippet taken from the file in: <u>src/generateLayout/generateLayout.ts</u> <br><br>
+          This file, along with other similar files found in the generateLayout directory was useful as 
+          it allowed us to adapt our project based on this similar structure of importing the AI API library 
+          and component types, making API calls to OpenAI. Furthermore, we can also improve on the meta prompts 
+          (Figure 2, line 10) beyond just safety and ethics, to use them to refine the generated node tree. 
+          Meta prompts are an excellent way of guiding large language models to perform complex tasks and reasoning 
+          in a more methodical and logical way [8]. Based on the research paper in [8], we can leverage the use of 
+          meta prompts to generate more refined and tailored results for the user.
+        </p>
+
+        <img src="research-assets/code_snippet1.png" alt="Code snippet 1" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u>Figure 2. Code snippet of generatedLayout.ts taken from v1.0</u></p>
+
+        <p>
+          <u>2. Choice of Frameworks</u><br><br>
+          The implementation of widely-used, industry relevant frameworks such as React and WinUI helped us to scope our research more clearly. 
+          This gave us a good sense of what we could start exploring and looking into without having to write our own components from scratch. 
+          This is discussed further in <strong>section 2: Technology Review.</strong><br><br>
+          This project was a useful example of the existing frameworks we can use, where v1.0 
+          highlights the ability to successfully implement such frameworks into our version - 
+          with the method of exporting to HTML + CSS and WinUI frameworks being evident with v1.0. 
+        </p>
+
+        <p>
+          <u>Conclusion</u><br><br>
+          Version 1.0 gave us a good starting point and provided enough direction and structure 
+          to aid us in our research and development process. It gave us confidence that programming
+           a system like this is feasible. In particular, the frameworks and design decisions made gave 
+           us a reference point and insight on how it could be implemented, especially the exporting of 
+           UI designs into various frontend frameworks and also structuring our output using data structures like node trees. 
+        </p>
+
+        <p style="font-size: 1.5em;"><strong>Pain points</strong></p>
+        <p><u>1. Complex Directory Structure</u></p>
+        <p>
+          While the system architecture design provided a clear high level overview of the system, 
+          the directory structure of v1.0 is complex and difficult to navigate. Several issues 
+          stood out which made understanding the system more challenging. <br><br>
+
+          There were multiple nested folders containing different functionalities, 
+          causing a bloated folder hierarchy. For instance, the tests (<strong>__tests__</strong>) 
+          were located in the backed folder (/src) and this folder included more folders containing different 
+          types of tests. A modular approach can be employed for our version, to reduce folder sprawl and improve 
+          organisation [9]; thereby enabling our system to be scalable and extendable.<br><br>
+
+          Additionally, several files included were obsolete and design decisions that were not 
+          made were left in the source code. This made the directory structure unnecessarily convoluted. 
+          It is evident that the group attempted to integrate some form of GitHub Copilot calls in the 
+          backend but was ultimately abandoned. While there was some explanation of what this feature 
+          could potentially be, the implementation was partially done with boilerplate code (Figure 3). 
+          As such, this code served no purpose but to make the source code files more complicated.
+        </p>
+
+        <img src="research-assets/code_snippet2.png" alt="Code snippet 2" class="img-fluid custom-margin" style="width: 100%;">
+        <p><br></p>
+        <img src="research-assets/code_snippet3.png" alt="Code snippet 3" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u> Figure 3. Abandoned code for integrating Copilot left in source code</u></p>
+
+        <p><u>2. Nested components and mixed UI logic</u></p>
+        <p>
+          Some crucial components of the code were written with nested components, incorporating mixed UI logic in the program. 
+          This poor programming practice made deciphering the program logic more tedious and also harder to maintain, scale and test. 
+          One main culprit is the <strong>MainWebviewPanel.ts</strong> program that manages a webview panel in the VSCode extension. 
+          This class is responsible for creating, displaying, and handling interactions with the webview panel, 
+          which is a vital component of the system - yet landed itself to the aforementioned faults. <br><br>
+
+          The <strong>_setWebviewMessageListener</strong> method in <strong>MainWebviewPanel.ts</strong> contains a large switch statement with
+          deeply nested logic for handling various commands (Figure 4). Each case in the switch statement performs 
+          complex operations, such as: Fetching API keys, Saving and loading files, Processing sketches and text 
+          descriptions, etc. This, among other issues, makes the method too long and complex, which reduces r
+          eadability and maintainability. <br><br>
+        </p>
+
+        <img src="research-assets/code_snippet4.png" alt="Code snippet 4" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u>Figure 4. Snippet of _setWebviewMesageListener method containing many switch statements</u></p>
+
+        <p style="font-size: 1.5em;"><strong>Verdict</strong></p>
+
+        <p>
+          While v1.0 provided a sufficient basis to scope our research and structure our project, 
+          some major issues such as the complex directory structure and complicated code logic made 
+          it difficult to extend v1.0. As such, we made the difficult but necessary decision to <strong>redo the system</strong> 
+          from scratch in our own way. Though this may seem like a poor decision in terms 
+          of time, redoing the system allowed us to overcome the issues v1.0 faced with the fundamental 
+          design of the system, thereby allowing us greater flexibility in implementing better, more robust 
+          features. With a more modular approach and design for our version, we can ensure greater maintainability,
+          reusability, scalability and abstraction. A version that emphasizes the SOLID principles [10] will 
+          greatly improve system architecture, allowing for future COMP0016 groups to extend our project with 
+          more ease than it took us to understand v1.0’s system.  
+        </p>
+
+      </div>
+      
+    </section>
+
+    <section id="technology-review" class="mb-5">
+        <h2>Technology Review</h2>
+
+      <h3>
+        <a href="#possibleSolnCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="possibleSolnCollapse" class="text-decoration-none">
+          Possible Solutions <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="possibleSolnCollapse">
+        <p>
+          For solutions to a system like Blueprint AI, we considered two aspects. 
+        </p>
+
+        <p><u>1. Presence of Coding</u></p>
+        <p>
+          This aspect refers to how much the user will need to code to get their frontend designs out and working, 
+          also taking into account a user’s programming skill level. The increasing prevalence of low-code/no-code 
+          products such as Wix and Microsoft PowerApps signals a shift in traditional software development workflow, 
+          reducing the barriers to entry for software development. This is greatly empowering for the average user as the 
+          technical skills needed are vastly reduced [11]. Furthermore, the estimated low-code/no-code market size was 
+          USD 6.78 billion in 2022, and is projected to grow significantly in the next decade [12].<br><br>
+
+          While a low-code/no-code design choice would make sense given the current market, this would limit the flexibility 
+          and control a user has when designing their frontend. The user would be limited to pre-designed components and structures, 
+          which is restrictive [13]. Additionally, employing a low-code/no-code design would not make our student-developed project 
+          standout against industry standard solutions like Wix and PowerApps which are already established. <br><br>
+
+          On the other hand, incorporating too many elements of coding required by the user would cater towards the more experienced 
+          developers and would be more time-consuming; a counter-intuitive design choice for Blueprint AI.<br><br>
+
+          With the intended users being those who require a quick, reliable way to scaffold and generate frontend designs - 
+          regardless of their know-how and technical expertise in frontend development, our approach would need to cater to this type of user. 
+          As such, an approach requiring more coding than conventional low-code/no-code platforms but at the same time not be a necessary 
+          component for the frontend generation. This comes in the form of the <strong>exporting feature</strong> where users can edit the exported code in the 
+          frontend framework they need, a welcomed feature over low-code/no-code platforms like Wix which lack an exporting feature. Users of all 
+          programming backgrounds would thus find that using Blueprint AI is valuable in terms of the time savings it affords and also the flexibility 
+          in editing the frontend code generated. Figure 5 depicts a general indication of where Blueprint AI falls in the spectrum of coding required by the user.
+        </p>
+
+        <img src="research-assets/diagram1.png" alt="Diagram 1" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u>Figure 5. Coding spectrum approach used for Blueprint AI</u></p>
+
+        <p><u>2. Prominence of AI </u></p>
+        <p>
+          Currently, popular industry solutions like Wix, Visily and PowerApps do feature AI tools to help generate frontend designs 
+          (as discussed under Section 1.1), but these AI tools are relegated to being an additional feature rather than being integrated 
+          throughout every aspect that the user interacts with when designing. We aim to get Blueprint AI to stand out from existing solutions 
+          through making AI more prominent; studies have shown that AI is extremely useful in expediting frontend development, thereby alleviating 
+          workloads through automation [14].<br><br>
+
+          In order to make AI more prominent, from the start, users are prompted to tell the AI what they want through text, 
+          image or both.  We also plan to include a chat bot for the user to interact with the AI by telling it what changes to make. 
+          This allows for prompts by the user that can be tailored to the users specific needs, enhancing the flexibility and control 
+          that the user has as well - beyond manually tweaking the frontend source code themselves. Additionally, the AI also recommends
+          different pages that the users need as frontend design requires multiple pages, on average 12-30 pages for a full-fledged website - 
+          according to [15].<br><br>
+
+          With this, at every step, AI is integrated seamlessly into the frontend development experience, 
+          streamlining the development process. With AI-driven UI generation, users are afforded efficiency and flexibility. 
+          Figure 6 depicts the continuous integration of AI in Blueprint AI.
+        </p>
+
+        <img src="research-assets/diagram2.png" alt="Diagram 2" class="img-fluid custom-margin" style="width: 100%;">
+        <p><u>Figure 6. Continuous integration of AI in Blueprint AI</u></p>
+      </div>
+
+      <h3>
+        <a href="#devicesCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="devicesCollapse" class="text-decoration-none">
+          Devices <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="devicesCollapse">
+        One of the standout features of v1.0 was its integration as a VSCode extension. 
+        The sheer user base VSCode has, amounting to over 2.5 million active monthly users in 2017 [16] 
+        makes it an attractive choice to deploy Blueprint AI as a VSCode extension. The free-to-use 
+        IDE hosts over 4000 extensions [16] and has comprehensive documentation on how to deploy our project as an 
+        extension [6]. Thus, having Blueprint AI as a <strong>VSCode extension</strong> means it runs on any device that supports VSCode, 
+        removing hardware dependency concerns and allowing our project to reach a wide range of developers.
+      </div>
+
+      <h3>
+        <a href="#algorithmsCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="algorithmsCollapse" class="text-decoration-none">
+          Algorithms <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="algorithmsCollapse">
+        <p>
+          For UI layout recognition, we needed software that could effectively and efficiently extract text 
+          description from given screenshots of websites. This text description would then be used to describe 
+          to the AI what kind of website the user wants to build. With this as a priority, we considered the following 
+          approaches: 
+        </p>
+
+        <p><u>1. Traditional Image Processing (OpenCV, cv2)</u></p>
+        <p>
+          OpenCV (Open Source Computer Vision Library) is a computer vision and machine learning software library. 
+          It is widely used for real-time image and video processing, and it provides a comprehensive set of tools 
+          for tasks like object detection, facial recognition, motion tracking, and more. Its cross platform 
+          capabilities and common programming language interfaces (C, C++, Python, Java) make it easier to develop with [17]. 
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th><strong>Pros</strong></th>
+              <th><strong>Cons</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                No licensing cost, <br>
+                Extensive Documentation,<br>
+                Versatile as it supports a wide range of computer vision tasks.
+              </td>
+              <td>
+                Steep learning curve owing to wide range of advanced tools available 
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          For Blueprint AI, there is simply no need for real-time image processing. This allowed us to narrow the search for 
+          libraries that related to text description extraction from an image, overcoming the need to pore through advanced 
+          libraries for heavy-duty image processing. Given that OpenCV is also widely used in industry, it made OpenCV a suitable choice.
+        </p>
+
+        <p><u>Deep learning based Optical Character Recognition (OCR):</u></p>
+        <p>
+          OCR is a technology that converts images (e.g., scanned documents, photos, or screenshots) into text that computers can read and edit . 
+          While OCRs can defer in the types of images they can extract from, the main function of an OCR is to allow computers to recognise and 
+          extract text from images. Some OCRs leverage AI and deep learning in the image processing and text detection and recognition front, 
+          allowing for more robust and impressive functionality [18]. This use of AI by OCR is inline with Blueprint AI’s central theme and 
+          abstract, as such, we researched on OCRs that specialised in extracting from screenshots that have deep learning capabilities.<br><br>
+
+          We narrowed our options down to two competing solutions: EasyOCR and Tesseract. Both are open-source systems which use AI for processing. 
+          The table below shows what each OCR can do.
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th><strong>OCR</strong></th>
+              <th><strong>Description</strong></th>
+              <th><strong>Standout Features</strong></th>
+              <th><strong>Drawbacks</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>EasyOCR</strong>
+              </td>
+              <td>
+                Python based OCR which has support for over 80 languages.<br>
+                Built on Pytorch and easy to implement and use [19].<br>
+                Faster on GPU due to its deep learning-based architecture.
+              </td>
+              <td>
+                Provides higher accuracy for noisy, complicated images. This can be useful for complicated website layouts such as Chinese e-commerce platforms, 
+                which are known to be more intricate compared to Western counterparts [20].<br><br>
+                Handles multilingual text in a single image effectively
+
+              </td>
+              <td>
+                Limited fine-tuning options.
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <strong>Tesseract</strong>
+              </td>
+              <td>
+                PA traditional OCR engine developed in part by Google with comprehensive documentation found in [21].<br><br>
+                Optimized for CPU and generally faster on CPU.                
+              </td>
+              <td>
+                Highly customisable, supports custom training and fine tuning.<br><br>
+                Affords high accuracy with clean input.
+              </td>
+              <td>
+                Struggles with noisy or distorted text.<br><br>
+                Requires separate language data files for each language.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          We decided to use <strong>EasyOCR</strong>, with the primary reason being the ease of installation and implementation with Python 
+          and its simple API. Tesseract would require more set-up to get it running and implementation would be a bit more tedious. 
+          Additionally, while both OCRs would need some form of image pre-processing to be done before character recognition, EasyOCR 
+          requires less pre-processing. Lastly, while AI capabilities are an important factor for Blueprint AI, fine-tuning the OCR to 
+          produce the highest quality result is not a priority as we want our system to focus more on efficiency and speed for our users 
+          to rapidly scaffold their frontend development. <br><br>
+
+          In Blueprint AI, we use <strong>cv2 (OpenCV)</strong> to clean up images before running them through EasyOCR for text extraction. 
+          Think of cv2 as a tool that prepares the image—adjusting brightness, removing noise, and sharpening text—so it’s easier to read. 
+          This step is important because raw screenshots can be cluttered or blurry, making it harder for the OCR to recognize text accurately. 
+          Once the image is prepped, EasyOCR, a deep learning-based tool, quickly scans and extracts the text, even from complex website layouts. 
+          This setup helps us efficiently turn website screenshots into clear, structured descriptions that the AI can use to generate front-end designs.
+
+        </p>
+      </div>
+
+      <h3>
+        <a href="#programmingCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="programmingCollapse" class="text-decoration-none">
+          Programming Languages, Frameworks, Libraries, APIs <i class="fa fa-chevron-down"></i>
+        </a>
+      </h3>
+      <div class="collapse" id="programmingCollapse">
+        <p><u>1. Programming Languages and Frameworks</u></p>
+        <p>
+          We decided to continue the use of React, CraftJS and FluentUI from v1.0. 
+          React’s component-based architecture allows us to break down UI components 
+          into smaller, reusable pieces. This modularity is perfect for generating dynamic UIs, 
+          as components can be composed and reused across the application, ensuring ease of generating 
+          UIs dynamically based on user and AI input.<br><br>
+
+          CraftJS provides a drag-and-drop interface for building and editing UIs. 
+          This makes it easier for non-technical users or designers to create and modify 
+          layouts without writing code. Also, CraftJS integrates with React components which 
+          makes the system more cohesive.<br><br>
+
+          With these frameworks, we used Typescript instead of Javascript because the 
+          static typing of Typescript allowed for catching errors at compile time rather 
+          than runtime, easing the development and debugging process significantly. 
+          This also helps ensure the project remains scalable and maintainable as it 
+          grows as Typescript is better for organisation and refactoring.
+        </p>
+
+        <p><u>2. AI API</u></p>
+        <p>
+          For Blueprint AI’s backend, we leverage <strong>LangChain</strong> and <strong>Axios</strong> to streamline AI interactions
+          and data fetching. <strong>LangChain</strong> is a powerful framework designed to work with large language 
+          models (LLMs), making it easier to build AI-driven applications by managing prompt chaining, 
+          memory, and model selection. This allows Blueprint AI to create more dynamic and context-aware 
+          interactions when generating front-end designs. Meanwhile, <strong>Axios</strong>, a popular JavaScript library 
+          for making HTTP requests, ensures smooth and efficient communication with APIs, including OpenAI’s models. 
+          Its promise-based structure simplifies data handling, making API calls more reliable and easier to manage. 
+          Together, <strong>LangChain</strong> and <strong>Axios</strong> help optimize AI integration, ensuring a seamless and responsive user experience. <br><br>
+
+          We have also decided to stick with using OpenAI for the AI API. 
+          OpenAI contains many different models suitable for this project, 
+          such as DALLE, a generative AI model that creates images from text descriptions, 
+          allowing for image generation. OpenAI also boasts industry leading models that 
+          are highly advanced and intelligent, outperforming other competitors like Meta, 
+          Amazon and Microsoft [22]. With the impressive line-up of AI models, users also 
+          have more flexibility in managing their own tokens to manage their costs.  
+          Combined with the fact that OpenAI is also highly popular and widely used [23], and 
+          integrating OpenAI API calls into the backend is relatively straightforward, Blueprint AI 
+          will use OpenAI for its AI integration.
+        </p>
+      </div>
+
+    </section>
+      
+    </section>
+
+    <section id="our-technical-decisions" class="mb-5">
+      <h2>Summary of Technical Decisions</h2>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th><strong>Category</strong></th>
+            <th><strong>Final Choice</strong></th>
+            <th><strong>Reason</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Programming Frameworks</strong>
+            </td>
+            <td>
+              <strong>React (CraftJS, FluentUI, MaterialUI)</strong>
+            </td>
+            <td>
+              Best for component-based UI generation
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Programming Language</strong>
+            </td>
+            <td>
+              <strong>Typescript</strong>
+            </td>
+            <td>
+              Easier to catch errors, debug, refactor and extend
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Backend AI Integration</strong>
+            </td>
+            <td>
+              <strong>OpenAI, LangChain, Axios</strong>
+            </td>
+            <td>
+              Best Natural Language Processing capabilities
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Programming Frameworks</strong>
+            </td>
+            <td>
+              <strong>React (CraftJS, FluentUI, MaterialUI)</strong>
+            </td>
+            <td>
+              Best for component-based UI generation
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>OCR/Text Recognition</strong>
+            </td>
+            <td>
+              <strong>EasyOCR + cv2</strong>
+            </td>
+            <td>
+              Best for text extraction from screenshots.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>Deployment Platform</strong>
+            </td>
+            <td>
+              <strong>VSCode</strong>
+            </td>
+            <td>
+              Developers work within VSCode, improving workflow, eliminating hardware dependencies
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </section>
+
+    <section id="references" class="mb-5">
+      <h2>References</h2>
+      <p>
+        [1] K. Goldstein, “Wix ADI: How Design AI Elevates Website Creation for Everyone,” Wix Blog, Jun. 19, 2022. <a href="https://www.wix.com/blog/wix-artificial-design-intelligence" target="_blank">https://www.wix.com/blog/wix-artificial-design-intelligence</a><br><br>
+        [2] “Power Pages – Website Builder | Microsoft Power Platform,” Microsoft.com, 2024. <a href="https://www.microsoft.com/en-us/power-platform/products/power-pages#tabs-pill-bar-ocb9d4_tab4" target="_blank">https://www.microsoft.com/en-us/power-platform/products/power-pages#tabs-pill-bar-ocb9d4_tab4</a> (accessed Mar. 05, 2025). <br><br>
+        [3] “Edit code with Visual Studio Code for the Web (preview),” Microsoft.com, Mar. 07, 2024. <a href="https://learn.microsoft.com/en-us/power-pages/configure/visual-studio-code-editor?WT.mc_id=powerportals_inproduct_portalstudio2" target="_blank">https://learn.microsoft.com/en-us/power-pages/configure/visual-studio-code-editor?WT.mc_id=powerportals_inproduct_portalstudio2</a> (accessed Mar. 05, 2025).<br><br>
+        [4] I. Bouchrika, “Mobile vs Desktop Usage Statistics for 2020/2021,” Research.com, Feb. 24, 2021. <a href="https://research.com/software/mobile-vs-desktop-usage" target="_blank">https://research.com/software/mobile-vs-desktop-usage</a><br><br>
+        [5] lukejlatham, “GitHub - lukejlatham/vscode-rapid-gui,” GitHub, 2024. <a href="https://github.com/lukejlatham/vscode-rapid-gui/tree/main" target="_blank">https://github.com/lukejlatham/vscode-rapid-gui/tree/main</a> (accessed Mar. 15, 2025).<br><br>
+        [6] “Webview API,” code.visualstudio.com. <a href="https://code.visualstudio.com/api/extension-guides/webview" target="_blank">https://code.visualstudio.com/api/extension-guides/webview</a><br><br>
+        [7] Karl-Bridge-Microsoft, “Windows UI Library (WinUI) - Windows apps,” learn.microsoft.com. <a href="https://learn.microsoft.com/en-us/windows/apps/winui/" target="_blank">https://learn.microsoft.com/en-us/windows/apps/winui/</a><br><br>
+        [8] Y. Zhang, Y. Yuan, and A. C.-C. Yao, “Meta Prompting for AI Systems,” arXiv.org, 2023. <a href="https://arxiv.org/abs/2311.11482" target="_blank">https://arxiv.org/abs/2311.11482</a><br><br>
+        [9] A. Mendonça, “Monolithic Modular Architecture: Modular Folder Organization,” Medium, Jul. 22, 2023. <a href="https://medium.com/@abel.ncm/monolithic-modular-architecture-modular-folder-organization-4cbf97175ab4" target="_blank">https://medium.com/@abel.ncm/monolithic-modular-architecture-modular-folder-organization-4cbf97175ab4</a> (accessed Mar. 18, 2025).<br><br>
+        [10] S. Watts, “The Importance of SOLID Design Principles,” BMC Blogs, Jun. 15, 2020. <a href="https://www.bmc.com/blogs/solid-design-principles/" target="_blank">https://www.bmc.com/blogs/solid-design-principles/</a><br><br>
+        [11] A. Saxena, “How Policy Reforms And Interoperability Are Reshaping Value-Based Care,” Forbes, Mar. 20, 2025. <a href="https://www.forbes.com/councils/forbestechcouncil/2025/03/20/how-policy-reforms-and-interoperability-are-reshaping-value-based-care/" target="_blank">https://www.forbes.com/councils/forbestechcouncil/2025/03/20/how-policy-reforms-and-interoperability-are-reshaping-value-based-care/</a> (accessed Mar. 20, 2025).<br><br>
+        [12] “Low-code Development Platform Market Size Report, 2030,” www.grandviewresearch.com. <a href="https://www.grandviewresearch.com/industry-analysis/low-code-development-platform-market-report" target="_blank">https://www.grandviewresearch.com/industry-analysis/low-code-development-platform-market-report</a><br><br>
+        [13] “What’s Wrong with Low and No Code Platforms?,” www.pandium.com. <a href="https://www.pandium.com/blogs/whats-wrong-with-low-and-no-code-platforms" target="_blank">https://www.pandium.com/blogs/whats-wrong-with-low-and-no-code-platforms</a><br><br>
+        [14] Manoj Kumar Dobbala, “Rise of Generative AI: Impacts on Frontend Development,” Sep. 09, 2023. <a href="https://www.researchgate.net/publication/382639784_Rise_of_Generative_AI_Impacts_on_Frontend_Development" target="_blank">https://www.researchgate.net/publication/382639784_Rise_of_Generative_AI_Impacts_on_Frontend_Development</a><br><br>
+        [15] J. Bracamontes, “How Many Pages Should A Website Have?,” Acumenstudio.com, Feb. 06, 2023. <a href="https://acumenstudio.com/how-many-pages-should-a-website-have/" target="_blank">https://acumenstudio.com/how-many-pages-should-a-website-have/</a><br><br>
+        [16] S. McBreen, “Visual Studio Code 2.6M Users, 12 months of momentum and more to come.,” Nov. 15, 2017 code.visualstudio.com. <a href="https://code.visualstudio.com/blogs/2017/11/16/connect" target="_blank">https://code.visualstudio.com/blogs/2017/11/16/connect</a><br><br>
+        [17] OpenCV, “About OpenCV,” OpenCV, 2018. <a href="https://opencv.org/about/" target="_blank">https://opencv.org/about/</a><br><br>
+        [18] Amazon, “What is OCR (Optical Character Recognition)? - AWS,” Amazon Web Services, Inc. <a href="https://aws.amazon.com/what-is/ocr/" target="_blank">https://aws.amazon.com/what-is/ocr/</a><br><br>
+        [19] A. Mahajan, “EasyOCR: A Comprehensive Guide,” Medium, Oct. 29, 2023. <a href="https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168" target="_blank">https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168</a><br><br>
+        [20] J. Nielsen and Y. Cheng, “Are Chinese Websites Too Complex?,” Nielsen Norman Group, Nov. 06, 2016. <a href="https://www.nngroup.com/articles/china-website-complexity/" target="_blank">https://www.nngroup.com/articles/china-website-complexity/</a> (accessed Mar. 22, 2025).<br><br>
+        [21] tesseract-ocr, “tesseract-ocr/tesseract,” GitHub, Oct. 20, 2019. <a href="https://github.com/tesseract-ocr/tesseract" target="_blank">https://github.com/tesseract-ocr/tesseract</a><br><br>
+        [22] “OpenAI - Quality, Performance & Price Analysis | Artificial Analysis,” Artificialanalysis.ai, 2025. <a href="https://artificialanalysis.ai/providers/openai" target="_blank">https://artificialanalysis.ai/providers/openai</a><br><br>
+        [23] E. H. Schwartz, “OpenAI confirms 400 million weekly ChatGPT users - here’s 5 great ways to use the world’s most popular AI chatbot,” TechRadar, Feb. 22, 2025. <a href="https://www.techradar.com/computing/artificial-intelligence/openai-confirms-400-million-weekly-chatgpt-users-heres-5-great-ways-to-use-the-worlds-most-popular-ai-chatbot" target="_blank">https://www.techradar.com/computing/artificial-intelligence/openai-confirms-400-million-weekly-chatgpt-users-heres-5-great-ways-to-use-the-worlds-most-popular-ai-chatbot</a> (accessed Mar. 22, 2025).<br><br>
+        This research forms the foundation for Blueprint AI’s development, ensuring we use the best technologies to optimize AI-assisted front-end generation.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto">
+    <div class="footer-logos d-flex justify-content-center align-items-center">
+      <a href="https://www.ucl.ac.uk" target="_blank">
+        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
+      </a>
+      <a href="https://www.microsoft.com" target="_blank">
+        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
+      </a>
+      <a href="https://github.com/YOUR_GITHUB" target="_blank">
+        <i class="fa-brands fa-square-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional custom scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
