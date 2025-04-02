@@ -211,9 +211,79 @@
       </div>
     </section>
 
-    <section id="known-bug-list" class="mb-5">
-      <h2>Known Bug List</h2>
-      <p>INSERT TABLE WITH KNOWN BUGS AND SEVERITY RATING</p>
+    <section id="known-bugs" class="mb-5">
+      <h2>Known Bugs List</h2>
+      <p>
+        Although the system works well overall, a few known issues have been
+        observed. Below is a brief overview along with suggested workarounds
+        or improvements.
+      </p>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Bug</th>
+              <th scope="col">Details</th>
+              <th scope="col">Severity</th>
+              <th scope="col">Suggested Workaround</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Inconsistent Layout/Positioning</strong></td>
+              <td>
+                In certain scenarios, the automatically generated layout may
+                not position or size components properly, leading to minor
+                visual discrepancies.
+              </td>
+              <td>Medium</td>
+              <td>
+                Refine or clarify layout instructions in your prompts, and use
+                the iterative chat to adjust component positions after
+                generation.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Limited YouTube IDs</strong></td>
+              <td>
+                The AI currently has a small set of known video IDs. If it
+                inserts video components, they may not always align with your
+                actual content.
+              </td>
+              <td>Low</td>
+              <td>
+                Replace placeholder YouTube IDs in the generated code with
+                your own valid IDs, or remove the video element if not needed.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Initial Website Simplicity</strong></td>
+              <td>
+                Sometimes the first pass of the website is quite simple,
+                lacking complex styling or advanced components, especially if
+                the user’s instructions are brief.
+              </td>
+              <td>Low</td>
+              <td>
+                Provide more detailed requirements in your initial prompt or
+                use additional prompts to enrich the design and styling.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Possible AI Confusion</strong></td>
+              <td>
+                The AI might produce unexpected results if given contradictory
+                or irrelevant instructions.
+              </td>
+              <td>Low</td>
+              <td>
+                Keep prompts clear and consistent. If the design becomes
+                inconsistent, reset or clarify the context and re-generate.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="individual contributions" class="mb-5">
@@ -531,10 +601,913 @@
       <!-- Bootstrap JS (Required for Tabs to Work) -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <section id="future-work" class="mb-5">
-      <h2>Future work</h2>
-      <p>Outline potential improvements or next steps for the project.</p>
-    </section>
+      <section id="future-work" class="mb-5">
+        <!-- BEGIN CUSTOM INSERTION OF FUTURE PLAN -->
+        <div class="mt-4 p-3 border rounded future-plan">
+          <h3 class="mb-3" style="text-decoration: underline">
+            Future Work / Plan
+          </h3>
+
+          <!-- First Thing to Do -->
+          <h4 class="mt-4">First Thing to Do: Refine the First Page Creator</h4>
+          <p class="fst-italic">Integrate Improved Text-Parsing Algorithms</p>
+          <p>
+            <strong>Goal:</strong> Better handle user instructions that are
+            verbose, loosely structured, or contain multiple requirements.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Evaluate existing text-processing in
+              <code>blueprintAiPrompts.ts</code> and enhance parsing logic to
+              split user input into discrete tasks (e.g., recommended sections,
+              brand guidelines, color choices).
+            </li>
+            <li>
+              Consider additional libraries or custom regular expressions to
+              parse bullet points, disclaimers, or multi-sentence instructions.
+            </li>
+            <li>
+              Implement tests in <code>blueprintAiClient.ts</code> to ensure
+              each text-parsing step is validated with real-world samples.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Extend Multiple Design Options Functionality</h4>
+          <p>
+            <strong>Goal:</strong> Offer users more than one layout/theme
+            “preview” before committing to a design.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              In <code>BlueprintAiService.ts</code>, modify the final CraftJS
+              layout generation to produce multiple valid JSON outputs instead
+              of just one.
+            </li>
+            <li>
+              Adjust the UI (particularly in <code>AiSidebar.tsx</code> and
+              <code>CreateWithImaginationComponent.tsx</code>) to let users
+              cycle through various design previews.
+            </li>
+            <li>
+              Implement caching of each design variant so the user can switch
+              back and forth without triggering a full re-run of the AI each
+              time.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Incorporate a More Advanced Suggestion Engine</h4>
+          <p>
+            <strong>Goal:</strong> Provide real-time auto-completion and design
+            hints, akin to ChatGPT’s type-ahead suggestions.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Build an incremental prompt mechanism in
+              <code>AiSidebar.tsx</code> that sends partial user input to
+              <code>callOpenAiChat(...)</code> for on-the-fly suggestions.
+            </li>
+            <li>
+              Maintain an “in-progress user session state” in the React store
+              (<code>store.ts</code>) so suggestions remain consistent across
+              typed words.
+            </li>
+            <li>
+              Add usage metrics to gauge how often and effectively users select
+              AI suggestions, and feed that data back for iterative model
+              tuning.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">
+            First Thing to Do (Continued): Refine Screenshot-to-Design Flow
+          </h4>
+          <h5 class="fw-bold mt-3">
+            Improve OCR Extraction with Robust Pre-Processing
+          </h5>
+          <p>
+            <strong>Goal:</strong> Enhance the accuracy of text recognition from
+            user-provided screenshots.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              In <code>ocr_service.py</code>, add pipelines for contrast
+              enhancement (e.g., Pillow or OpenCV filters) and binarization to
+              improve input data for EasyOCR.
+            </li>
+            <li>
+              Implement optional deskew or rotation correction for images that
+              are tilted.
+            </li>
+            <li>
+              Cache intermediate results (e.g., pre-processed images) in a
+              temporary folder to reduce repeated processing costs.
+            </li>
+          </ul>
+
+          <h5 class="fw-bold mt-4">
+            Expand Recognition of Additional Elements
+          </h5>
+          <p>
+            <strong>Goal:</strong> Identify icons, embedded diagrams, or
+            non-text objects.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              Research add-on modules for EasyOCR or complementary libraries
+              that detect bounding shapes or graphical elements.
+            </li>
+            <li>
+              Store these recognized elements in the JSON output from
+              <code>pythonBridge.ts</code> to feed into higher-level AI prompts.
+            </li>
+            <li>
+              Provide placeholders in the final CraftJS JSON so icons or diagram
+              placeholders can be replaced by the user later.
+            </li>
+          </ul>
+
+          <h5 class="fw-bold mt-4">Enhance GUI Summarization AI</h5>
+          <p>
+            <strong>Goal:</strong> Support identification of nested layouts,
+            modals, floating widgets, or dynamic interface elements from
+            screenshots.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              Update <code>GUI_SUMMARY_META_PROMPT</code> in
+              <code>blueprintAiPrompts.ts</code> to specifically prompt for
+              nested structures or repeated components.
+            </li>
+            <li>
+              Implement consistency checks between the “UI Summarization AI” and
+              “GUI Summarization AI” responses, merging them into a more
+              cohesive final representation.
+            </li>
+            <li>
+              Add debug logs in <code>getSummariesFromScreenshot.ts</code> to
+              track how well the AI can interpret dynamic elements (e.g.,
+              expanding sidebars or pop-up dialogs).
+            </li>
+          </ul>
+
+          <h4 class="mt-4">
+            First Thing to Do (Continued): Improve Main Interface Usability
+          </h4>
+          <h5 class="fw-bold mt-3">
+            Provide Step-by-Step Tutorials for New Users
+          </h5>
+          <p>
+            <strong>Goal:</strong> Reduce onboarding friction by guiding
+            first-time users through the interface.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              Create a tutorial mode in <code>MainInterface.tsx</code> that
+              highlights key features in the left sidebar
+              (<code>PrimarySidebar.tsx</code>), properties sidebar
+              (<code>PropertiesSidebar.tsx</code>), and the canvas.
+            </li>
+            <li>
+              Store a “hasCompletedTutorial” flag in local storage or in the
+              user’s extension settings (<code>extensionContext.ts</code>).
+            </li>
+            <li>
+              Include a quick “tour” of dragging components, editing properties,
+              and generating a first layout from text or a screenshot.
+            </li>
+          </ul>
+
+          <h5 class="fw-bold mt-4">Capture In-Interface Feedback</h5>
+          <p>
+            <strong>Goal:</strong> Gather direct input from users about UI pain
+            points or desired features.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              Add a “Feedback” button near the top of the interface that opens a
+              modal (in <code>AiFeaturesModal.tsx</code> or a new file) for user
+              comments.
+            </li>
+            <li>
+              Automate sending feedback data to an internal or external logging
+              service, ensuring privacy measures are in place.
+            </li>
+          </ul>
+
+          <h5 class="fw-bold mt-4">
+            Offer Richer Explanations of Design Choices
+          </h5>
+          <p>
+            <strong>Goal:</strong> Help users understand why certain layout
+            decisions were made by the AI.
+          </p>
+          <h6>Technical Steps:</h6>
+          <ul>
+            <li>
+              Extend <code>FINAL_CRAFTJS_META_PROMPT</code> to request a
+              “rationale” for each major layout choice.
+            </li>
+            <li>
+              Display that rationale in a new tab or collapsible section within
+              the <code>AiSidebar.tsx</code> or the properties panel.
+            </li>
+            <li>
+              Include user-selectable detail levels (e.g., “Basic Explanation”
+              vs. “Technical Reasoning”).
+            </li>
+          </ul>
+
+          <!-- Second Thing (Immediate Next Improvements) -->
+          <h3 class="mt-5">
+            Second Thing (Immediate Next Improvements): Enhance AI Iterative
+            Chat Menu
+          </h3>
+          <h4 class="mt-4">
+            Reference Multiple Canvas Components in a Single Chat Turn
+          </h4>
+          <p>
+            <strong>Goal:</strong> Allow the AI to simultaneously modify or
+            discuss multiple components, improving design iteration.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              In the AI chat flow (<code>AiSidebar.tsx</code>), add logic to
+              gather references (IDs/names) of all selected components (e.g.,
+              BarChart1, BarChart2).
+            </li>
+            <li>
+              Modify the messages in <code>BlueprintAiService.ts</code> to pass
+              these references explicitly, so the AI can handle them in one
+              prompt/response cycle.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Better Conversation Memory</h4>
+          <p>
+            <strong>Goal:</strong> Retain context across multiple user
+            interactions and consecutive design changes.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Maintain a conversation history in React state or via a local
+              store that persists until the user resets or closes the project.
+            </li>
+            <li>
+              Summarize prior user requests and AI responses to pass as
+              “context” in the system prompt each time.
+            </li>
+            <li>
+              Implement an upper bound on conversation length to avoid
+              performance or cost issues with large chat histories.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Advanced Upvote/Downvote Logic</h4>
+          <p>
+            <strong>Goal:</strong> Let users easily “train” or guide AI
+            suggestions during a single session.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Include “thumbs up”/“thumbs down” icons in the iterative chat UI.
+            </li>
+            <li>
+              Immediately incorporate that feedback into subsequent prompts,
+              e.g., “The user disliked the color scheme last time, focus on
+              cooler tones now.”
+            </li>
+            <li>
+              Log aggregated feedback for debugging or for future model
+              fine-tuning.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">
+            Second Thing (Immediate Next Improvements): Broaden Component
+            Library
+          </h3>
+          <h4 class="mt-4">Add Specialized Components</h4>
+          <p>
+            <strong>Goal:</strong> Facilitate common layouts like contact forms,
+            product carousels, and dynamic data visualizations.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Create new React components in
+              <code>webview-ui/src/components/UserComponents/</code> for each
+              specialized feature.
+            </li>
+            <li>
+              Include relevant property editors in
+              <code>PropertiesSidebar</code> for each new component type.
+            </li>
+            <li>
+              Provide demo usage in <code>DemoPages</code> to show how these
+              components can be integrated.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Advanced Search/Filter in the Component Sidebar</h4>
+          <p>
+            <strong>Goal:</strong> Help users quickly locate custom or
+            user-generated components.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Implement a robust filter function in
+              <code>ElementsList.tsx</code> that accounts for tags, categories,
+              or user-defined metadata.
+            </li>
+            <li>
+              Allow sorting by popularity or recency if usage metrics are
+              collected.
+            </li>
+            <li>
+              Display suggested components related to the user’s typed query or
+              current page context.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Include More Interactive Components</h4>
+          <p>
+            <strong>Goal:</strong> Offer frequently requested UI patterns like
+            accordions, tabbed panels, or tooltips.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Develop these interactive components with proper event handling
+              and state management in React.
+            </li>
+            <li>
+              Test them in both desktop and mobile views to ensure
+              responsiveness and accessibility.
+            </li>
+            <li>
+              Document any important usage notes (e.g., limiting nested
+              accordions to avoid confusion).
+            </li>
+          </ul>
+
+          <h3 class="mt-5">
+            Second Thing (Immediate Next Improvements): Expand Page & Layout
+            Management
+          </h3>
+          <h4 class="mt-4">Introduce Page Dependency or Hierarchy Tracking</h4>
+          <p>
+            <strong>Goal:</strong> Allow certain pages to inherit layouts or
+            designs from “parent” pages.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Store hierarchical relationships in the Redux store
+              (<code>store.ts</code>) or a new data structure.
+            </li>
+            <li>
+              Auto-update child pages when a parent’s shared layout changes
+              (e.g., a universal navigation bar).
+            </li>
+            <li>
+              Provide visual cues or references in <code>PagesTab.tsx</code> to
+              clarify parent-child relationships.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Create Templating Features</h4>
+          <p>
+            <strong>Goal:</strong> Let users save an existing page as a reusable
+            template that can be applied to new pages or new projects.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Add a “Save as Template” option in <code>PagesTab.tsx</code> or
+              the main left sidebar.
+            </li>
+            <li>
+              Store templates in a dedicated folder or database reference so
+              they appear in a “Templates Library.”
+            </li>
+            <li>
+              Provide versioning for templates, so updates to a template can be
+              selectively applied to derived pages.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Richer Preview Thumbnails in Pages Sidebar</h4>
+          <p>
+            <strong>Goal:</strong> Show actual mini-snapshots rather than static
+            placeholders.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Use a lightweight offscreen rendering technique or canvas snapshot
+              to capture each page’s layout in real time.
+            </li>
+            <li>
+              Cache these previews to maintain fast performance when switching
+              between pages.
+            </li>
+            <li>
+              Provide a “Refresh Thumbnail” button to manually update snapshots
+              if needed.
+            </li>
+          </ul>
+
+          <!-- Third Thing (Longer-Term Enhancements) -->
+          <h3 class="mt-5">
+            Third Thing (Longer-Term Enhancements): AI-Driven Visual Tweaks
+          </h3>
+          <h4 class="mt-4">
+            Automatic Color Palettes, Typography, and Animations
+          </h4>
+          <p>
+            <strong>Goal:</strong> Reduce manual styling work by letting the AI
+            suggest or auto-apply cohesive styles.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Expand the “final layout” prompt to include style parameters such
+              as font families, brand color patterns, and transitions.
+            </li>
+            <li>
+              Implement a “Try Another Style” button that triggers re-generation
+              of color/typography suggestions without altering the page
+              structure.
+            </li>
+            <li>
+              Provide usage examples in the documentation and integrate usage
+              analytics to refine the style suggestions over time.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Quick Theme Updates</h4>
+          <p>
+            <strong>Goal:</strong> Let a user apply a full theme override across
+            all pages with one click.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Centralize theme properties (e.g., global CSS variables for color
+              or spacing) in a single location.
+            </li>
+            <li>
+              Expose a “Choose Theme” option in the main interface that triggers
+              a global re-render with updated styles.
+            </li>
+            <li>
+              Maintain a library of pre-set themes in
+              <code>webview-ui/src/themes/</code> or a similar structure.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Visual Consistency Checks</h4>
+          <p>
+            <strong>Goal:</strong> Ensure brand consistency or adherence to
+            design system guidelines.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Implement “consistency check” prompts in
+              <code>BlueprintAiService.ts</code> that highlight or auto-correct
+              out-of-place colors or fonts.
+            </li>
+            <li>
+              Provide real-time notifications if a newly added component
+              conflicts with the existing style guidelines.
+            </li>
+            <li>
+              Integrate advanced color harmony checks (e.g., complementary or
+              analogous color palettes) to avoid visual clashes.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">
+            Third Thing (Longer-Term Enhancements): Multi-Page Generation &
+            Linking
+          </h3>
+          <h4 class="mt-4">Bulk Page Generation</h4>
+          <p>
+            <strong>Goal:</strong> Generate multiple related pages (Home,
+            Products, About, etc.) in a single AI request for cohesive site
+            designs.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Extend <code>getBlueprintLayout(...)</code> to handle an array of
+              page descriptions, returning JSON for each.
+            </li>
+            <li>
+              Provide an interface in
+              <code>CreateWithImaginationComponent.tsx</code> to accept multiple
+              page prompts at once.
+            </li>
+            <li>
+              Auto-generate a site map that links each newly created page within
+              a shared navigation system.
+            </li>
+          </ul>
+
+          <!-- (Removed "Automated Cross-Page Linking" section) -->
+
+          <h3 class="mt-5">
+            Third Thing (Longer-Term Enhancements): Collaboration & Versioning
+            Features
+          </h3>
+          <h4 class="mt-4">Multi-User Editing with Conflict Resolution</h4>
+          <p>
+            <strong>Goal:</strong> Let teams design pages collaboratively in
+            real time.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Introduce a real-time sync layer (e.g., WebSockets or a
+              cloud-based real-time database) to broadcast changes.
+            </li>
+            <li>
+              Use operational transforms or CRDTs (Conflict-free Replicated Data
+              Types) to handle simultaneous component modifications.
+            </li>
+            <li>
+              Provide user identity tracking so each user sees who is editing
+              which component at any given time.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Version History System</h4>
+          <p>
+            <strong>Goal:</strong> Offer the ability to roll back or compare
+            previous states of a page.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Store diffs or snapshots of the CraftJS JSON layout whenever a
+              major change is committed.
+            </li>
+            <li>
+              Present a timeline UI where users can browse older versions, see
+              the changes, and revert if necessary.
+            </li>
+            <li>
+              Add checks to ensure that rolling back does not break new
+              references or newly introduced components.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Integration with External Git Repositories</h4>
+          <p>
+            <strong>Goal:</strong> Simplify continuous integration (CI) and
+            team-based code reviews.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Provide an “Export to Git” option in <code>ExportMenu.tsx</code>,
+              prompting for repository URL and authentication.
+            </li>
+            <li>
+              Auto-commit the generated code or relevant JSON files to the
+              specified branch.
+            </li>
+            <li>
+              Potentially link each version or user session to a Git commit,
+              enabling standard PR workflows for reviewing changes.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">
+            First Improvement to Prioritize: Performance Optimizations
+          </h3>
+          <h4 class="mt-4">Caching Partial AI Results</h4>
+          <p>
+            <strong>Goal:</strong> Speed up repeated AI calls for similar or
+            iterative user prompts.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Store intermediate OCR results in memory or on disk when the user
+              is refining the same screenshot.
+            </li>
+            <li>
+              Cache previously generated layout JSON variants in a dictionary
+              keyed by user prompt or page name.
+            </li>
+            <li>
+              In <code>python-ocr/ocr_service.py</code>, leverage concurrency or
+              async frameworks to serve repeated requests faster.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Streamline python-ocr Services</h4>
+          <p>
+            <strong>Goal:</strong> Prevent timeouts or crashes with
+            high-resolution images.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Optimize image reading (e.g., handle scaling or chunked
+              processing) to avoid memory spikes.
+            </li>
+            <li>
+              Use a queue system to process multiple OCR tasks sequentially if
+              the extension must handle batch processing.
+            </li>
+            <li>
+              Monitor resource usage (CPU/RAM) in real time to gracefully
+              degrade image resolution if needed.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Optimize JS/TS Rendering in the CraftJS Canvas</h4>
+          <p>
+            <strong>Goal:</strong> Ensure that drag-and-drop, resizing, and
+            layering remain fluid, even on complex pages.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Profile React performance in <code>MainInterface.tsx</code> and
+              <code>RenderNode.tsx</code> to identify unnecessary re-renders.
+            </li>
+            <li>
+              Implement memoization or virtualization for large component
+              hierarchies.
+            </li>
+            <li>
+              Use code-splitting or lazy loading for heavy modules, especially
+              in advanced AI features.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">Second Improvement: Extended Export Menu</h3>
+          <h4 class="mt-4">Expand .NET / Cross-Platform Capability</h4>
+          <p>
+            <strong>Goal:</strong> Offer robust integrations with Blazor,
+            ASP.NET Core, or other .NET frameworks.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              In <code>codeGenerator.ts</code>, build additional code templates
+              that output <code>.razor</code> files or
+              <code>.cshtml</code> partials.
+            </li>
+            <li>
+              Create a config screen for selecting Blazor vs. ASP.NET Core so
+              the user sees relevant file structures (e.g.,
+              <code>Program.cs</code>, <code>.csproj</code>).
+            </li>
+            <li>
+              Provide post-export instructions in a readme about how to
+              integrate the generated code into an existing .NET project.
+            </li>
+          </ul>
+
+          <!-- (Removed "Export Preview in a Standard IDE" section) -->
+
+          <h4 class="mt-4">Optional “Lite” or “Full-Blown” Exports</h4>
+          <p>
+            <strong>Goal:</strong> Give users control over the complexity and
+            size of their exported project.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              In the export settings UI, add radio buttons for “Lite,”
+              “Standard,” and “Full-Blown.”
+            </li>
+            <li>
+              “Lite” might omit advanced animations and large library imports,
+              focusing on minimal file size.
+            </li>
+            <li>
+              “Full-Blown” includes extra JS transitions, thorough in-code
+              documentation, and sample tests.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">Third Improvement: Advanced Testing and QA</h3>
+          <h4 class="mt-4">Automated Unit Tests for Generated Pages</h4>
+          <p>
+            <strong>Goal:</strong> Validate layout integrity and basic
+            functionality each time a new page is generated.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Generate Jest (or similar framework) test files alongside each
+              exported HTML/CSS/JS.
+            </li>
+            <li>
+              Check for crucial elements (navigation bars, footers, container
+              IDs) to ensure they match the AI’s expected structure.
+            </li>
+            <li>
+              Integrate with a continuous testing pipeline if the user’s project
+              is already set up with CI/CD.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Integration Tests for AI-Driven Functionalities</h4>
+          <p>
+            <strong>Goal:</strong> Confirm the AI flow remains stable across
+            updates, especially with OCR or iterative chat.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Script end-to-end tests that simulate a user providing a
+              screenshot, verifying the returned UI summary or layout meets a
+              certain confidence threshold.
+            </li>
+            <li>
+              Monitor prompt/response times to ensure performance targets are
+              being met.
+            </li>
+            <li>
+              Cover advanced features like multi-component edits in a single AI
+              chat turn, capturing potential regression issues.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">One-Click Test Runner</h4>
+          <p>
+            <strong>Goal:</strong> Make it effortless for users (and devs) to
+            run the entire test suite within the extension’s UI.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Integrate a “Run Tests Now” button in the main interface or
+              extension panel that triggers a script (e.g.,
+              <code>npm run test</code> or <code>pytest</code>).
+            </li>
+            <li>
+              Display pass/fail results in a modal or side panel, linking to
+              test logs for deeper investigation.
+            </li>
+            <li>
+              Store historical test runs in a simple JSON or SQLite DB so
+              developers can see if a recent change introduced new errors.
+            </li>
+          </ul>
+
+          <!-- New Sections -->
+          <h3 class="mt-5">
+            Fourth Thing: Accessibility &amp; Internationalization
+          </h3>
+          <h4 class="mt-4">Accessibility Enhancements</h4>
+          <p>
+            <strong>Goal:</strong> Ensure the generated layouts comply with WCAG
+            for screen readers and keyboard navigation.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Integrate accessibility checks (e.g., <code>axe-core</code>) into
+              the automated testing pipeline.
+            </li>
+            <li>
+              Provide an “ARIA-friendly” option in the layout generator that
+              includes alt attributes, ARIA roles, and labeled form components
+              by default.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Localization &amp; Multi-Language Support</h4>
+          <p>
+            <strong>Goal:</strong> Let the user easily generate pages in
+            multiple languages or switch the interface language.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Add an i18n library (like <code>react-i18next</code>) to the
+              extension’s front-end, enabling language toggles.
+            </li>
+            <li>
+              Allow the AI to incorporate localized text blocks or placeholders
+              in the CraftJS JSON (e.g., storing translations in separate
+              files).
+            </li>
+            <li>
+              Provide user prompts for multilingual generation, so the AI
+              returns a layout with distinct language sections.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">Fifth Thing: Security &amp; Compliance</h3>
+          <h4 class="mt-4">Data Protection for OCR and AI Calls</h4>
+          <p>
+            <strong>Goal:</strong> Safeguard sensitive user information when
+            screenshots or prompts are sent to external AI services.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Implement encryption or hashed identifiers for images or text that
+              might contain PII (personally identifiable information).
+            </li>
+            <li>
+              Provide an in-tool warning or guidelines about not uploading
+              confidential or personal data.
+            </li>
+            <li>
+              Evaluate storing partial artifacts locally (rather than ephemeral
+              cloud storage) to minimize exposure.
+            </li>
+          </ul>
+
+          <h4 class="mt-4">Role-Based Access Control (RBAC)</h4>
+          <p>
+            <strong>Goal:</strong> Restrict advanced AI features or destructive
+            actions (like mass page deletion) to authorized roles in a
+            multi-user environment.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Integrate a user/role management system in the back-end or
+              extension context.
+            </li>
+            <li>
+              Grey out or hide certain UI elements for users without the
+              necessary permissions.
+            </li>
+            <li>
+              Log all major actions (like template creation or AI-based code
+              export) for an audit trail.
+            </li>
+          </ul>
+
+          <h3 class="mt-5">
+            Sixth Thing: Plugin Ecosystem &amp; Community Extensions
+          </h3>
+          <h4 class="mt-4">Support for Third-Party Plugins</h4>
+          <p>
+            <strong>Goal:</strong> Let the community develop and share custom AI
+            prompts, components, or workflows.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Expose a public API or configuration schema so plugin developers
+              can add new features or override existing ones.
+            </li>
+            <li>
+              Provide a plugin directory in the codebase (<code>/plugins</code>)
+              where community-driven modules can be installed.
+            </li>
+            <li>Document plugin best practices and security guidelines.</li>
+          </ul>
+
+          <h4 class="mt-4">Marketplace for Components and Templates</h4>
+          <p>
+            <strong>Goal:</strong> Encourage user sharing of popular layouts,
+            color themes, or industry-specific page templates.
+          </p>
+          <h5><u>Technical Steps:</u></h5>
+          <ul>
+            <li>
+              Develop a curated gallery within the extension or a dedicated
+              website that showcases official and community components.
+            </li>
+            <li>
+              Include rating/review functionality so users can evaluate the
+              quality and reliability of each shared item.
+            </li>
+            <li>
+              Enable one-click import of any template or component into a user’s
+              project, verifying compatibility with the current version of the
+              extension.
+            </li>
+          </ul>
+        </div>
+        <!-- END CUSTOM INSERTION OF FUTURE PLAN -->
+      </section>
   </main>
 
   <!-- Footer -->
