@@ -172,21 +172,78 @@
   </p>
 
   <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Python OCR Unit Tests</h3>
-  <p style="margin-bottom:1rem;">
-    For OCR-related functionality, we rely on a structured test suite using Python’s
-    <strong>unittest</strong> framework. These tests confirm that each stage of the text
-    extraction process—preprocessing, bounding box detection, confidence thresholding—
-    meets our accuracy requirements. By systematically comparing recognized text against
-    expected substrings and validating bounding box sizes, we detect issues early in
-    development.
-  </p>
-  <p style="margin-bottom:1rem;">
-    We focus on the most critical edge cases that might appear in real-world usage, such
-    as small fonts on receipts, unusual layouts in billing forms, and variable invoice
-    formats. In addition to verifying raw text recognition, we also confirm that our JSON
-    output (which includes <code>text</code>, <code>confidence</code>, and <code>bbox</code>)
-    remains consistently structured.
-  </p>
+<p style="margin-bottom:1rem;">
+  For OCR-related functionality, we rely on an extensive and carefully designed test suite 
+  built with Python’s <strong>unittest</strong> framework. Each test case within this suite 
+  is meant to precisely reflect potential real-world conditions that our OCR pipeline 
+  might encounter when converting screenshots into workable text for our AI summarization 
+  workflow. By structuring tests around specific, well-defined scenarios, we gain deeper 
+  insights into how each step of the process handles both typical and edge-case conditions.
+</p>
+<p style="margin-bottom:1rem;">
+  At a high level, our Python OCR unit tests validate five fundamental aspects of the process:
+</p>
+<ol style="margin-bottom:1rem; list-style-type: decimal; margin-left:2rem;">
+  <li><strong>Preprocessing Efficacy:</strong> We check whether applying grayscale, upscaling, 
+    or noise reduction steps before running EasyOCR significantly boosts text recognition 
+    results. Test images range from crisp, high-resolution screenshots to heavily compressed 
+    or low-contrast images, ensuring that preprocessing steps consistently enhance 
+    accuracy rather than degrade it.</li>
+
+  <li><strong>Bounding Box Calculation:</strong> Each recognized text element returns a set 
+    of coordinates representing the bounding box. We validate these against an acceptable 
+    size range defined in our test cases. For instance, a small label on a form might require 
+    a bounding box area of 40–100 pixels, whereas a larger heading might span hundreds or 
+    even thousands of pixels in area. By confirming these ranges, we ensure our system 
+    accurately pinpoints textual regions.</li>
+
+  <li><strong>Confidence Thresholding:</strong> We measure the average and individual 
+    confidence scores from the OCR results to confirm that they meet or exceed minimum 
+    thresholds. For example, certain test images mandate a confidence score of at least 0.80 
+    to pass. This assures us that the recognized text is reliable enough to feed into the AI 
+    summarization steps without introducing spurious or low-accuracy content.</li>
+
+  <li><strong>Substring Verification:</strong> Each test case includes an <code>expected_substring</code> 
+    value. By scanning the full recognized text for that substring, we verify that crucial 
+    details—like an invoice number, a billing label, or a receipt total—appear exactly as 
+    anticipated. For real-world usage, missing or incorrect substrings might lead to user 
+    confusion or broken AI analysis (e.g., a chat prompt about an invoice failing because 
+    the word "Invoice" never got recognized).</li>
+
+  <li><strong>JSON Output Consistency:</strong> Once we generate final OCR data, the system 
+    encodes it as a JSON array of recognized text items, each with <code>text</code>, 
+    <code>confidence</code>, and <code>bbox</code> fields. Our tests parse this JSON to ensure 
+    it’s valid and that each data entry includes all required fields. This consistency is 
+    critical for the subsequent steps in the pipeline, where the AI summarization relies on 
+    structured JSON rather than raw, unformatted text.</li>
+</ol>
+
+<p style="margin-bottom:1rem;">
+  Our test images are carefully curated to cover diverse scenarios: <strong>Receipts</strong> 
+  often have small, dense text blocks and varied fonts, <strong>Billing Forms</strong> can 
+  include vertical or horizontally aligned text with an array of labels, and 
+  <strong>Invoices</strong> typically feature tables, prominent headings, and sections such 
+  as “Invoice #” or “Amount Due.” By systematically running these tests and evaluating the 
+  results, we confirm that the OCR handles each situation reliably, alerting us to any 
+  regressions or degradations in accuracy as our codebase evolves.
+</p>
+<p style="margin-bottom:1rem;">
+  From an architectural perspective, the Python tests also double as a form of contract 
+  testing for the AI module that follows. By ensuring the detected text is both accurate 
+  and well-structured, the subsequent AI requests (e.g., for UI summarization) can assume 
+  that they’re getting clean, precise information. This helps minimize the probability of 
+  cascading errors, where flawed OCR output might cause the AI to misunderstand essential 
+  labels (like “Username” or “Submit Button”) within the CraftJS-generated layout. 
+</p>
+<p style="margin-bottom:1rem;">
+  Finally, these Python OCR unit tests are integrated into our continuous integration (CI) 
+  workflow. Whenever a developer pushes a change, the entire OCR test suite is automatically 
+  triggered, providing immediate feedback if any adjustment—say, introducing a new 
+  preprocessing technique—negatively impacts performance or accuracy. This proactive testing 
+  stance, combined with the depth of our scenario coverage, ensures that our OCR functionality 
+  remains robust and continues to support the broader AI-driven architecture over time.
+</p>
+
 
   <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
 <code>
@@ -329,26 +386,73 @@ if __name__ == '__main__':
 
   <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Integration with AI Summaries</h3>
   <p style="margin-bottom:1rem;">
-    Beyond verifying correct OCR outputs, these Python tests feed into our AI summarization
-    pipeline. When recognized text meets expected thresholds, the subsequent AI prompts
-    (for UI/GUI summarization) receive cleaner data, reducing the likelihood of errors in
-    the final CraftJS layouts. This correlation between OCR accuracy and AI correctness
-    underlines why solid unit test coverage is crucial at every step.
+    Our Python OCR tests serve as the first critical step in an integrated pipeline that
+    continues with AI-driven summarization. Whenever a screenshot is processed, each recognized
+    text fragment—along with its corresponding confidence score and bounding box—feeds directly
+    into our AI summarization routines. This sequence is particularly important when the AI is
+    attempting to group and interpret distinct UI elements, such as buttons, labels, or form
+    fields.
   </p>
-
+  <p style="margin-bottom:1rem;">
+    If the OCR data is inaccurate or misaligned, the summarization model may incorrectly classify
+    certain parts of the interface, leading to poorly structured CraftJS layouts. For instance,
+    an incorrectly recognized label (e.g., “Submiit” instead of “Submit”) might prompt the AI to
+    overlook important functions or produce an illogical element hierarchy. Similarly, a mismatch
+    in bounding boxes can cause the AI to merge distinct text blocks into a single item, producing
+    misleading or broken interface components. Therefore, accurate, well-tested OCR output 
+    substantially reduces error propagation and ensures our summarization steps yield meaningful
+    UI/GUI outlines.
+  </p>
+  <p style="margin-bottom:1rem;">
+    We also validate the interplay between OCR accuracy and AI text grouping. Common real-world
+    scenarios include receipts with itemized lists, form pages with overlapping fields, or
+    dense landing pages featuring multiple navigation bars. By testing OCR performance on these
+    complex visuals and then measuring how accurately the AI organizes them (into nav bars,
+    headers, or content blocks), we confirm that the entire end-to-end pipeline remains robust.
+    Our Python unit tests, in turn, give us confidence that any anomalies in AI output stem from
+    legitimate modeling complexities rather than faulty input data.
+  </p>
+  
   <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">TypeScript Integration and Performance Tests</h3>
   <p style="margin-bottom:1rem;">
-    On the JavaScript/TypeScript side, we combine integration checks for data flow between
-    our Python back-end and the AI summarization logic. These tests cover scenarios where the
-    recognized text is large, complex, or only partially accurate, examining how the AI reacts
-    to varying input quality. 
+    On the JavaScript/TypeScript side, we perform comprehensive integration checks that monitor
+    the data flow from OCR (Python) all the way to the AI summarization logic and final layout
+    rendering. These tests verify that large or partially accurate recognized text is still
+    handled gracefully by the AI. For instance, even if some tokens are unrecognized or
+    truncated, our summarization prompts and fallback logic should interpret the remaining text
+    in a robust manner, maintaining essential structure and labeling within the resulting CraftJS
+    blueprint.
   </p>
   <p style="margin-bottom:1rem;">
-    Additionally, we measure how long the entire pipeline takes—covering OCR, UI summary,
-    and GUI summary generation. This ensures our solution remains performant for images of
-    various complexity levels. The snippet below (<strong>aiOcrPerformance.integration.test.ts</strong>)
-    shows how we track and log these times.
+    We also account for concurrency and real-time feedback. Multiple AI requests (e.g., repeated
+    summarizations after small user edits) must not degrade system performance to an unacceptable
+    level. The TypeScript integration tests simulate situations where the user uploads multiple
+    screenshots of varying sizes—like a straightforward login form followed by a large, image-heavy
+    landing page—in quick succession. We measure processing speeds and monitor memory usage to
+    ensure our solution scales without crashing or causing severe slowdowns. Concurrency checks
+    also focus on verifying that partial outputs from the OCR service do not lock the AI summarization
+    routines.
   </p>
+  <p style="margin-bottom:1rem;">
+    Regarding performance, we maintain detailed logging of every stage: from the start of OCR 
+    processing to the final generation of a CraftJS layout. This data is aggregated in test
+    reports, allowing us to pinpoint bottlenecks or regressions when the codebase evolves. For
+    example, if the OCR step suddenly spikes from 20 seconds to 60 seconds for a moderately
+    complex screenshot, we receive an immediate alert through our continuous integration pipeline.
+    We can then trace that spike to a specific commit or configuration change (e.g., a newly
+    introduced preprocessing step) and address it before it affects user-facing builds.
+  </p>
+  <p style="margin-bottom:1rem;">
+    The TypeScript tests also perform content validation on AI outputs beyond mere timing. We
+    inspect the textual summaries (both UI and GUI) to confirm they include vital elements,
+    such as “Submit Button” or “Navigation Bar,” and do not produce contradictory or impossible
+    layout structures. By combining these content checks with timing metrics, our integration
+    suite ensures both correctness and efficiency in real-world usage scenarios. The following
+    snippet (<strong>aiOcrPerformance.integration.test.ts</strong>) demonstrates how we track
+    and log these performance benchmarks, making them an essential part of regression detection
+    and capacity planning.
+  </p>
+  
 
   <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
 <code>
