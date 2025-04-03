@@ -1,282 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blueprint AI - Home</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- Rubik’s Cube Loader CSS -->
+    <link rel="stylesheet" href="rubiks.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blueprint AI - Home</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Your Custom CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <!-- Rubik’s Cube Loader CSS -->
-  <link rel="stylesheet" href="rubiks.css">
-</head>
+  <body>
+    <!-- LOADING SCREEN (Spinner fetched dynamically) -->
+    <div id="loading-screen"></div>
 
-<body>
+    <!-- ALL PAGE CONTENT IS INSIDE THIS WRAPPER, INITIALLY HIDDEN -->
+    <div id="page-content" style="display: none">
+      <!-- HEADER & NAVBAR -->
+      <header>
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <!-- Logo or brand -->
+            <a class="navbar-brand" href="index.html">
+              <img
+                src="logoText.png"
+                alt="Blueprint AI Logo"
+                class="navbar-logo"
+              />
+            </a>
 
-  <!-- LOADING SCREEN (Spinner fetched dynamically) -->
-  <div id="loading-screen"></div>
+            <!-- Toggle button for mobile view -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-  <!-- ALL PAGE CONTENT IS INSIDE THIS WRAPPER, INITIALLY HIDDEN -->
-  <div id="page-content" style="display: none;">
+            <!-- Nav links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <!-- HOME now a dropdown -->
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle active"
+                    href="index.html"
+                    id="homeDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Home
+                  </a>
+                  <!-- Drop-down links -->
+                  <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                    <li>
+                      <a class="dropdown-item" href="#abstract">Abstract</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#video">Video</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#timeline">Timeline</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#ourteam">Our Team</a>
+                    </li>
+                  </ul>
+                </li>
 
-    <!-- HEADER & NAVBAR -->
-    <header>
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <!-- Logo or brand -->
-          <a class="navbar-brand" href="index.html">
-            <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
+                <!-- Other nav links -->
+                <li class="nav-item">
+                  <a class="nav-link" href="requirements.html">Requirements</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="research.html">Research</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="ui-design.html">UI Design</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="system-design.html"
+                    >System Design</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="implementation.html"
+                    >Implementation</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="testing.html">Testing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="evaluation.html">Evaluation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="appendices.html">Appendices</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="blog.html">Blog</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div
+          class="hero-section d-flex flex-column flex-lg-row align-items-center"
+        >
+          <div class="hero-text">
+            <h2 class="description">
+              Empowering developers with AI-driven UI design
+            </h2>
+            <h3 class="slogan">
+              Keep the frontend at the backend of your mind!
+            </h3>
+          </div>
+          <img
+            src="home-assets/logo.png"
+            alt="Blueprint AI Logo"
+            class="hero-logo"
+          />
+        </div>
+      </header>
+
+      <!-- ABSTRACT -->
+      <section id="abstract" class="abstract my-5">
+        <div class="row">
+          <div class="col-12">
+            <h2>The Problem</h2>
+            <p>
+              Front-end development is often a bottleneck in software projects,
+              requiring extensive knowledge of HTML, CSS, JavaScript, and UI/UX
+              design principles. Developers spend significant time manually
+              coding interfaces, which slows down productivity, especially in
+              hackathons, rapid prototyping, and agile development environments.
+            </p>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <h2>Our Solution</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>
+              Blueprint AI is a <strong>VSCode extension</strong> that
+              <strong>leverages AI to automate front-end UI design</strong>.
+              Users can generate layouts by
+              <strong>uploading images</strong> and/or
+              <strong>describing their ideas</strong> in natural language. The
+              AI seamlessly converts these inputs into structured UI components
+              using CraftJS, enabling real-time editing without the need for
+              code.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>
+              Blueprint AI streamlines front-end development by reducing manual
+              effort through integrating AI at every step of the design process.
+              From ideation to exporting of code, this ensures design
+              consistency and accelerates project timelines. It democratises UI
+              design, making professional-grade interfaces accessible to both
+              developers and non-coders, ultimately bridging the gap between
+              creativity and implementation.
+            </p>
+          </div>
+        </div>
+        <blockquote>
+          “If this was available now, I would use it.”
+          <span>- Prof. Joseph Connor, UCL Dept of Computer Science</span>
+        </blockquote>
+        <div class="row mt-4">
+          <img
+            src="home-assets/features.png"
+            alt="Feature Graphics"
+            class="img-fluid features-img"
+          />
+        </div>
+      </section>
+
+      <!-- VIDEO SECTION -->
+      <section id="video" class="video-section my-5">
+        <h2>Project Video</h2>
+        <div
+          style="
+            width: 100%;
+            max-width: 1060px;
+            aspect-ratio: 16/9;
+            margin: 0 auto;
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/JZ93GVsJ2tY"
+            title="Blueprint AI Presentation"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="width: 100%; height: 100%"
+          >
+          </iframe>
+        </div>
+      </section>
+
+      <!-- TIMELINE -->
+      <section id="timeline" class="project-management my-5">
+        <h2>Project Timeline</h2>
+        <p>
+          The Gantt chart below illustrates our time organisation. This enabled
+          us to work more efficently and collaboratively.
+        </p>
+        <img
+          src="home-assets/gantt-chart.png"
+          alt="Gantt Chart"
+          class="img-fluid"
+        />
+      </section>
+
+      <!-- OUR TEAM -->
+      <section id="ourteam" class="our-team my-5">
+        <h2>Meet Team 21</h2>
+        <div class="row team-container">
+          <!-- Team Member 1: Gideon -->
+          <div class="col-md-3 team-member">
+            <img src="home-assets/gideon.jpeg" alt="Gideon" class="img-fluid" />
+            <h3>Gideon Zeru</h3>
+            <p>2nd Year BSc CS Student</p>
+            <p>Programmer | Tester | Report Editor</p>
+            <div class="social-icons">
+              <a href="https://github.com/23Deon" target="_blank">
+                <i class="fa-brands fa-square-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/gideon-zeru-28b3b323a"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Team Member 2: Josh -->
+          <div class="col-md-3 team-member">
+            <img src="home-assets/josh.jpg" alt="Josh" class="img-fluid" />
+            <h3>Joshua Mendel</h3>
+            <p>2nd Year BSc CS Student</p>
+            <p>Programmer | Tester | Client Liason</p>
+            <div class="social-icons">
+              <a href="https://github.com/23Deon" target="_blank">
+                <i class="fa-brands fa-square-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/joshua-mendel-6ab22a185/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Team Member 3: Joshua Ian Soh -->
+          <div class="col-md-3 team-member">
+            <img src="home-assets/joshua.JPG" alt="Joshua" class="img-fluid" />
+            <h3>Joshua Ian Soh</h3>
+            <p>2nd Year BSc CS Student</p>
+            <p>Programmer | UI Design | Researcher</p>
+            <div class="social-icons">
+              <a href="https://github.com/jay5oh33rn" target="_blank">
+                <i class="fa-brands fa-square-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/joshua-soh-4a507533b"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Team Member 4: Simran -->
+          <div class="col-md-3 team-member">
+            <img src="home-assets/simran.jpg" alt="Simran" class="img-fluid" />
+            <h3>Simran Goel</h3>
+            <p>2nd Year MEng CS Student</p>
+            <p>Programmer | Researcher | Report Editor</p>
+            <div class="social-icons">
+              <a href="https://github.com/simrangoel0" target="_blank">
+                <i class="fa-brands fa-square-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/simran-goel00/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="text-center py-4">
+        <div
+          class="footer-logos d-flex justify-content-center align-items-center"
+        >
+          <a href="https://www.ucl.ac.uk" target="_blank">
+            <img src="ucl.png" alt="UCL Logo" class="footer-logo" />
           </a>
-
-          <!-- Toggle button for mobile view -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Nav links -->
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <!-- HOME now a dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="index.html" id="homeDropdown" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  Home
-                </a>
-                <!-- Drop-down links -->
-                <ul class="dropdown-menu" aria-labelledby="homeDropdown">
-                  <li><a class="dropdown-item" href="#abstract">Abstract</a></li>
-                  <li><a class="dropdown-item" href="#video">Video</a></li>
-                  <li><a class="dropdown-item" href="#timeline">Timeline</a></li>
-                  <li><a class="dropdown-item" href="#ourteam">Our Team</a></li>
-                </ul>
-              </li>
-
-              <!-- Other nav links -->
-              <li class="nav-item">
-                <a class="nav-link" href="requirements.html">Requirements</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="research.html">Research</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ui-design.html">UI Design</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="system-design.html">System Design</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="implementation.html">Implementation</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="testing.html">Testing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="evaluation.html">Evaluation</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="appendices.html">Appendices</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="blog.html">Blog</a>
-              </li>
-            </ul>
-          </div>
+          <a href="https://www.microsoft.com" target="_blank">
+            <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo" />
+          </a>
+          <a href="https://github.com/YOUR_GITHUB" target="_blank">
+            <i class="fa-brands fa-square-github"></i>
+          </a>
         </div>
-      </nav>
+      </footer>
+    </div>
+    <!-- end #page-content -->
 
-      <!-- Hero Section -->
-      <div class="hero-section d-flex flex-column flex-lg-row align-items-center">
-        <div class="hero-text">
-          <h2 class="description">Empowering developers with AI-driven UI design</h2>
-          <h3 class="slogan">Keep the frontend at the backend of your mind!</h3>
-        </div>
-        <img src="home-assets/logo.png" alt="Blueprint AI Logo" class="hero-logo">
-      </div>
-    </header>
+    <!-- Bootstrap Bundle + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your Custom Scripts (if any) -->
+    <script src="script.js"></script>
 
-    <!-- ABSTRACT -->
-    <section id="abstract" class="abstract my-5">
-      <div class="row">
-        <div class="col-12">
-          <h2>The Problem</h2>
-          <p>
-            Front-end development is often a bottleneck in software projects, requiring extensive knowledge of HTML,
-            CSS, JavaScript, and UI/UX design principles. Developers spend significant time manually coding interfaces,
-            which slows down productivity, especially in hackathons, rapid prototyping, and agile development
-            environments.
-          </p>
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-12">
-          <h2>Our Solution</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <p>
-            Blueprint AI is a <strong>VSCode extension</strong> that <strong>leverages AI to automate front-end UI
-              design</strong>. Users can generate layouts by <strong>uploading images</strong> and/or <strong>describing
-              their ideas</strong> in natural language. The AI seamlessly converts these inputs into structured UI
-            components using CraftJS, enabling real-time editing without the need for code.
-          </p>
-        </div>
-        <div class="col-md-6">
-          <p>
-            Blueprint AI streamlines front-end development by reducing manual effort through integrating AI at every
-            step of the design process. From ideation to exporting of code, this ensures design consistency and
-            accelerates project timelines. It democratises UI design, making professional-grade interfaces accessible to
-            both developers and non-coders, ultimately bridging the gap between creativity and implementation.
-          </p>
-        </div>
-      </div>
-      <blockquote>
-        “If this was available now, I would use it.”
-        <span>- Prof. Joseph Connor, UCL Dept of Computer Science</span>
-      </blockquote>
-      <div class="row mt-4">
-        <img src="home-assets/features.png" alt="Feature Graphics" class="img-fluid features-img">
-      </div>
-    </section>
+    <!-- LOADER FETCH & TIMER LOGIC -->
+    <script>
+      // 1) Fetch the rubiks.html snippet
+      fetch('rubiks.html')
+        .then((response) => response.text())
+        .then((loaderHtml) => {
+          // Insert the loader markup into #loading-screen
+          document.getElementById('loading-screen').innerHTML = loaderHtml;
+        })
+        .catch((err) => console.error('Error loading Rubik’s loader:', err));
 
-    <!-- VIDEO SECTION -->
-    <section id="video" class="video-section my-5">
-      <h2>Project Video</h2>
+      // 2) Create two promises: page load + 2-second timer (you can change to 3000 for 3s)
+      const pageLoadPromise = new Promise((resolve) => {
+        window.addEventListener('load', resolve);
+      });
 
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/JZ93GVsJ2tY" title="Blueprint AI Presentation"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </section>
+      const twoSecondPromise = new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      });
 
-    <!-- TIMELINE -->
-    <section id="timeline" class="project-management my-5">
-      <h2>Project Timeline</h2>
-      <p>The Gantt chart below illustrates our time organisation. This enabled us to work more efficently and
-        collaboratively.</p>
-      <img src="home-assets/gantt-chart.png" alt="Gantt Chart" class="img-fluid">
-    </section>
-
-    <!-- OUR TEAM -->
-    <section id="ourteam" class="our-team my-5">
-      <h2>Meet Team 21</h2>
-      <div class="row team-container">
-        <!-- Team Member 1: Gideon -->
-        <div class="col-md-3 team-member">
-          <img src="home-assets/gideon.jpeg" alt="Gideon" class="img-fluid">
-          <h3>Gideon Zeru</h3>
-          <p>2nd Year BSc CS Student</p>
-          <p>Programmer | Tester | Report Editor</p>
-          <div class="social-icons">
-            <a href="https://github.com/23Deon" target="_blank">
-              <i class="fa-brands fa-square-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/gideon-zeru-28b3b323a" target="_blank">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Team Member 2: Josh -->
-        <div class="col-md-3 team-member">
-          <img src="home-assets/josh.jpg" alt="Josh" class="img-fluid">
-          <h3>Joshua Mendel</h3>
-          <p>2nd Year BSc CS Student</p>
-          <p>Programmer | Tester | Client Liason</p>
-          <div class="social-icons">
-            <a href="https://github.com/23Deon" target="_blank">
-              <i class="fa-brands fa-square-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/joshua-mendel-6ab22a185/" target="_blank">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Team Member 3: Joshua Ian Soh -->
-        <div class="col-md-3 team-member">
-          <img src="home-assets/joshua.JPG" alt="Joshua" class="img-fluid">
-          <h3>Joshua Ian Soh</h3>
-          <p>2nd Year BSc CS Student</p>
-          <p>Programmer | UI Design | Researcher</p>
-          <div class="social-icons">
-            <a href="https://github.com/jay5oh33rn" target="_blank">
-              <i class="fa-brands fa-square-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/joshua-soh-4a507533b" target="_blank">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Team Member 4: Simran -->
-        <div class="col-md-3 team-member">
-          <img src="home-assets/simran.jpg" alt="Simran" class="img-fluid">
-          <h3>Simran Goel</h3>
-          <p>2nd Year MEng CS Student</p>
-          <p>Programmer | Researcher | Report Editor</p>
-          <div class="social-icons">
-            <a href="https://github.com/simrangoel0" target="_blank">
-              <i class="fa-brands fa-square-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/simran-goel00/" target="_blank">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="text-center py-4">
-      <div class="footer-logos d-flex justify-content-center align-items-center">
-        <a href="https://www.ucl.ac.uk" target="_blank">
-          <img src="ucl.png" alt="UCL Logo" class="footer-logo">
-        </a>
-        <a href="https://www.microsoft.com" target="_blank">
-          <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
-        </a>
-        <a href="https://github.com/YOUR_GITHUB" target="_blank">
-          <i class="fa-brands fa-square-github"></i>
-        </a>
-      </div>
-    </footer>
-  </div> <!-- end #page-content -->
-
-  <!-- Bootstrap Bundle + Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Your Custom Scripts (if any) -->
-  <script src="script.js"></script>
-
-  <!-- LOADER FETCH & TIMER LOGIC -->
-  <script>
-    // 1) Fetch the rubiks.html snippet
-    fetch('rubiks.html')
-      .then(response => response.text())
-      .then(loaderHtml => {
-        // Insert the loader markup into #loading-screen
-        document.getElementById('loading-screen').innerHTML = loaderHtml;
-      })
-      .catch(err => console.error('Error loading Rubik’s loader:', err));
-
-    // 2) Create two promises: page load + 2-second timer (you can change to 3000 for 3s)
-    const pageLoadPromise = new Promise(resolve => {
-      window.addEventListener('load', resolve);
-    });
-
-    const twoSecondPromise = new Promise(resolve => {
-      setTimeout(resolve, 2000);
-    });
-
-    // 3) Wait for both promises, then hide loader + show content
-    Promise.all([pageLoadPromise, twoSecondPromise])
-      .then(() => {
+      // 3) Wait for both promises, then hide loader + show content
+      Promise.all([pageLoadPromise, twoSecondPromise]).then(() => {
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('page-content').style.display = 'block';
       });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
