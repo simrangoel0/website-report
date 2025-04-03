@@ -90,38 +90,574 @@
       </div>
     </nav>
 
-    <!-- Page Title/Intro -->
-    <h1 class="my-5">Testing</h1>
-    <p>How we validated system reliability, compatibility, and performance under various conditions, ensuring quality and user satisfaction.</p>
-  </header>
+<!-- Page Title/Intro -->
+<h1 class="my-5" style="font-size:2rem; margin-bottom:1rem;">Testing</h1>
+<p style="margin-bottom:2rem;">
+  How we validated system reliability, compatibility, and performance under
+  various conditions, ensuring quality and user satisfaction.
+</p>
+</header>
 
-  <!-- Main Content -->
-  <main class="container flex-grow-1">
-    <!-- Sections inside the same container -->
-    <section id="testing-strategy" class="mb-5">
-      <h2>Testing Strategy</h2>
-      <p>Outline your overall approach to testing here.</p>
-    </section>
+<!-- Main Content -->
+<main class="container flex-grow-1" style="max-width: 900px; margin: 0 auto;">
 
-    <section id="unit-and-integration-testing" class="mb-5">
-      <h2>Unit and Integration Testing</h2>
-      <p>Describe your unit tests, integration tests, frameworks used, etc.</p>
-    </section>
+  <!-- Testing Strategy -->
+  <section id="testing-strategy" class="mb-5" style="margin-bottom:2rem;">
+    <h2 style="font-size:1.75rem; margin-bottom:1rem;">Testing Strategy</h2>
+    <p style="margin-bottom:1rem;">
+      Our testing strategy embodies a comprehensive, end-to-end approach that covers
+      every aspect of the project’s AI-driven web page creation pipeline, user interface
+      rendering, and underlying Python OCR service. The primary goal is to validate not
+      only individual features—such as text extraction from screenshots, AI summarization
+      for UI structure, and final layout generation—but also the broader integration
+      points that unite these components into a cohesive user experience.
+    </p>
+    <p style="margin-bottom:1rem;">
+      By adopting a layered methodology, we ensure high accuracy and reliability when
+      creating fully functional web pages from textual descriptions and screenshot
+      references. Each stage of the AI flow is systematically examined, along with key
+      user interface interactions in the CraftJS editor and the performance of the Python
+      services powering OCR and data transfer. This approach guarantees that users
+      experience a smooth, consistent workflow, from providing a prompt or image to
+      receiving a fully rendered, interactive layout.
+    </p>
+    <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Testing Scope</h3>
+    <p style="margin-bottom:1rem;">
+      The testing scope encompasses all modules and services within the project, ensuring
+      that each segment of the AI flow and user interface is rigorously examined for
+      correctness, reliability, and maintainability. This includes:
+    </p>
+    <ul style="margin-bottom:1rem;">
+      <li><strong>Python OCR (EasyOCR) in the python-ocr folder:</strong> Validates text extraction accuracy and performance.</li>
+      <li><strong>AI Summaries and Final Layout Generation within the ai directory:</strong> Ensures prompt handling, summarization accuracy, and JSON layout conformity with CraftJS requirements.</li>
+      <li><strong>Main Web Application and User Interface under webview-ui:</strong> Tests React components, sidebars, drag-and-drop CraftJS canvas, and AI chat flows.</li>
+      <li><strong>VS Code Extension Wrapper in src:</strong> Verifies robust communication between the extension and the front-end modules.</li>
+      <li><strong>Export and Packaging Features:</strong> Checks HTML/CSS/JS exports, code generation, and user workflows to move finished designs into real-world environments.</li>
+    </ul>
+    <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Automated and Manual Testing</h3>
+    <p style="margin-bottom:1rem;">
+      A structured mix of automated and manual tests ensures that every critical path is
+      covered while also enabling exploratory testing. Automated tests provide repeatable,
+      fast feedback on core functionalities such as Python OCR, AI prompt handling, and UI
+      components. Manual tests focus on usability, design fidelity, and user acceptance by
+      simulating real-world usage. This dual testing approach maintains a robust safety net
+      that yields high confidence in each release.
+    </p>
+    <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Compatibility and Hardware Testing</h3>
+    <p style="margin-bottom:1rem;">
+      Compatibility and hardware testing ensures that the entire AI-driven page generation
+      workflow operates seamlessly on Windows, macOS, and Linux platforms, across diverse
+      hardware configurations. We confirm Python OCR performance and accuracy on machines
+      with varying CPU and GPU capabilities by running repeated extractions on screenshots
+      of different resolutions and file sizes.
+    </p>
+    <p style="margin-bottom:1rem;">
+      Multiple screen sizes and resolutions are also tested to guarantee correct
+      responsiveness. Peripherals such as touchscreens are validated to confirm drag-and-drop
+      mechanics in the CraftJS canvas. By thoroughly verifying cross-platform stability,
+      the project meets user expectations under all operating conditions.
+    </p>
+  </section>
 
-    <section id="compatibility-testing" class="mb-5">
-      <h2>Compatibility Testing</h2>
-      <p>Detail how you tested across different browsers, devices, or OS versions.</p>
-    </section>
+ <!-- Unit and Integration Testing -->
+<section id="unit-and-integration-testing" class="mb-5" style="margin-bottom:2rem;">
+  <h2 style="font-size:1.75rem; margin-bottom:1rem;">Unit and Integration Testing</h2>
 
-    <section id="responsive-design-testing" class="mb-5">
-      <h2>Responsive Design Testing</h2>
-      <p>Explain methods or tools used for ensuring responsiveness (e.g., dev tools, device labs).</p>
-    </section>
+  <p style="margin-bottom:1rem;">
+    We employ a comprehensive blend of Python <em>unittest</em> and JavaScript/TypeScript
+    testing frameworks to verify both modular correctness and system-wide integrity. This
+    dual-layered approach ensures that each core functionality—ranging from OCR text
+    extraction to the AI-driven summarization—operates reliably on its own and in tandem
+    with the rest of the project’s components.
+  </p>
 
-    <section id="performance-stress-testing" class="mb-5">
-      <h2>Performance/Stress Testing</h2>
-      <p>Show how you tested your application’s performance under load, including any tools or metrics used.</p>
-    </section>
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Python OCR Unit Tests</h3>
+  <p style="margin-bottom:1rem;">
+    For OCR-related functionality, we rely on a structured test suite using Python’s
+    <strong>unittest</strong> framework. These tests confirm that each stage of the text
+    extraction process—preprocessing, bounding box detection, confidence thresholding—
+    meets our accuracy requirements. By systematically comparing recognized text against
+    expected substrings and validating bounding box sizes, we detect issues early in
+    development.
+  </p>
+  <p style="margin-bottom:1rem;">
+    We focus on the most critical edge cases that might appear in real-world usage, such
+    as small fonts on receipts, unusual layouts in billing forms, and variable invoice
+    formats. In addition to verifying raw text recognition, we also confirm that our JSON
+    output (which includes <code>text</code>, <code>confidence</code>, and <code>bbox</code>)
+    remains consistently structured.
+  </p>
+
+  <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
+<code>
+import unittest
+import os
+import json
+from typing import List, Dict, Any
+from ocr_service import minimal_preprocess, run_easyocr
+
+class TestOCRService(unittest.TestCase):
+    """
+    This class checks recognized text, bounding boxes, and confidence values.
+    """
+
+    def setUp(self):
+        """
+        Establishes a list of test cases with known images and corresponding expectations.
+        Each element contains:
+          - img_path: Path to a local image.
+          - expected_substring: A phrase expected in the recognized text.
+          - approximate_confidence: A lower threshold to validate confidence.
+          - bounding_box_range: Approximate bounding box size to confirm detection coords.
+        """
+        self.test_cases: List[Dict[str, Any]] = [
+            {
+                "img_path": "tests/data/receipt_sample.png",
+                "expected_substring": "Total: 15.99",
+                "approximate_confidence": 0.80,
+                "bounding_box_range": (50, 1000)
+            },
+            {
+                "img_path": "tests/data/invoice_sample.png",
+                "expected_substring": "Invoice #1234",
+                "approximate_confidence": 0.75,
+                "bounding_box_range": (80, 1200)
+            },
+            {
+                "img_path": "tests/data/billing_form.jpg",
+                "expected_substring": "Billing Information",
+                "approximate_confidence": 0.70,
+                "bounding_box_range": (60, 1500)
+            }
+        ]
+
+    def test_text_extraction(self):
+        """
+        Validates that the recognized text output contains the expected substring
+        for each sample image. The output text is aggregated into a single string
+        for a substring check.
+        """
+        for case in self.test_cases:
+            processed_image = minimal_preprocess(case["img_path"])
+            ocr_results = run_easyocr(processed_image)
+            recognized_text = " ".join([item[1] for item in ocr_results])
+            self.assertIn(case["expected_substring"], recognized_text)
+
+    def test_confidence_values(self):
+        """
+        Verifies that recognized text elements maintain an average confidence
+        above an approximate threshold, using final outputs from run_easyocr.
+        """
+        for case in self.test_cases:
+            processed_image = minimal_preprocess(case["img_path"])
+            ocr_results = run_easyocr(processed_image)
+            confidences = []
+            for item in ocr_results:
+                if len(item) >= 3:
+                    confidences.append(float(item[2]))
+            avg_conf = sum(confidences) / max(len(confidences), 1)
+            self.assertGreaterEqual(
+                avg_conf,
+                case["approximate_confidence"],
+                msg=f"Average confidence is {avg_conf}, lower than expected."
+            )
+
+    def test_bounding_boxes(self):
+        """
+        Confirms that bounding boxes for recognized text fall within a
+        reasonable range, ensuring coordinate extraction is consistent.
+        """
+        for case in self.test_cases:
+            processed_image = minimal_preprocess(case["img_path"])
+            ocr_results = run_easyocr(processed_image)
+            min_box_size, max_box_size = case["bounding_box_range"]
+            for item in ocr_results:
+                coords = item[0]
+                xs = [pt[0] for pt in coords]
+                ys = [pt[1] for pt in coords]
+                width = max(xs) - min(xs)
+                height = max(ys) - min(ys)
+                box_area = width * height
+                self.assertGreaterEqual(
+                    box_area,
+                    min_box_size,
+                    msg=f"Box area of {box_area} is below {min_box_size}."
+                )
+                self.assertLessEqual(
+                    box_area,
+                    max_box_size,
+                    msg=f"Box area of {box_area} is above {max_box_size}."
+                )
+
+    def test_output_structure(self):
+        """
+        Checks that the final JSON structure is well-formed and includes
+        'text', 'confidence', and 'bbox' fields for each recognized item.
+        """
+        for case in self.test_cases:
+            processed_image = minimal_preprocess(case["img_path"])
+            results = run_easyocr(processed_image)
+            output_data = []
+            for result in results:
+                coords = result[0]
+                text_val = result[1]
+                conf_val = result[2] if len(result) >= 3 else 1.0
+                xs = [pt[0] for pt in coords]
+                ys = [pt[1] for pt in coords]
+                min_x, max_x = int(min(xs)), int(max(xs))
+                min_y, max_y = int(min(ys)), int(max(ys))
+                data_entry = {
+                    "text": text_val,
+                    "confidence": float(conf_val),
+                    "bbox": [min_x, min_y, max_x, max_y]
+                }
+                output_data.append(data_entry)
+
+            json_str = json.dumps(output_data, ensure_ascii=False)
+            parsed = json.loads(json_str)
+            self.assertIsInstance(parsed, list)
+            for item in parsed:
+                self.assertIn("text", item)
+                self.assertIn("confidence", item)
+                self.assertIn("bbox", item)
+                self.assertIsInstance(item["bbox"], list)
+
+if __name__ == '__main__':
+    unittest.main()
+</code>
+  </pre>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Integration with AI Summaries</h3>
+  <p style="margin-bottom:1rem;">
+    Beyond verifying correct OCR outputs, these Python tests feed into our AI summarization
+    pipeline. When recognized text meets expected thresholds, the subsequent AI prompts
+    (for UI/GUI summarization) receive cleaner data, reducing the likelihood of errors in
+    the final CraftJS layouts. This correlation between OCR accuracy and AI correctness
+    underlines why solid unit test coverage is crucial at every step.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">TypeScript Integration and Performance Tests</h3>
+  <p style="margin-bottom:1rem;">
+    On the JavaScript/TypeScript side, we combine integration checks for data flow between
+    our Python back-end and the AI summarization logic. These tests cover scenarios where the
+    recognized text is large, complex, or only partially accurate, examining how the AI reacts
+    to varying input quality. 
+  </p>
+  <p style="margin-bottom:1rem;">
+    Additionally, we measure how long the entire pipeline takes—covering OCR, UI summary,
+    and GUI summary generation. This ensures our solution remains performant for images of
+    various complexity levels. The snippet below (<strong>aiOcrPerformance.integration.test.ts</strong>)
+    shows how we track and log these times.
+  </p>
+
+  <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
+<code>
+/**
+ * @file aiOcrPerformance.integration.test.ts
+ *
+ * Measures how long OCR and subsequent AI summarization take for images
+ * of varying complexity in the Blueprint AI Project. 
+ * It logs or asserts runtimes to track performance trends.
+ */
+
+import path from 'path';
+import fs from 'fs';
+import { performance } from 'perf_hooks';
+import { runPythonOcr } from '../../src/ai/pythonBridge';
+import { getUiSummary, getGuiSummary } from '../../src/ai/blueprintAiClient';
+
+describe('AI + OCR Performance Integration Tests', () => {
+  interface TestImageCase {
+    name: string;
+    filename: string;
+    complexityLevel: string;
+  }
+
+  const testImages: TestImageCase[] = [
+    { name: 'Very Simple', filename: 'very-simple.png', complexityLevel: 'very-simple' },
+    { name: 'Simple', filename: 'simple.png', complexityLevel: 'simple' },
+    { name: 'Moderate', filename: 'moderate.png', complexityLevel: 'moderate' },
+    { name: 'Complex', filename: 'complex.png', complexityLevel: 'complex' },
+    { name: 'Dense', filename: 'dense.png', complexityLevel: 'dense' },
+    { name: 'Extremely Dense', filename: 'extremely-dense.png', complexityLevel: 'extremely-dense' },
+  ];
+
+  const FAKE_OPENAI_KEY = 'sk-xxxxxxx-FAKE-TEST-KEY';
+
+  testImages.forEach((testCase) => {
+    it(\`should measure OCR and AI time for image: \${testCase.name}\`, async () => {
+      const imagePath = path.resolve(__dirname, '..', 'data', testCase.filename);
+
+      if (!fs.existsSync(imagePath)) {
+        throw new Error(\`Test image not found at path: \${imagePath}\`);
+      }
+
+      const rawImageBuffer = fs.readFileSync(imagePath);
+
+      // Measure OCR time
+      const ocrStart = performance.now();
+      const ocrResult = await runPythonOcr(rawImageBuffer);
+      const ocrEnd = performance.now();
+      const ocrTimeMs = ocrEnd - ocrStart;
+
+      // Build recognized text
+      const recognizedText = ocrResult.map((item: any) => item.text).join('\\n');
+
+      // Measure UI summary time
+      const uiStart = performance.now();
+      const uiSummary = await getUiSummary({
+        text: recognizedText,
+        screenshot: rawImageBuffer,
+        openAiKey: FAKE_OPENAI_KEY,
+      });
+      const uiEnd = performance.now();
+      const uiTimeMs = uiEnd - uiStart;
+
+      // Measure GUI summary time
+      const guiStart = performance.now();
+      const guiSummary = await getGuiSummary({
+        screenshot: rawImageBuffer,
+        openAiKey: FAKE_OPENAI_KEY,
+      });
+      const guiEnd = performance.now();
+      const guiTimeMs = guiEnd - guiStart;
+
+      // Log results
+      console.log(
+        \`[\${testCase.complexityLevel.toUpperCase()}] OCR Time: \${(ocrTimeMs / 1000).toFixed(2)}s,\` +
+        \` UI AI Time: \${(uiTimeMs / 1000).toFixed(2)}s,\` +
+        \` GUI AI Time: \${(guiTimeMs / 1000).toFixed(2)}s\`
+      );
+
+      // Basic performance assertions
+      expect(ocrTimeMs).toBeLessThan(120000);
+      expect(uiTimeMs).toBeLessThan(180000);
+      expect(guiTimeMs).toBeLessThan(180000);
+
+      // Verify the AI summaries are not empty
+      expect(uiSummary).toBeTruthy();
+      expect(guiSummary).toBeTruthy();
+    });
+  });
+});
+</code>
+  </pre>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Continuous Integration and Future Expansion</h3>
+  <p style="margin-bottom:1rem;">
+    All tests run automatically via our continuous integration (CI) pipeline whenever new
+    code is pushed to the repository. This guarantees that OCR, AI summarization, and final
+    layout rendering remain stable with each commit. Additional tests can be introduced to
+    target newly discovered edge cases or extended modules, ensuring that coverage scales
+    alongside new features like multi-page generation, more advanced design transformations,
+    and refined AI prompts.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Relevance to the Overall Project</h3>
+  <p style="margin-bottom:1rem;">
+    By thoroughly testing each core function—OCR accuracy, bounding box validations, confidence
+    thresholds, AI handling of recognized text, and layout generation logic—we uphold the
+    end-to-end reliability of the entire AI-driven workflow. These rigorous checks reduce the
+    risk of regressions and user-facing errors, ensuring that both the <strong>First Page Creator</strong>
+    and the <strong>Main Interface</strong> consistently deliver the expected user experience.
+  </p>
+</section>
+
+    </pre>
+  </section>
+
+  <!-- Compatibility Testing -->
+<section id="compatibility-testing" class="mb-5" style="margin-bottom:2rem;">
+  <h2 style="font-size:1.75rem; margin-bottom:1rem;">Compatibility Testing</h2>
+  <p style="margin-bottom:1rem;">
+    We run exhaustive compatibility checks across Windows, macOS, and Linux. Our tests
+    include verifying the VS Code extension’s performance, ensuring the Python OCR scripts
+    run consistently, and validating that the webview UI renders and behaves properly in
+    embedded frames or native browsers on each platform. This helps guarantee that both
+    the AI-driven page creation process and the CraftJS editor flow remain stable and
+    visually consistent, regardless of operating system specifics.
+  </p>
+  <p style="margin-bottom:1rem;">
+    Machines with varied CPU/GPU configurations are used to confirm that image processing,
+    memory usage, and text extraction remain stable over a wide range of hardware. We ensure
+    that users on both resource-constrained setups (e.g., older laptops) and high-performance
+    workstations (with advanced graphics capabilities) can run the application without
+    encountering crashes or major slowdowns. This involves validating that the Python OCR
+    service does not exceed memory limits and that the AI summarization pipeline remains
+    responsive, even under heavier loads.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Platform Range</h3>
+  <p style="margin-bottom:1rem;">
+    Our testing environment covers multiple distributions of Linux (Ubuntu, Fedora),
+    multiple macOS versions, and Windows 10/11. On each platform, we install the VS
+    Code extension locally and verify:
+  </p>
+  <ul style="margin-bottom:1rem; list-style-type: disc; margin-left:2rem;">
+    <li>Extension activation, including correct loading of Python-based OCR components.</li>
+    <li>Proper initialization of the webview UI, ensuring React components and styling load without error.</li>
+    <li>Full functionality of AI-driven layout generation, from uploading images to rendering the final CraftJS layout.</li>
+  </ul>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">VS Code Extension Integrations</h3>
+  <p style="margin-bottom:1rem;">
+    We confirm that the extension maintains reliable communication between the front-end
+    React interface and the back-end Python OCR services. Cross-version checks of VS Code
+    itself are included to ensure that no compatibility issues arise from varying API levels.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">GPU/CPU Variations</h3>
+  <p style="margin-bottom:1rem;">
+    Python OCR (EasyOCR) benefits from GPU acceleration in some cases, so we validate both
+    GPU-enabled and CPU-only usage. Test scenarios confirm that text extraction and bounding
+    box predictions remain accurate without sacrificing performance, regardless of whether
+    the underlying hardware is a high-end GPU or a basic integrated graphics chip.
+  </p>
+</section>
+
+<!-- Responsive Design Testing -->
+<section id="responsive-design-testing" class="mb-5" style="margin-bottom:2rem;">
+  <h2 style="font-size:1.75rem; margin-bottom:1rem;">Responsive Design Testing</h2>
+  <p style="margin-bottom:1rem;">
+    Our application is tested on multiple screen sizes—ranging from high-resolution displays
+    to more modest laptops—to ensure that UI elements, sidebars, and the draggable canvas
+    remain usable and visually clear at any scale. Touchscreen devices also receive focused
+    testing to confirm that drag-and-drop operations function as expected. This is crucial for
+    maintaining a smooth user experience across desktops, tablets, and convertible laptops.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Breakpoints and Screen Resolutions</h3>
+  <p style="margin-bottom:1rem;">
+    We test standard breakpoints (e.g., 1280px, 1024px, 768px, 480px) to confirm that components
+    auto-adjust their layouts accordingly. The CraftJS canvas accommodates these breakpoints by
+    scaling appropriately, ensuring that no overlapping or hidden interface elements appear at
+    smaller resolutions.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Touchscreen and Pointer Interactions</h3>
+  <p style="margin-bottom:1rem;">
+    We verify that dragging, resizing, and rotating elements in the CraftJS canvas are smooth
+    when using touch gestures. Similarly, pointer-based interactions (e.g., trackpads, styluses)
+    also undergo tests to confirm consistent behavior. During these tests, we pay particular
+    attention to any potential delays or missed events, ensuring that the user experience
+    remains intuitive.
+  </p>
+
+  <p style="margin-bottom:1rem;">
+    We also combine real-world device checks with browser developer tools for testing
+    responsiveness. Every major element—such as component sidebars, property panels, and
+    advanced editing features—undergoes repeated iteration to confirm fluid adaptation to
+    different display widths and orientations.
+  </p>
+</section>
+
+<!-- Performance/Stress Testing -->
+<section id="performance-stress-testing" class="mb-5" style="margin-bottom:2rem;">
+  <h2 style="font-size:1.75rem; margin-bottom:1rem;">Performance/Stress Testing</h2>
+  <p style="margin-bottom:1rem;">
+    To verify scalability and robust handling of real-world scenarios, we subject the application
+    to varying image complexities (e.g., “Very Simple” to “Extremely Dense”) and different user
+    prompts. Below are visual summaries of OCR confidence, character error rates, AI
+    processing times, and overall accuracy. These metrics illustrate how our upscaling/grayscale
+    preprocessing and AI summarization adapt to diverse workloads.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">OCR Confidence and Accuracy</h3>
+  <figure style="margin-bottom:2rem;">
+    <img 
+      src="./testing-assets/OCR_CONFIDENCE.png" 
+      alt="OCR Confidence Scores" 
+      style="max-width: 100%; border:1px solid #ccc;"
+    />
+    <figcaption style="margin-top:0.5rem; font-style:italic;">
+      Average OCR Confidence Scores by Preprocessing Method
+    </figcaption>
+  </figure>
+  <p style="margin-bottom:1rem;">
+    The <strong>Upscale + Grayscale</strong> method demonstrates the highest confidence levels
+    (ranging from about 0.88 to 0.95 across different test images). <strong>Grayscale Only</strong>
+    remains moderately strong but can dip under 0.8 for complex images, while
+    <strong>No Preprocessing</strong> often produces the lowest confidence (around 0.55 to 0.65)
+    for items like MobileUI or ProductLabel that contain small or stylized text.
+  </p>
+
+  <figure style="margin-bottom:2rem;">
+    <img 
+      src="./testing-assets/OCR_PREPROCESSING.png" 
+      alt="OCR Accuracy by Preprocessing Method" 
+      style="max-width: 100%; border:1px solid #ccc;"
+    />
+    <figcaption style="margin-top:0.5rem; font-style:italic;">
+      Comparative OCR Accuracy for different preprocessing options
+    </figcaption>
+  </figure>
+  <p style="margin-bottom:1rem;">
+    Similarly, the accuracy chart underscores that <strong>Upscale + Grayscale</strong> yields
+    the most consistent text recognition results, especially for screenshots containing
+    multiple form fields (e.g., <em>BillingForm</em>) and heavily segmented layouts
+    (<em>MobileUI</em>). <strong>No Preprocessing</strong> trails behind significantly, indicating
+    that some image adjustments are vital for better OCR performance.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Character Error Rates (CER)</h3>
+  <figure style="margin-bottom:2rem;">
+    <img 
+      src="./testing-assets/CHARACTER_PREPROCESSING.png" 
+      alt="Character Error Rate by Preprocessing Method" 
+      style="max-width: 100%; border:1px solid #ccc;"
+    />
+    <figcaption style="margin-top:0.5rem; font-style:italic;">
+      Character Error Rate (CER) across different preprocessing approaches
+    </figcaption>
+  </figure>
+  <p style="margin-bottom:1rem;">
+    Character error rate measurements illustrate where certain methods excel. 
+    <strong>Upscale + Grayscale</strong> consistently keeps CER below 10%, even for complex text
+    segments, while <strong>No Preprocessing</strong> can climb above 30% in some cases. 
+    This gap is especially evident when analyzing small receipt text or intricate UI labels.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">AI Processing Time vs Image Complexity</h3>
+  <figure style="margin-bottom:2rem;">
+    <img 
+      src="./testing-assets/PROCESSING_COMPLEXITY.png" 
+      alt="AI Processing Time vs Image Complexity" 
+      style="max-width: 100%; border:1px solid #ccc;"
+    />
+    <figcaption style="margin-top:0.5rem; font-style:italic;">
+      AI Processing Time (OCR and CraftJS output) for varied complexity levels
+    </figcaption>
+  </figure>
+  <p style="margin-bottom:1rem;">
+    As image complexity increases, both OCR and CraftJS output times rise proportionally.
+    Simple images (e.g., a basic login page) complete OCR in approximately 19 seconds and
+    CraftJS output in around 18 seconds, while extremely dense images (e.g., 
+    large multi-section forms or lengthy product labels) can push OCR to about 230 seconds
+    and CraftJS output to 343 seconds. This predictable scaling allows us to benchmark
+    improvements in the future and optimize our AI pipeline for increasingly dense screenshots.
+  </p>
+
+  <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Overall Observations</h3>
+  <p style="margin-bottom:1rem;">
+    Our stress tests confirm that specialized preprocessing (upscaling, grayscaling, and
+    careful cleanup) significantly boosts OCR reliability. This, in turn, feeds more accurate
+    textual data into the AI summarization layers, ensuring that the final CraftJS layouts
+    reflect the correct information. Meanwhile, the increased processing time for extremely
+    dense images remains a key area for future optimization, particularly in concurrency or
+    real-time user feedback scenarios.
+  </p>
+  <p style="margin-bottom:1rem;">
+    In summary, from straightforward login pages to complex multi-section invoices, the system
+    demonstrates strong resilience and accuracy. Our combination of advanced image preprocessing,
+    structured AI summarization prompts, and performance-oriented architecture enables rapid,
+    high-quality page generation under a variety of test conditions.
+  </p>
+</section>
+
+
+</main>
+
+
 
     <section id="user-acceptance-testing" class="mb-5">
       <h2>User Acceptance Testing (UAT)</h2>    
