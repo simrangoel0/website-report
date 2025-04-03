@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
   <!-- Rubik’s Cube Loader CSS -->
   <link rel="stylesheet" href="rubiks.css">
 </head>
+
 <body>
 
   <!-- LOADING SCREEN (Spinner fetched dynamically) -->
@@ -29,30 +31,20 @@
           <a class="navbar-brand" href="index.html">
             <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
           </a>
-      
+
           <!-- Toggle button for mobile view -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-      
+
           <!-- Nav links -->
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <!-- HOME now a dropdown -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active"
-                   href="index.html"
-                   id="homeDropdown"
-                   role="button"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false">
+                <a class="nav-link dropdown-toggle active" href="index.html" id="homeDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
                   Home
                 </a>
                 <!-- Drop-down links -->
@@ -113,9 +105,10 @@
         <div class="col-12">
           <h2>The Problem</h2>
           <p>
-            Front-end development is often a bottleneck in software projects, requiring extensive knowledge of HTML, 
-          CSS, JavaScript, and UI/UX design principles. Developers spend significant time manually coding interfaces, 
-          which slows down productivity, especially in hackathons, rapid prototyping, and agile development environments.
+            Front-end development is often a bottleneck in software projects, requiring extensive knowledge of HTML,
+            CSS, JavaScript, and UI/UX design principles. Developers spend significant time manually coding interfaces,
+            which slows down productivity, especially in hackathons, rapid prototyping, and agile development
+            environments.
           </p>
         </div>
       </div>
@@ -127,12 +120,18 @@
       <div class="row">
         <div class="col-md-6">
           <p>
-            Blueprint AI is a <strong>VSCode extension</strong> that <strong>leverages AI to automate front-end UI design</strong>. Users can generate layouts by <strong>uploading images</strong> and/or <strong>describing their ideas</strong> in natural language. The AI seamlessly converts these inputs into structured UI components using CraftJS, enabling real-time editing without the need for code.
+            Blueprint AI is a <strong>VSCode extension</strong> that <strong>leverages AI to automate front-end UI
+              design</strong>. Users can generate layouts by <strong>uploading images</strong> and/or <strong>describing
+              their ideas</strong> in natural language. The AI seamlessly converts these inputs into structured UI
+            components using CraftJS, enabling real-time editing without the need for code.
           </p>
         </div>
         <div class="col-md-6">
           <p>
-            Blueprint AI streamlines front-end development by reducing manual effort through integrating AI at every step of the design process. From ideation to exporting of code, this ensures design consistency and accelerates project timelines. It democratises UI design, making professional-grade interfaces accessible to both developers and non-coders, ultimately bridging the gap between creativity and implementation.
+            Blueprint AI streamlines front-end development by reducing manual effort through integrating AI at every
+            step of the design process. From ideation to exporting of code, this ensures design consistency and
+            accelerates project timelines. It democratises UI design, making professional-grade interfaces accessible to
+            both developers and non-coders, ultimately bridging the gap between creativity and implementation.
           </p>
         </div>
       </div>
@@ -148,16 +147,18 @@
     <!-- VIDEO SECTION -->
     <section id="video" class="video-section my-5">
       <h2>Project Video</h2>
-      <video controls class="w-100">
-        <source src="project-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/JZ93GVsJ2tY" title="Blueprint AI Presentation"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </section>
 
     <!-- TIMELINE -->
     <section id="timeline" class="project-management my-5">
       <h2>Project Timeline</h2>
-      <p>The Gantt chart below illustrates our time organisation. This enabled us to work more efficently and collaboratively.</p>
+      <p>The Gantt chart below illustrates our time organisation. This enabled us to work more efficently and
+        collaboratively.</p>
       <img src="home-assets/gantt-chart.png" alt="Gantt Chart" class="img-fluid">
     </section>
 
@@ -277,4 +278,5 @@
       });
   </script>
 </body>
+
 </html>
