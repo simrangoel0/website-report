@@ -1670,13 +1670,13 @@
                 Loading sidebar code...
                 </code></pre>
                 <script>
-                  fetch('/implementation-assets/sidebarCode.txt')
+                  fetch('./implementation-assets/sidebarCode.txt')
                     .then(response => response.text())
                     .then(data => {
                       document.getElementById('sidebar-code-display').textContent = data;
                     })
                     .catch(err => {
-                      document.getElementById('sidebar-code-display').textContent = 'Error loading sidebar code.';
+                      document.getElementById('sidebar-code-display').textContent = 'Error loading sidebar code, run the website locally to view code snippet';
                     });
                 </script>
                 <p class="text-sm">
@@ -1713,13 +1713,13 @@
                 Loading export menu code...
                 </code></pre>
                 <script>
-                  fetch('/implementation-assets/exportMenu.txt')
+                  fetch('./implementation-assets/exportMenu.txt')
                     .then(response => response.text())
                     .then(data => {
                       document.getElementById('export-menu-code-display').textContent = data;
                     })
                     .catch(err => {
-                      document.getElementById('export-menu-code-display').textContent = 'Error loading export menu code.';
+                      document.getElementById('export-menu-code-display').textContent = 'Error loading sidebar code, run the website locally to view code snippet';
                     });
                 </script>
                 <p class="text-sm">
@@ -1748,13 +1748,13 @@
                 Loading export editor view code...
                 </code></pre>
                 <script>
-                  fetch('/implementation-assets/exportEditorView.txt')
+                  fetch('./implementation-assets/exportEditorView.txt')
                     .then(response => response.text())
                     .then(data => {
                       document.getElementById('export-editor-view-code-display').textContent = data;
                     })
                     .catch(err => {
-                      document.getElementById('export-editor-view-code-display').textContent = 'Error loading export editor view code.';
+                      document.getElementById('export-editor-view-code-display').textContent = 'Error loading sidebar code, run the website locally to view code snippet';
                     });
                 </script>
                 <p class="text-sm">
@@ -1781,13 +1781,13 @@
                 Loading container component code...
                 </code></pre>
                 <script>
-                  fetch('/implementation-assets/containerComponent.txt')
+                  fetch('./implementation-assets/containerComponent.txt')
                     .then(response => response.text())
                     .then(data => {
                       document.getElementById('container-component-code-display').textContent = data;
                     })
                     .catch(err => {
-                      document.getElementById('container-component-code-display').textContent = 'Error loading container component code.';
+                      document.getElementById('container-component-code-display').textContent = 'Error loading sidebar code, run the website locally to view code snippet';
                     });
                 </script>
                 <p class="text-sm"> The <strong>Container</strong> component is a flexible, multi-purpose layout element specifically designed for use with Craft.js. It supports four distinct layout types (<em>container</em>, <em>row</em>, <em>section</em>, and <em>grid</em>) to accommodate various design scenarios—ranging from basic flex boxes to more complex grid structures. By merging default properties and user-defined settings, the <strong>Container</strong> makes it straightforward to configure margins, padding, borders, shadows, and background colors, ensuring visually appealing and well-organized interfaces. </p> <p class="text-sm"> This component leverages Craft.js hooks like <code>useNode</code> to integrate seamlessly with the editor environment, allowing developers to drag, drop, and resize elements within a live editing interface. For instance, if the <strong>Container</strong> is not the root element, it wraps its contents in a custom <code>Resizer</code> component, enabling users to manually adjust its dimensions. If it <em>is</em> the root, it enforces constraints and styles that differentiate it from child containers. </p> <p class="text-sm"> Each layout type is accompanied by relevant style properties—like gap, flex direction, grid columns, or row gap—giving precise control over element alignment and spacing. This approach keeps your layouts adaptable and modular, while the <strong>Container</strong> component’s user-friendly settings panel (exposed through <code>ContainerProperties</code>) simplifies customization.
@@ -1798,13 +1798,13 @@
                       Loading dataStore code...
                     </code></pre>
                     <script>
-                      fetch('/implementation-assets/dataStore.txt')
+                      fetch('./implementation-assets/dataStore.txt')
                         .then(response => response.text())
                         .then(data => {
                           document.getElementById('dataStore-code-display').textContent = data;
                         })
                         .catch(err => {
-                          document.getElementById('dataStore-code-display').textContent = 'Error loading dataStore code.';
+                          document.getElementById('dataStore-code-display').textContent = 'Error loading sidebar code, run the website locally to view code snippet';
                         });
                     </script>
                     <p>
@@ -2067,7 +2067,7 @@
             <div class="col-sm-6 col-lg-4">
               <div class="text-center border rounded p-3 bg-white">
                 <img
-                  src="/implementation-assets/react.png"
+                  src="./implementation-assets/react.png"
                   alt="React logo"
                   style="width: 80px"
                   class="mb-2"
@@ -2086,7 +2086,7 @@
             <div class="col-sm-6 col-lg-4">
               <div class="text-center border rounded p-3 bg-white">
                 <img
-                  src="/implementation-assets/craftJS.png"
+                  src="./implementation-assets/craftJS.png"
                   alt="CraftJS logo"
                   style="width: 80px"
                   class="mb-2"
@@ -2104,7 +2104,7 @@
             <div class="col-sm-6 col-lg-4">
               <div class="text-center border rounded p-3 bg-white">
                 <img
-                  src="/implementation-assets/fluentui.png"
+                  src="./implementation-assets/fluentui.png"
                   alt="Fluent UI logo"
                   style="width: 80px"
                   class="mb-2"
@@ -2123,7 +2123,7 @@
             <div class="col-sm-6 col-lg-4">
               <div class="text-center border rounded p-3 bg-white">
                 <img
-                  src="/implementation-assets/nodeJS.png"
+                  src="./implementation-assets/nodeJS.png"
                   alt="Node.js logo"
                   style="width: 80px"
                   class="mb-2"
@@ -2142,7 +2142,7 @@
             <div class="col-sm-6 col-lg-4">
               <div class="text-center border rounded p-3 bg-white">
                 <img
-                  src="/implementation-assets/typescript.png"
+                  src="./implementation-assets/typescript.png"
                   alt="TypeScript logo"
                   style="width: 80px"
                   class="mb-2"
@@ -2162,7 +2162,7 @@
               <div class="text-center border rounded p-3 bg-white">
                 <div class="d-flex justify-content-center mb-2">
                   <img
-                    src="/implementation-assets/python.png"
+                    src="./implementation-assets/python.png"
                     alt="Python logo"
                     style="width: 80px"
                     class="me-2"
