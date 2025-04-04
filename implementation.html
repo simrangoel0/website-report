@@ -49,19 +49,19 @@
               <!-- Home Link -->
               <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="requirements.html">Requirements</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="research.html">Research</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="ui-design.html">UI Design</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="system-design.html">System Design</a>
-              </li>
+              </p>
 
               <!-- Implementation link with dynamic dropdown -->
               <li class="nav-item dropdown">
@@ -83,20 +83,20 @@
                 >
                   <!-- Items will be injected by script below -->
                 </ul>
-              </li>
+              </p>
 
               <li class="nav-item">
                 <a class="nav-link" href="testing.html">Testing</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="evaluation.html">Evaluation</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="appendices.html">Appendices</a>
-              </li>
+              </p>
               <li class="nav-item">
                 <a class="nav-link" href="blog.html">Blog</a>
-              </li>
+              </p>
             </ul>
           </div>
         </div>
@@ -136,37 +136,37 @@
 
           <h3>Root-Level Files & Directories</h3>
           <ul>
-            <li>
+            <p>• 
               <strong>eslint.config.mjs, package.json, package-lock.json</strong
               >: Basic configuration and dependency management for the main VS
               Code extension. ESLint rules and Node modules for the backend
               logic live here.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>tsconfig.json</strong>: Manages TypeScript compilation
               settings for the extension codebase (excluding the web UI, which
               has its own config).
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>README.md</strong>: Provides a high-level overview of
               BlueprintAI, plus instructions on setup and usage.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>python-ocr/</strong>: Houses Python scripts related to
               OCR. This includes:
               <ul>
-                <li>
+                <p>• 
                   <em>ocr_service.py</em> – Invoked by the extension to run
                   EasyOCR on user-uploaded screenshots. Outputs recognized text
                   lines for the AI summarization step.
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>requirements.txt</em> – Lists the Python dependencies
                   (e.g., <em>numpy</em>, <em>opencv-python-headless</em>,
                   <em>easyocr</em>).
-                </li>
+                </p>
               </ul>
-            </li>
+            </p>
           </ul>
 
           <h3>Core Extension Source (<code>src</code> Folder)</h3>
@@ -176,42 +176,42 @@
             orchestration, Python bridging, and panel creation.
           </p>
           <ul>
-            <li>
+            <p>• 
               <strong>ai/</strong> – Manages OpenAI prompts, OCR-based
               summarization, and bridging to the Python script. Key files:
               <ul>
-                <li>
+                <p>• 
                   <em>blueprintAiPrompts.ts</em> – Reusable prompt templates.
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>BlueprintAiService.ts</em> – High-level methods for final
                   CraftJS layout generation.
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>getSummariesFromScreenshot.ts</em> – Chains OCR output
                   with UI/GUI summarization prompts.
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>pythonBridge.ts</em> – Spawns Python processes (e.g.,
                   <em>ocr_service.py</em>) and returns results.
-                </li>
+                </p>
               </ul>
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>extension.ts</strong> – The main extension entry point,
               registering commands and setting up the webview panel.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>panels/</strong> – Contains <em>MainWebViewPanel.ts</em>,
               defining how the React web UI is injected into the VS Code panel
               and how it communicates with the backend.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>utils/</strong> – Utility modules such as
               <em>extensionContext.ts</em> (for storing context across sessions)
               and <em>validateApiKey.ts</em> (for verifying user-supplied or
               stored AI keys).
-            </li>
+            </p>
           </ul>
 
           <h3>React Web UI (<code>webview-ui</code> Folder)</h3>
@@ -222,79 +222,79 @@
             Code extension’s webview.
           </p>
           <ul>
-            <li>
+            <p>• 
               <strong>index.html, package.json, package-lock.json</strong> – The
               starting point for the React app and the local Node modules
               (distinct from the root-level <em>package.json</em>).
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>postcss.config.js, tailwind.config.js</strong> – Setup for
               Tailwind CSS and other post-processing tools, ensuring consistent
               styling across the UI.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>vite.config.ts</strong> – Configuration for bundling the
               React source code, outputting the final
               <em>webview-ui</em> bundle.
-            </li>
-            <li>
+            </p>
+            <p>• 
               <strong>src/</strong> – Contains the core React code:
               <ul>
-                <li>
+                <p>• 
                   <em>App.tsx, main.tsx</em>, and <em>global.css</em> – The
                   bootstrap logic and global styles for the web application.
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>components/</em> – A suite of React components for the UI,
                   including:
                   <ul>
-                    <li>
+                    <p>• 
                       <strong>AiSidebar</strong> – Where users enter text/image
                       prompts for iterative AI changes.
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>CreateWithImagination</strong> – Manages the
                       initial “Create from text or screenshot” workflow (though
                       final design variants are chosen by the user or AI).
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>ExportMenu</strong> – Allows specifying which
                       pages to export, generating HTML/CSS/JS, and downloading
                       as a ZIP.
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>PrimarySidebar</strong> – Left-side panel that
                       includes <em>LayoutTab</em>, <em>PagesTab</em>,
                       <em>SaveModal</em>, etc.
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>PropertiesSidebar</strong> – Right-side panel for
                       editing attributes of selected components (text, color,
                       layout).
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>SuggestedPages</strong> – Dialogs for AI-suggested
                       page creation (e.g. “Home,” “AboutUs,” etc.).
-                    </li>
-                    <li>
+                    </p>
+                    <p>• 
                       <strong>UserComponents</strong> – Definitions of custom
                       draggable components (Button, Container, Image,
                       Navigation, etc.) that appear on the CraftJS canvas.
-                    </li>
+                    </p>
                   </ul>
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>pages/</em> – High-level “page” containers, such as
                   <em>MainInterface</em> (the main editor with sidebars and
                   canvas).
-                </li>
-                <li>
+                </p>
+                <p>• 
                   <em>store/</em> – Provides global state management (e.g.,
                   <em>store.ts</em>) for the web UI, storing user actions,
                   selected components, and more.
-                </li>
+                </p>
               </ul>
-            </li>
+            </p>
           </ul>
 
           <h3>Key Workflow</h3>
@@ -304,28 +304,28 @@
             <em>webview-ui</em>. Within that app, the user can:
           </p>
           <ul>
-            <li>
+            <p>• 
               Generate a page from text or screenshot via the
               <strong>CreateWithImagination</strong> flow.
-            </li>
-            <li>
+            </p>
+            <p>• 
               Edit layouts on the <strong>MainInterface</strong> using
               <em>Component Sidebar</em>, <em>Layout Sidebar</em>,
               <em>Pages Sidebar</em>, and <em>Properties Sidebar</em>.
-            </li>
-            <li>
+            </p>
+            <p>• 
               Use <strong>AiSidebar</strong> to iteratively prompt the AI to add
               or modify page elements.
-            </li>
-            <li>
+            </p>
+            <p>• 
               Perform OCR if a screenshot is uploaded (via
               <em>pythonBridge.ts</em>), feed the text into AI summarizations,
               and see updated designs in real time.
-            </li>
-            <li>
+            </p>
+            <p>• 
               Export the final pages using <em>ExportMenu</em> for local storage
               or further development.
-            </li>
+            </p>
           </ul>
           <p>
             This layered approach separates the core AI logic (in
@@ -913,30 +913,30 @@
             Together, these pieces let the backend dispatch prompts with the correct system
             instructions and user content:
             <ul>
-              <li>
+              <p>• 
                 <strong><code>getUiSummary(...)</code>:</strong> Sends raw OCR text (and possibly
                 a truncated, base64-encoded screenshot) to OpenAI with the
                 <code>UI_SUMMARY_META_PROMPT</code>, receiving back a short bullet-style summary
                 of the recognized interface text. This is specifically meant to highlight items
                 like “navigation,” “list of categories,” or “footer links,” while skipping
                 extraneous lines.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <strong><code>getGuiSummary(...)</code>:</strong> Concentrates on layout structure.
                 It encodes only the screenshot in base64 (again truncated, if too large) and
                 applies the <code>GUI_SUMMARY_META_PROMPT</code>, retrieving a high-level
                 description of the visual design (e.g., “a tall header, left sidebar, multi-column
                 content”). This text is more about structure and color or brand cues, less about
                 the line-by-line text content.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <strong><code>getFinalCraftJsLayout(...)</code>:</strong> The culminating step
                 that merges <em>user instructions</em>, <em>UI summary</em>, and <em>GUI summary</em>
                 into a valid JSON layout for CraftJS. It uses the <code>FINAL_CRAFTJS_META_PROMPT</code>
                 as a “system” prompt and injects all relevant textual data. The AI’s response is
                 strictly JSON, containing a “layout” key with nested CraftJS components like
                 <code>Container</code>, <code>Button</code>, <code>Text</code>, etc.
-              </li>
+              </p>
             </ul>
             Additionally, <code>callChatGPT</code> is a simple utility that sets up the “system” and
             “user” roles, along with the chosen OpenAI model (<em>e.g. gpt-3.5-turbo</em>), and
@@ -952,21 +952,21 @@
             summary and GUI summary, then <em>(b)</em> pass those summaries along with the user’s
             text to <code>getFinalCraftJsLayout</code>. Here is its conceptual structure:
             <ul>
-              <li>
+              <p>• 
                 <em>Calls <code>getSummariesFromScreenshot</code></em>: If a screenshot was provided,
                 it runs OCR to get the raw text lines, then uses <code>getUiSummary</code> and
                 <code>getGuiSummary</code> to convert them into two distinct short-form texts. If
                 no screenshot is passed in, the UI summary is minimal and the GUI summary is empty.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Calls <code>getFinalCraftJsLayout</code></em>: Takes <code>userText</code> plus
                 those two summaries, feeding them into the <code>FINAL_CRAFTJS_META_PROMPT</code>.
                 The AI returns strictly valid JSON in the shape of a single-page CraftJS layout.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Returns the final JSON</em>: The raw string (with “layout”: { ... } ) can then be
                 used by the front-end to render or store the new design.
-              </li>
+              </p>
             </ul>
             Essentially, <em>BlueprintAiService.ts</em> is the bridging code that orchestrates the
             summarization steps and the final layout generation.
@@ -976,25 +976,25 @@
             <strong>3) <em>getSummariesFromScreenshot.ts</em></strong><br>
             This is where the extension decides how to handle the screenshot, if any:
             <ul>
-              <li>
+              <p>• 
                 <code>runPythonOcr</code> is called if <code>rawScreenshot</code> was provided,
                 returning an array of recognized text objects. These text items (with bounding box
                 info and confidence scores) are joined into a single string. If no screenshot is
                 present, we skip OCR altogether.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <code>getUiSummary</code> is invoked with that joined text and the screenshot
                 buffer. The AI returns a condensed bullet list describing text-based UI elements.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <code>getGuiSummary</code> is invoked only if a screenshot is actually there, to
                 produce the layout-based summary. If the screenshot is missing, we leave the GUI
                 summary empty.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 Both summaries are returned in an object so the caller can decide how to apply them
                 next—most often passing them to the final layout generation step.
-              </li>
+              </p>
             </ul>
             Any errors during OCR or summarization are captured and returned as textual error
             messages, ensuring the front-end can display an appropriate notification if something
@@ -1005,25 +1005,25 @@
             <strong>4) <em>pythonBridge.ts</em></strong><br>
             This TypeScript file encapsulates how Blueprint AI triggers a Python script for OCR:
             <ul>
-              <li>
+              <p>• 
                 <em>Locating Python & the Script</em>: We check for a local Python environment
                 (under <code>python-ocr/venv/Scripts/python.exe</code>) and the presence of
                 <code>ocr_service.py</code> in the same folder. If either is missing, an error is
                 thrown.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Writing a Temporary Screenshot</em>: The raw <code>Buffer</code> from
                 <code>rawScreenshot</code> is written to a random temp filename in the
                 <code>globalStoragePath</code>, ensuring we have a real image file for the Python
                 script to process. Once done, the file is removed.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Spawning the OCR Process</em>: We run the Python script with the temp image
                 path, collecting <code>stdout</code> and <code>stderr</code>. If the script
                 completes with exit code 0, <code>stdout</code> is parsed as JSON to produce an
                 array of OCR result objects. If there's an error or non-zero exit code, we handle
                 it gracefully, optionally showing a VSCode error message.
-              </li>
+              </p>
             </ul>
             By encapsulating all of these steps, we keep the front-end logic free from direct Python
             calls. <em>pythonBridge.ts</em> is the only TypeScript file that knows how to spawn the
@@ -1034,20 +1034,20 @@
             <strong>5) <em>ocr_service.py</em></strong><br>
             This Python script forms the final link in the OCR chain. It:
             <ul>
-              <li>
+              <p>• 
                 <em>Loads and optionally upscales the image</em> to help with small fonts, then
                 converts it to grayscale.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Runs EasyOCR</em> in paragraph mode, returning recognized lines with confidence
                 scores. Each recognized block contains bounding box coordinates plus the text
                 itself.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 <em>Outputs JSON</em> to <code>stdout</code>, which the TypeScript code then
                 parses. This JSON array represents each recognized line or block of text that
                 might factor into the subsequent UI summarization.
-              </li>
+              </p>
             </ul>
             Because Python’s EasyOCR can handle many image scenarios, it’s well-suited for capturing
             textual details from user-provided screenshots. Combined with minimal pre-processing
@@ -1061,20 +1061,20 @@
             logic for Blueprint AI. The user sees a single “Generate Layout” action, but behind the
             scenes:
             <ul>
-              <li>
+              <p>• 
                 If a screenshot is included, the system writes it to disk, calls Python OCR, and
                 obtains the recognized text lines.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 We pass that text and the screenshot to <code>getUiSummary</code> (which uses the
                 <code>UI_SUMMARY_META_PROMPT</code>) and <code>getGuiSummary</code> (which uses
                 <code>GUI_SUMMARY_META_PROMPT</code>) for more refined summarizations.
-              </li>
-              <li>
+              </p>
+              <p>• 
                 Finally, we merge everything with the user’s instructions in
                 <code>getFinalCraftJsLayout</code> (guided by <code>FINAL_CRAFTJS_META_PROMPT</code>)
                 to produce a single-page CraftJS layout in JSON form.
-              </li>
+              </p>
             </ul>
             This approach ensures that text-based clues from OCR and visual layout hints from the
             screenshot can be combined with the user’s explicit requests—resulting in a
@@ -1089,9 +1089,10 @@
           <h2>Code Samples</h2>
         
             <section id="improved-blueprint-ai-client" class="mb-5">
-            <h2>blueprintAiClient.ts</h2>
+            <h2>1) blueprintAiClient.ts</h2>
             <div class="container text-start">
-              <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>            
+              <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                <code>            
             import axios from 'axios';
             import {
             UI_SUMMARY_META_PROMPT,
@@ -1271,7 +1272,8 @@
         
           <section id="mini-blueprint-ai-service" class="mb-4">
             <h3>2) BlueprintAiService.ts</h3>
-            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+              <code>
           /*
            * BlueprintAiService.ts
            * Demonstrates orchestrating:
@@ -1325,7 +1327,8 @@
         
           <section id="mini-get-summaries" class="mb-4">
             <h3>3) getSummariesFromScreenshot.tsx</h3>
-            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+              <code>
           /*
            * getSummariesFromScreenshot.tsx
            * This file orchestrates how we extract and interpret screenshot data
@@ -1401,7 +1404,8 @@
         
           <section id="python-bridge-section" class="mb-4">
             <h3>4) pythonBridge.ts</h3>
-            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>        
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+              <code>        
           import * as vscode from 'vscode';
           import * as fs from 'fs';
           import * as path from 'path';
@@ -1548,8 +1552,8 @@
         
           <section id="python-ocr-service" class="mb-4">
             <h3>5) ocr_service.py</h3>
-            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin:0 auto;"><code>
-          import sys
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+              import sys
           import json
           import cv2
           import numpy as np
@@ -1666,8 +1670,8 @@
 
               <section id="ai-sidebar-section" class="mb-5">
                 <h2>AiSidebar Component</h2>
-                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="sidebar-code-display">
-                Loading sidebar code...
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                  Loading sidebar code...
                 </code></pre>
                 <script>
                   fetch('./implementation-assets/sidebarCode.txt')
@@ -1709,7 +1713,8 @@
           
             <section id="export-menu-section" class="mb-5">
                 <h2>ExportMenu Component</h2>
-                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="export-menu-code-display">
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                  <code id="export-menu-code-display">
                 Loading export menu code...
                 </code></pre>
                 <script>
@@ -1744,7 +1749,8 @@
             <!-- Add new section importing exportEditorView.txt -->
             <section id="export-editor-view-section" class="mb-5">
                 <h2>ExportEditorView Component</h2>
-                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="export-editor-view-code-display">
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                  <code id="export-editor-view-code-display">
                 Loading export editor view code...
                 </code></pre>
                 <script>
@@ -1777,7 +1783,8 @@
               <!-- Add a section importing containerComponent.txt -->
               <section id="container-component-section" class="mb-5">
                 <h2>ContainerComponent</h2>
-                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="container-component-code-display">
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                  <code id="container-component-code-display">
                 Loading container component code...
                 </code></pre>
                 <script>
@@ -1794,7 +1801,8 @@
         
                   <section id="data-storage" class="mb-5">
                     <h2>Data storage</h2>
-                    <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="dataStore-code-display">
+                    <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+                      <code id="dataStore-code-display">
                       Loading dataStore code...
                     </code></pre>
                     <script>
@@ -2190,145 +2198,139 @@
         </p>
 
         <h3>Node.js Packages</h3>
-        <ul>
-          <li>@babel/core@7.26.0</li>
-          <li>@craftjs/core@0.2.11</li>
-          <li>@craftjs/layers@0.2.6</li>
-          <li>@emotion/react@11.14.0</li>
-          <li>@emotion/styled@11.14.0</li>
-          <li>@eslint/js@9.17.0</li>
-          <li>@fluentui/react@8.122.5</li>
-          <li>@fullhuman/postcss-purgecss@7.0.2</li>
-          <li>@monaco-editor/react@4.7.0</li>
-          <li>@mui/icons-material@6.3.1</li>
-          <li>@mui/material@6.3.1</li>
-          <li>@mui/system@6.4.0</li>
-          <li>@types/classnames@2.3.0</li>
-          <li>@types/file-saver@2.0.7</li>
-          <li>@types/js-beautify@1.14.3</li>
-          <li>@types/node@22.10.6</li>
-          <li>@types/react-color@3.0.13</li>
-          <li>@types/react-dom@18.3.5</li>
-          <li>@types/react-grid-layout@1.3.5</li>
-          <li>@types/react@18.3.18</li>
-          <li>@types/styled-components@5.1.34</li>
-          <li>@types/uuid@10.0.0</li>
-          <li>@vitejs/plugin-react-swc@3.7.2</li>
-          <li>autoprefixer@10.4.20</li>
-          <li>babel-plugin-inline-react-svg@2.0.2</li>
-          <li>classnames@2.5.1</li>
-          <li>cross-env@7.0.3</li>
-          <li>cssnano@7.0.6</li>
-          <li>debounce@2.2.0</li>
-          <li>eslint-plugin-react-hooks@5.1.0</li>
-          <li>eslint-plugin-react-refresh@0.4.16</li>
-          <li>eslint@9.17.0</li>
-          <li>file-saver@2.0.5</li>
-          <li>globals@15.14.0</li>
-          <li>js-beautify@1.15.4</li>
-          <li>jszip@3.10.1</li>
-          <li>konva@9.3.18</li>
-          <li>lzutf8@0.6.3</li>
-          <li>monaco-editor@0.52.2</li>
-          <li>postcss-import@16.1.0</li>
-          <li>postcss-preset-env@10.1.3</li>
-          <li>postcss@8.5.0</li>
-          <li>re-resizable@6.10.3</li>
-          <li>react-color@2.19.3</li>
-          <li>react-colorful@5.6.1</li>
-          <li>react-contenteditable@3.3.7</li>
-          <li>react-dom@18.3.1</li>
-          <li>react-grid-layout@1.5.0</li>
-          <li>react-icons@5.5.0</li>
-          <li>react-konva@18.2.10</li>
-          <li>react-loading@2.0.3</li>
-          <li>react-player@2.16.0</li>
-          <li>react-rnd@10.4.14</li>
-          <li>react-router-dom@7.1.1</li>
-          <li>react-router@7.1.1</li>
-          <li>react-youtube@10.1.0</li>
-          <li>react@18.3.1</li>
-          <li>sharp@0.33.5</li>
-          <li>styled-components@6.1.14</li>
-          <li>tailwindcss@3.4.17</li>
-          <li>typescript-eslint@8.19.1</li>
-          <li>typescript@5.6.3</li>
-          <li>uuid@11.0.4</li>
-          <li>vite@5.4.11</li>
-        </ul>
+<div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+  <div style="flex: 1 1 30%;">
+    <p>@babel/core@7.26.0</p>
+    <p>@craftjs/core@0.2.11</p>
+    <p>@craftjs/layers@0.2.6</p>
+    <p>@emotion/react@11.14.0</p>
+    <p>@emotion/styled@11.14.0</p>
+    <p>@eslint/js@9.17.0</p>
+    <p>@fluentui/react@8.122.5</p>
+    <p>@fullhuman/postcss-purgecss@7.0.2</p>
+    <p>@monaco-editor/react@4.7.0</p>
+    <p>@mui/icons-material@6.3.1</p>
+    <p>@mui/material@6.3.1</p>
+    <p>@mui/system@6.4.0</p>
+    <p>@types/classnames@2.3.0</p>
+    <p>@types/file-saver@2.0.7</p>
+    <p>@types/js-beautify@1.14.3</p>
+    <p>@types/node@22.10.6</p>
+    <p>@types/react-color@3.0.13</p>
+    <p>@types/react-dom@18.3.5</p>
+    <p>@types/react-grid-layout@1.3.5</p>
+    <p>@types/react@18.3.18</p>
+    <p>@types/styled-components@5.1.34</p>
+    <p>@types/uuid@10.0.0</p>
+  </div>
+
+  <div style="flex: 1 1 30%;">
+    <p>@vitejs/plugin-react-swc@3.7.2</p>
+    <p>autoprefixer@10.4.20</p>
+    <p>babel-plugin-inline-react-svg@2.0.2</p>
+    <p>classnames@2.5.1</p>
+    <p>cross-env@7.0.3</p>
+    <p>cssnano@7.0.6</p>
+    <p>debounce@2.2.0</p>
+    <p>eslint-plugin-react-hooks@5.1.0</p>
+    <p>eslint-plugin-react-refresh@0.4.16</p>
+    <p>eslint@9.17.0</p>
+    <p>file-saver@2.0.5</p>
+    <p>globals@15.14.0</p>
+    <p>js-beautify@1.15.4</p>
+    <p>jszip@3.10.1</p>
+    <p>konva@9.3.18</p>
+    <p>lzutf8@0.6.3</p>
+    <p>monaco-editor@0.52.2</p>
+    <p>postcss-import@16.1.0</p>
+    <p>postcss-preset-env@10.1.3</p>
+    <p>postcss@8.5.0</p>
+    <p>re-resizable@6.10.3</p>
+    <p>react-color@2.19.3</p>
+  </div>
+
+  <div style="flex: 1 1 30%;">
+    <p>react-colorful@5.6.1</p>
+    <p>react-contenteditable@3.3.7</p>
+    <p>react-dom@18.3.1</p>
+    <p>react-grid-layout@1.5.0</p>
+    <p>react-icons@5.5.0</p>
+    <p>react-konva@18.2.10</p>
+    <p>react-loading@2.0.3</p>
+    <p>react-player@2.16.0</p>
+    <p>react-rnd@10.4.14</p>
+    <p>react-router-dom@7.1.1</p>
+    <p>react-router@7.1.1</p>
+    <p>react-youtube@10.1.0</p>
+    <p>react@18.3.1</p>
+    <p>sharp@0.33.5</p>
+    <p>styled-components@6.1.14</p>
+    <p>tailwindcss@3.4.17</p>
+    <p>typescript-eslint@8.19.1</p>
+    <p>typescript@5.6.3</p>
+    <p>uuid@11.0.4</p>
+    <p>vite@5.4.11</p>
+  </div>
+</div>
+
 
         <h3>Python Packages (OCR Script)</h3>
         <ul>
-          <li>numpy</li>
-          <li>opencv-python-headless</li>
-          <li>easyocr (installed automatically with PyTorch)</li>
+          <p>• numpy</p>
+          <p>• opencv-python-headless</p>
+          <p>• easyocr (installed automatically with PyTorch)</p>
         </ul>
 
         <h3>Internal AI and OCR APIs</h3>
         <ul>
-          <li>
-            <strong>getBlueprintLayout(...)</strong><br />
+            <p>• <strong>getBlueprintLayout(...)</strong><br />
             Main entry point for AI-based layout generation. Accepts user text
             and optional screenshot to produce a final single-page CraftJS
-            layout in JSON form.
-          </li>
-          <li>
-            <strong>getSummariesFromScreenshot(...)</strong><br />
+            layout in JSON form.</p>
+            <p>• <strong>getSummariesFromScreenshot(...)</strong><br />
             Handles screenshot data by running OCR (via
             <code>runPythonOcr(...)</code> and <code>ocr_service.py</code>) and
             then generating <em>uiSummary</em> and <em>guiSummary</em> through
-            AI calls.
-          </li>
-          <li>
-            <strong>runPythonOcr(...)</strong><br />
+            AI calls.</p>
+            <p>• <strong>runPythonOcr(...)</strong><br />
             Invokes the Python script <code>ocr_service.py</code> to extract
-            textual content from an image using EasyOCR.
-          </li>
-          <li>
-            <strong>getUiSummary(...)</strong> and
+            textual content from an image using EasyOCR.</p>
+            <p>• <strong>getUiSummary(...)</strong> and
             <strong>getGuiSummary(...)</strong><br />
             Summaries of textual content (UI elements) and visual layout (GUI
             structure) derived from screenshot OCR data. Uses OpenAI with
             specialized prompts (<em>UI_SUMMARY_META_PROMPT</em> and
-            <em>GUI_SUMMARY_META_PROMPT</em>).
-          </li>
-          <li>
-            <strong>getFinalCraftJsLayout(...)</strong><br />
+            <em>GUI_SUMMARY_META_PROMPT</em>).</p>
+            <p>• <strong>getFinalCraftJsLayout(...)</strong><br />
             Synthesizes the final CraftJS layout JSON from user input and the
             screenshot summaries, leveraging
-            <em>FINAL_CRAFTJS_META_PROMPT</em>.
-          </li>
-          <li>
-            <strong>callOpenAiChat(...)</strong><br />
+            <em>FINAL_CRAFTJS_META_PROMPT</em>.</p>
+            <p>• <strong>callOpenAiChat(...)</strong><br />
             A helper for all OpenAI requests. Chooses the model based on whether
-            a screenshot is involved. Returns the raw text response from OpenAI.
-          </li>
+            a screenshot is involved. Returns the raw text response from OpenAI.</p>
+            
         </ul>
 
         <h3>Key Frontend Modules</h3>
         <ul>
-          <li>
-            <strong>AiSidebar.tsx</strong>: Handles the user chat flow (prompt +
+          <p>• <strong>AiSidebar.tsx</strong>: Handles the user chat flow (prompt +
             optional image). Sends messages to
             <code>blueprintAI.generateLayout</code> and receives AI layout
-            results.
-          </li>
-          <li>
-            <strong>SuggestedPages.tsx</strong> and
+            results.</p>
+            <p>• <strong>SuggestedPages.tsx</strong> and
             <strong>CreateSelectedPage.tsx</strong>: Provide suggested page
             names, allow prompting with text and an optional image, and post to
-            <code>blueprintAI.generateLayoutSuggested</code>.
-          </li>
-          <li>
-            <strong>BlueprintAiService.ts</strong>,
+            <code>blueprintAI.generateLayoutSuggested</code>.</p>
+            <p>• <strong>BlueprintAiService.ts</strong>,
             <strong>pythonBridge.ts</strong>, and
             <strong>getSummariesFromScreenshot.ts</strong>: Coordinate calls to
-            OpenAI and the OCR Python script, returning final layout data.
-          </li>
+            OpenAI and the OCR Python script, returning final layout data.</p>
         </ul>
       </section>
+          <div class="floating-buttons">
+            <button id="topSection" class="section-nav-btn" title="Back to Top">Back To Top</button>
+          </div>
     </main>
-
     <!-- Footer -->
     <footer class="text-center py-4 mt-auto">
       <div
@@ -2345,6 +2347,7 @@
         </a>
       </div>
     </footer>
+
 
     <!-- Bootstrap JS Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -2382,6 +2385,16 @@
         });
       });
     </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const topBtn = document.getElementById('topSection');
+    
+        topBtn?.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    </script>    
+    
     <!-- Optional custom scripts -->
     <script src="script.js"></script>
   </body>
