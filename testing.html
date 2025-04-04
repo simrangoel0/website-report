@@ -99,7 +99,7 @@
 </header>
 
 <!-- Main Content -->
-<main class="container flex-grow-1" style="max-width: 900px; margin: 0 auto;">
+<main class="container flex-grow-1">
 
   <!-- Testing Strategy -->
   <section id="testing-strategy" class="mb-5" style="margin-bottom:2rem;">
@@ -128,11 +128,11 @@
       correctness, reliability, and maintainability. This includes:
     </p>
     <ul style="margin-bottom:1rem;">
-      <li><strong>Python OCR (EasyOCR) in the python-ocr folder:</strong> Validates text extraction accuracy and performance.</li>
-      <li><strong>AI Summaries and Final Layout Generation within the ai directory:</strong> Ensures prompt handling, summarization accuracy, and JSON layout conformity with CraftJS requirements.</li>
-      <li><strong>Main Web Application and User Interface under webview-ui:</strong> Tests React components, sidebars, drag-and-drop CraftJS canvas, and AI chat flows.</li>
-      <li><strong>VS Code Extension Wrapper in src:</strong> Verifies robust communication between the extension and the front-end modules.</li>
-      <li><strong>Export and Packaging Features:</strong> Checks HTML/CSS/JS exports, code generation, and user workflows to move finished designs into real-world environments.</li>
+      <p>- <strong>Python OCR (EasyOCR) in the python-ocr folder:</strong> Validates text extraction accuracy and performance.</p> 
+      <p>- <strong>AI Summaries and Final Layout Generation within the ai directory:</strong> Ensures prompt handling, summarization accuracy, and JSON layout conformity with CraftJS requirements.</p> 
+      <p>- <strong>Main Web Application and User Interface under webview-ui:</strong> Tests React components, sidebars, drag-and-drop CraftJS canvas, and AI chat flows.</p> 
+      <p>- <strong>VS Code Extension Wrapper in src:</strong> Verifies robust communication between the extension and the front-end modules.</p> 
+      <p>- <strong>Export and Packaging Features:</strong> Checks HTML/CSS/JS exports, code generation, and user workflows to move finished designs into real-world environments.</p> 
     </ul>
     <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">Automated and Manual Testing</h3>
     <p style="margin-bottom:1rem;">
@@ -184,38 +184,38 @@
   At a high level, our Python OCR unit tests validate five fundamental aspects of the process:
 </p>
 <ol style="margin-bottom:1rem; list-style-type: decimal; margin-left:2rem;">
-  <li><strong>Preprocessing Efficacy:</strong> We check whether applying grayscale, upscaling, 
+  <p>- <strong>Preprocessing Efficacy:</strong> We check whether applying grayscale, upscaling, 
     or noise reduction steps before running EasyOCR significantly boosts text recognition 
     results. Test images range from crisp, high-resolution screenshots to heavily compressed 
     or low-contrast images, ensuring that preprocessing steps consistently enhance 
-    accuracy rather than degrade it.</li>
+    accuracy rather than degrade it.</p> 
 
-  <li><strong>Bounding Box Calculation:</strong> Each recognized text element returns a set 
+  <p>- <strong>Bounding Box Calculation:</strong> Each recognized text element returns a set 
     of coordinates representing the bounding box. We validate these against an acceptable 
     size range defined in our test cases. For instance, a small label on a form might require 
     a bounding box area of 40–100 pixels, whereas a larger heading might span hundreds or 
     even thousands of pixels in area. By confirming these ranges, we ensure our system 
-    accurately pinpoints textual regions.</li>
+    accurately pinpoints textual regions.</p> 
 
-  <li><strong>Confidence Thresholding:</strong> We measure the average and individual 
+  <p>- <strong>Confidence Thresholding:</strong> We measure the average and individual 
     confidence scores from the OCR results to confirm that they meet or exceed minimum 
     thresholds. For example, certain test images mandate a confidence score of at least 0.80 
     to pass. This assures us that the recognized text is reliable enough to feed into the AI 
-    summarization steps without introducing spurious or low-accuracy content.</li>
+    summarization steps without introducing spurious or low-accuracy content.</p> 
 
-  <li><strong>Substring Verification:</strong> Each test case includes an <code>expected_substring</code> 
+  <p>- <strong>Substring Verification:</strong> Each test case includes an <code>expected_substring</code> 
     value. By scanning the full recognized text for that substring, we verify that crucial 
     details—like an invoice number, a billing label, or a receipt total—appear exactly as 
     anticipated. For real-world usage, missing or incorrect substrings might lead to user 
     confusion or broken AI analysis (e.g., a chat prompt about an invoice failing because 
-    the word "Invoice" never got recognized).</li>
+    the word "Invoice" never got recognized).</p> 
 
-  <li><strong>JSON Output Consistency:</strong> Once we generate final OCR data, the system 
+  <p>- <strong>JSON Output Consistency:</strong> Once we generate final OCR data, the system 
     encodes it as a JSON array of recognized text items, each with <code>text</code>, 
     <code>confidence</code>, and <code>bbox</code> fields. Our tests parse this JSON to ensure 
     it’s valid and that each data entry includes all required fields. This consistency is 
     critical for the subsequent steps in the pipeline, where the AI summarization relies on 
-    structured JSON rather than raw, unformatted text.</li>
+    structured JSON rather than raw, unformatted text.</p> 
 </ol>
 
 <p style="margin-bottom:1rem;">
@@ -245,8 +245,8 @@
 </p>
 
 
-  <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
-<code>
+<pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+  <code>
 import unittest
 import os
 import json
@@ -454,8 +454,8 @@ if __name__ == '__main__':
   </p>
   
 
-  <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left;">
-<code>
+  <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; max-width: 80%; width: 80%; margin: 0 auto;">
+    <code>
 /**
  * @file aiOcrPerformance.integration.test.ts
  *
@@ -598,9 +598,9 @@ describe('AI + OCR Performance Integration Tests', () => {
     Code extension locally and verify:
   </p>
   <ul style="margin-bottom:1rem; list-style-type: disc; margin-left:2rem;">
-    <li>Extension activation, including correct loading of Python-based OCR components.</li>
-    <li>Proper initialization of the webview UI, ensuring React components and styling load without error.</li>
-    <li>Full functionality of AI-driven layout generation, from uploading images to rendering the final CraftJS layout.</li>
+    <p>- Extension activation, including correct loading of Python-based OCR components.</p>
+    <p>- Proper initialization of the webview UI, ensuring React components and styling load without error.</p>
+    <p>- Full functionality of AI-driven layout generation, from uploading images to rendering the final CraftJS layout.</p>
   </ul>
 
   <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">VS Code Extension Integrations</h3>
@@ -671,7 +671,7 @@ describe('AI + OCR Performance Integration Tests', () => {
     <img 
       src="./testing-assets/OCR_CONFIDENCE.png" 
       alt="OCR Confidence Scores" 
-      style="max-width: 100%; border:1px solid #ccc;"
+      style="max-width: 60%; border:1px solid #ccc;"
     />
     <figcaption style="margin-top:0.5rem; font-style:italic;">
       Average OCR Confidence Scores by Preprocessing Method
@@ -689,7 +689,7 @@ describe('AI + OCR Performance Integration Tests', () => {
     <img 
       src="./testing-assets/OCR_PREPROCESSING.png" 
       alt="OCR Accuracy by Preprocessing Method" 
-      style="max-width: 100%; border:1px solid #ccc;"
+      style="max-width: 60%; border:1px solid #ccc;"
     />
     <figcaption style="margin-top:0.5rem; font-style:italic;">
       Comparative OCR Accuracy for different preprocessing options
@@ -708,7 +708,7 @@ describe('AI + OCR Performance Integration Tests', () => {
     <img 
       src="./testing-assets/CHARACTER_PREPROCESSING.png" 
       alt="Character Error Rate by Preprocessing Method" 
-      style="max-width: 100%; border:1px solid #ccc;"
+      style="max-width: 60%; border:1px solid #ccc;"
     />
     <figcaption style="margin-top:0.5rem; font-style:italic;">
       Character Error Rate (CER) across different preprocessing approaches
@@ -726,7 +726,7 @@ describe('AI + OCR Performance Integration Tests', () => {
     <img 
       src="./testing-assets/PROCESSING_COMPLEXITY.png" 
       alt="AI Processing Time vs Image Complexity" 
-      style="max-width: 100%; border:1px solid #ccc;"
+      style="max-width: 60%; border:1px solid #ccc;"
     />
     <figcaption style="margin-top:0.5rem; font-style:italic;">
       AI Processing Time (OCR and CraftJS output) for varied complexity levels
@@ -757,9 +757,6 @@ describe('AI + OCR Performance Integration Tests', () => {
     high-quality page generation under a variety of test conditions.
   </p>
 </section>
-
-
-</main>
 
 
 
