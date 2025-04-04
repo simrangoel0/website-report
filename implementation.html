@@ -115,9 +115,473 @@
       <section id="key-features" class="mb-5">
         <h2>Key Features</h2>
         <p>
-          Highlight the main features implemented, code snippets, and how they
-          work.
+          Below is a structured layout of subsections for each key feature in
+          the project. Each feature includes placeholders for implementation
+          details, code snippets, and diagrams. These are purely illustrative;
+          fill them in with the actual content as needed.
         </p>
+
+        <section id="project-structure" class="mb-5">
+          <h2>Project Structure</h2>
+
+          <p>
+            The overall layout of the BlueprintAI project is designed to keep
+            extension logic, Python OCR functionality, and the React-based web
+            UI separate yet interlinked. Below is a detailed breakdown of the
+            directory and file organization, along with short explanations of
+            each major part. Note that there are no multiple design themes for
+            users to pick from—only the functionality to generate or refine
+            pages via AI prompts or screenshots.
+          </p>
+
+          <h3>Root-Level Files & Directories</h3>
+          <ul>
+            <li>
+              <strong>eslint.config.mjs, package.json, package-lock.json</strong
+              >: Basic configuration and dependency management for the main VS
+              Code extension. ESLint rules and Node modules for the backend
+              logic live here.
+            </li>
+            <li>
+              <strong>tsconfig.json</strong>: Manages TypeScript compilation
+              settings for the extension codebase (excluding the web UI, which
+              has its own config).
+            </li>
+            <li>
+              <strong>README.md</strong>: Provides a high-level overview of
+              BlueprintAI, plus instructions on setup and usage.
+            </li>
+            <li>
+              <strong>python-ocr/</strong>: Houses Python scripts related to
+              OCR. This includes:
+              <ul>
+                <li>
+                  <em>ocr_service.py</em> – Invoked by the extension to run
+                  EasyOCR on user-uploaded screenshots. Outputs recognized text
+                  lines for the AI summarization step.
+                </li>
+                <li>
+                  <em>requirements.txt</em> – Lists the Python dependencies
+                  (e.g., <em>numpy</em>, <em>opencv-python-headless</em>,
+                  <em>easyocr</em>).
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>Core Extension Source (<code>src</code> Folder)</h3>
+          <p>
+            The <strong>src</strong> folder contains all TypeScript code that
+            runs in the VS Code extension context. It includes AI prompt
+            orchestration, Python bridging, and panel creation.
+          </p>
+          <ul>
+            <li>
+              <strong>ai/</strong> – Manages OpenAI prompts, OCR-based
+              summarization, and bridging to the Python script. Key files:
+              <ul>
+                <li>
+                  <em>blueprintAiPrompts.ts</em> – Reusable prompt templates.
+                </li>
+                <li>
+                  <em>BlueprintAiService.ts</em> – High-level methods for final
+                  CraftJS layout generation.
+                </li>
+                <li>
+                  <em>getSummariesFromScreenshot.ts</em> – Chains OCR output
+                  with UI/GUI summarization prompts.
+                </li>
+                <li>
+                  <em>pythonBridge.ts</em> – Spawns Python processes (e.g.,
+                  <em>ocr_service.py</em>) and returns results.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>extension.ts</strong> – The main extension entry point,
+              registering commands and setting up the webview panel.
+            </li>
+            <li>
+              <strong>panels/</strong> – Contains <em>MainWebViewPanel.ts</em>,
+              defining how the React web UI is injected into the VS Code panel
+              and how it communicates with the backend.
+            </li>
+            <li>
+              <strong>utils/</strong> – Utility modules such as
+              <em>extensionContext.ts</em> (for storing context across sessions)
+              and <em>validateApiKey.ts</em> (for verifying user-supplied or
+              stored AI keys).
+            </li>
+          </ul>
+
+          <h3>React Web UI (<code>webview-ui</code> Folder)</h3>
+          <p>
+            The <strong>webview-ui</strong> folder encapsulates the entire
+            front-end built with React and CraftJS. This is compiled separately
+            (using Vite) and then embedded as the main interface within the VS
+            Code extension’s webview.
+          </p>
+          <ul>
+            <li>
+              <strong>index.html, package.json, package-lock.json</strong> – The
+              starting point for the React app and the local Node modules
+              (distinct from the root-level <em>package.json</em>).
+            </li>
+            <li>
+              <strong>postcss.config.js, tailwind.config.js</strong> – Setup for
+              Tailwind CSS and other post-processing tools, ensuring consistent
+              styling across the UI.
+            </li>
+            <li>
+              <strong>vite.config.ts</strong> – Configuration for bundling the
+              React source code, outputting the final
+              <em>webview-ui</em> bundle.
+            </li>
+            <li>
+              <strong>src/</strong> – Contains the core React code:
+              <ul>
+                <li>
+                  <em>App.tsx, main.tsx</em>, and <em>global.css</em> – The
+                  bootstrap logic and global styles for the web application.
+                </li>
+                <li>
+                  <em>components/</em> – A suite of React components for the UI,
+                  including:
+                  <ul>
+                    <li>
+                      <strong>AiSidebar</strong> – Where users enter text/image
+                      prompts for iterative AI changes.
+                    </li>
+                    <li>
+                      <strong>CreateWithImagination</strong> – Manages the
+                      initial “Create from text or screenshot” workflow (though
+                      final design variants are chosen by the user or AI).
+                    </li>
+                    <li>
+                      <strong>ExportMenu</strong> – Allows specifying which
+                      pages to export, generating HTML/CSS/JS, and downloading
+                      as a ZIP.
+                    </li>
+                    <li>
+                      <strong>PrimarySidebar</strong> – Left-side panel that
+                      includes <em>LayoutTab</em>, <em>PagesTab</em>,
+                      <em>SaveModal</em>, etc.
+                    </li>
+                    <li>
+                      <strong>PropertiesSidebar</strong> – Right-side panel for
+                      editing attributes of selected components (text, color,
+                      layout).
+                    </li>
+                    <li>
+                      <strong>SuggestedPages</strong> – Dialogs for AI-suggested
+                      page creation (e.g. “Home,” “AboutUs,” etc.).
+                    </li>
+                    <li>
+                      <strong>UserComponents</strong> – Definitions of custom
+                      draggable components (Button, Container, Image,
+                      Navigation, etc.) that appear on the CraftJS canvas.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <em>pages/</em> – High-level “page” containers, such as
+                  <em>MainInterface</em> (the main editor with sidebars and
+                  canvas).
+                </li>
+                <li>
+                  <em>store/</em> – Provides global state management (e.g.,
+                  <em>store.ts</em>) for the web UI, storing user actions,
+                  selected components, and more.
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>Key Workflow</h3>
+          <p>
+            When users launch the extension, <em>extension.ts</em> sets up the
+            main webview by loading the compiled React app from
+            <em>webview-ui</em>. Within that app, the user can:
+          </p>
+          <ul>
+            <li>
+              Generate a page from text or screenshot via the
+              <strong>CreateWithImagination</strong> flow.
+            </li>
+            <li>
+              Edit layouts on the <strong>MainInterface</strong> using
+              <em>Component Sidebar</em>, <em>Layout Sidebar</em>,
+              <em>Pages Sidebar</em>, and <em>Properties Sidebar</em>.
+            </li>
+            <li>
+              Use <strong>AiSidebar</strong> to iteratively prompt the AI to add
+              or modify page elements.
+            </li>
+            <li>
+              Perform OCR if a screenshot is uploaded (via
+              <em>pythonBridge.ts</em>), feed the text into AI summarizations,
+              and see updated designs in real time.
+            </li>
+            <li>
+              Export the final pages using <em>ExportMenu</em> for local storage
+              or further development.
+            </li>
+          </ul>
+          <p>
+            This layered approach separates the core AI logic (in
+            <strong>src/ai</strong> and <em>python-ocr</em>) from the
+            <strong>webview-ui</strong> front-end. It allows for easy expansion
+            of both sides: new AI prompts or different user components can be
+            added without disrupting the rest of the codebase.
+          </p>
+        </section>
+
+        <!-- 1. First Page Creator -->
+        <section id="feature-first-page-creator" class="mb-5">
+          <h3>First Page Creator</h3>
+          <p>
+            <em
+              >Implementation details and explanation go here. Describe how the
+              system converts a text description or a screenshot into a design,
+              mentioning the libraries/plugins used, any challenges, and
+              relevant snippets.</em
+            >
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for First Page Creator feature
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram that illustrates your First Page
+              Creator flow.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. Main Interface -->
+        <section id="feature-main-interface" class="mb-5">
+          <h3>Main Interface</h3>
+          <p>
+            <em
+              >Implementation details for the main editing UI. Discuss the
+              frameworks/libraries used (e.g., React, CraftJS), how the
+              interface is rendered, and any challenges or solutions.</em
+            >
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Main Interface feature
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram of the Main Interface layout
+              hierarchy.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.1. Droppable CraftJS Canvas -->
+        <section id="feature-craftjs-canvas" class="mb-5">
+          <h4>Droppable CraftJS Canvas</h4>
+          <p>
+            <em
+              >Implementation details on how the draggable/interactable
+              components are handled, references to the indicator box, move/hide
+              icons, etc.</em
+            >
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for CraftJS Canvas feature
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a flow diagram of how components are
+              dropped/placed on the canvas.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.2. Properties Sidebar -->
+        <section id="feature-properties-sidebar" class="mb-5">
+          <h4>Properties Sidebar</h4>
+          <p>
+            <em>
+              Implementation details on the right-hand sidebar, how properties
+              are generated for the selected component, toggles for AI iterative
+              chat, etc.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Properties Sidebar
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram showing the flow for property updates
+              in the sidebar.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.3. Component Sidebar -->
+        <section id="feature-component-sidebar" class="mb-5">
+          <h4>Component Sidebar</h4>
+          <p>
+            <em>
+              Implementation details on the left-hand component list, including
+              search/filter logic, how draggable components are set up, etc.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Component Sidebar
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram illustrating how components are listed
+              and dragged.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.4. Layout Sidebar -->
+        <section id="feature-layout-sidebar" class="mb-5">
+          <h4>Layout Sidebar</h4>
+          <p>
+            <em>
+              Implementation details for margin/padding, the layers section,
+              expand/collapse of components, renaming, hiding, and reordering.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Layout Sidebar
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram showing how the Layout tab or Layers
+              section operates.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.5. Pages Sidebar -->
+        <section id="feature-pages-sidebar" class="mb-5">
+          <h4>Pages Sidebar</h4>
+          <p>
+            <em>
+              Implementation details for the multi-page handling: creating,
+              selecting, renaming, deleting pages, and suggested pages flow.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Pages Sidebar
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram illustrating page creation and
+              switching flow.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.6. Undo/Redo, Save Locally, Upload, Download -->
+        <section id="feature-undo-redo-save" class="mb-5">
+          <h4>Undo/Redo, Save, Upload, Download</h4>
+          <p>
+            <em>
+              Implementation details about version control at the UI level,
+              local storage or file-based saving, re-importing JSON, etc.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Undo/Redo & Save logic
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram demonstrating the save/load cycle.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 2.7. Export Menu -->
+        <section id="feature-export-menu" class="mb-5">
+          <h4>Export Menu</h4>
+          <p>
+            <em>
+              Implementation details for exporting pages, including selecting
+              pages, generating HTML/CSS/JS, counting lines, time estimates,
+              etc.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for Export Menu
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram illustrating the export flow and
+              bundling steps.]
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. AI Iterative Chat Menu -->
+        <section id="feature-ai-iterative-chat" class="mb-5">
+          <h3>AI Iterative Chat Menu</h3>
+          <p>
+            <em>
+              Implementation details for how the AI chat merges user prompts
+              with referencing multiple selected canvas elements, how upvoting
+              or downvoting responses works, etc.
+            </em>
+          </p>
+          <div style="margin-top: 10px">
+            <strong>Code Snippet (Placeholder):</strong>
+            <pre><code>// Example snippet for AI Iterative Chat Menu
+      // Insert relevant code here...
+      </code></pre>
+          </div>
+          <div style="margin-top: 10px">
+            <strong>Diagram (Placeholder):</strong>
+            <p>
+              [Add or reference a diagram showing how user prompts connect to
+              the AI generation flow and how the changes are applied to the
+              canvas.]
+            </p>
+          </div>
+        </section>
       </section>
 
       <section
