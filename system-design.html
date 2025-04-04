@@ -297,46 +297,1571 @@
         </p>
       </section>
 
-      <section id="site-map" class="mb-5">
-        <h2>Site Map</h2>
-        <p>Show the overall navigation or sitemap structure here.</p>
-      </section>
+      <section id="system-architecture-overview" class="mb-5">
+        <h2>System Architecture & Component Interconnections</h2>
 
-      <section id="sequence-diagrams" class="mb-5">
-        <h2>Sequence Diagrams</h2>
         <p>
-          Include any sequence diagrams representing interactions between
-          components.
+          This section provides an extremely detailed and extensive explanation
+          of how the various parts of the BlueprintAI system fit together—from
+          the initial “Home” screen to generating designs (via either screenshot
+          or text input), through to the Editing Interface with multiple
+          sidebars (Left Sidebar, AI Sidebar, and Properties Sidebar), as well
+          as the deeper AI features and export flows. The following diagrams are
+          referenced from the
+          <code>./system-architecture</code> directory, where they illustrate
+          high-level connections among major components and flows:
+        </p>
+
+        <!-- Diagram 1: Home -->
+        <figure>
+          <img
+            src="./system-architecture/Home.png"
+            alt="System Architecture - Home"
+            style="max-width: 100%; height: auto"
+          />
+          <figcaption>
+            Figure 1: A high-level flow chart showing how a user begins at the
+            Home screen and can choose to generate a design from a screenshot or
+            from text. The diagram also shows the AI Features box as a separate
+            path, reflecting that AI capabilities may be accessed alongside
+            these flows.
+          </figcaption>
+        </figure>
+
+        <p>
+          At the root of the system, users start at a
+          <strong>Home</strong> view. From here, two main options facilitate
+          creating a new web design: <strong>“Screenshot to Design”</strong> and
+          <strong>“Text to Design”</strong>. This mirrors the core idea behind
+          the <em>First Page Creator</em>, which accommodates both text-based
+          instructions and actual image uploads (e.g., screenshots). Once the
+          user selects one of these creation paths, the system employs AI logic
+          and—if necessary—OCR to parse text from the screenshot. At this point,
+          additional features such as
+          <strong>Auto-completed suggestions</strong> (akin to ChatGPT) and
+          <strong>Multiple design options or themes</strong> may be shown,
+          giving the user flexibility in choosing a layout style or overall
+          aesthetic.
+        </p>
+
+        <p>
+          When a screenshot is uploaded (the
+          <em>Screenshot to Design</em> path), the system uses
+          <strong>EasyOCR</strong> to detect text elements. This detected
+          text—along with the user’s descriptive instructions—feeds into the
+          <em>getBlueprintLayout(...)</em> function, culminating in an
+          AI-synthesized layout. In contrast, if a user opts for
+          <em>Text to Design</em>, only textual input (no screenshot) is
+          provided, and the system applies generative AI to create a draft
+          layout based purely on textual description. Either way, the user
+          eventually advances to a stage where they can
+          <strong>Load AI Images</strong> (an optional step that allows image
+          generation or insertion of AI-generated graphics).
+        </p>
+
+        <p>
+          Beyond these two initial entry points, the “AI Features” node (seen to
+          the right in Figure 1) indicates that advanced AI-driven
+          functionalities can be accessed independently at any time. For
+          instance, after the system has generated an initial layout, the user
+          may want to iterate on design details: adding or removing components,
+          modifying them, or generating new images. These AI features can handle
+          iterative prompts—refining layout geometry, color schemes, text, or
+          images on request.
+        </p>
+
+        <p>
+          Once the user has chosen their input path and optionally generated or
+          loaded any AI images, the process flows into the
+          <em>Editing Interface</em>. This is the central environment where the
+          user interacts with a droppable <strong>CraftJS Canvas</strong>. On
+          this canvas:
+        </p>
+
+        <ul>
+          <li>
+            Components can be <strong>dragged and dropped</strong> to fine-tune
+            the layout. Each component is interactive, offering visual
+            indicators when hovered or selected.
+          </li>
+          <li>
+            The system displays a suitable
+            <strong>Indicator Box</strong> around the selected component,
+            providing quick-access icons to move, hide, or delete that component
+            entirely. These fundamental editing capabilities combine with the
+            AI-driven approach to streamline the front-end design process.
+          </li>
+        </ul>
+
+        <p>Surrounding the Editing Interface, there are three key sidebars:</p>
+        <ul>
+          <li>
+            <strong>Left Sidebar</strong>: Subdivided into multiple tabs such as
+            Components, Layout, Pages, Undo/Redo, Save/Load, and Import/Export.
+            <ul>
+              <li>
+                <em>Components Tab</em> lets you search and drag in UI elements
+                like Buttons, Containers, Text, Images, Videos, and more.
+              </li>
+              <li>
+                <em>Layout Tab</em> includes margin/padding controls and a
+                hierarchical layers view of all components on the canvas. It
+                allows naming, hiding, or reordering nested elements.
+              </li>
+              <li>
+                <em>Pages Tab</em> manages multiple pages (e.g., Home, About,
+                Contact), with the ability to add, rename, delete, or reset
+                pages. It also exposes “Suggested Pages” that the AI can
+                generate upon selection (e.g., “Pricing Page,” “Product
+                Details,” etc.).
+              </li>
+              <li>
+                <em>Undo/Redo</em> grants revision control for quick layout
+                changes.
+              </li>
+              <li>
+                <em>Save/Load & Import/Export</em> handle local backups, direct
+                JSON imports, or full project exports (including HTML/CSS/JS).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Properties Sidebar</strong>: Found on the right. When a user
+            selects a component, its customizable properties appear here. This
+            includes text fields, color pickers, sliders for spacing or sizing,
+            toggles, and more. It also contains a button to open the
+            <strong>AI Iterative Chat Menu</strong>, enabling guided
+            reconfiguration of one or more selected elements based on textual
+            instructions to the AI.
+          </li>
+          <li>
+            <strong>AI Sidebar</strong>: Typically hidden but can be expanded to
+            facilitate deeper <strong>generative AI modifications</strong>.
+            Users can type prompts such as “Replace this navigation bar with a
+            collapsible vertical menu” or “Add a hero banner image with a bright
+            blue background.” The AI processes these requests and proposes
+            layout updates, which the user can accept or reject.
+          </li>
+        </ul>
+
+        <p>
+          Ultimately, once the user finishes editing or exploring design
+          variations, they can proceed to export the entire project. The “Export
+          Menu” on the left sidebar allows them to select specific pages or all
+          pages, estimate project size and lines of code, and then generate a
+          production-ready bundle (HTML/CSS/JS) that’s easily portable to
+          standard development tools or production hosting environments.
+        </p>
+
+        <p>
+          This seamless flow—from the <strong>Home</strong> screen to
+          <em>Screenshot to Design</em> or <em>Text to Design</em>, optionally
+          <strong>Load AI Images</strong>, and finally into the
+          <strong>Editing Interface</strong>—is central to the BlueprintAI
+          experience. Each step is designed to maximize ease of use, whether
+          you’re a non-technical user seeking quick prototypes or a seasoned
+          developer looking to accelerate page-building tasks.
+        </p>
+
+        <!-- Diagram 2: AiSidebar -->
+        <figure>
+          <img
+            src="./system-architecture/AiSidebar.png"
+            alt="System Architecture - AiSidebar"
+            style="max-width: 100%; height: auto"
+          />
+          <figcaption>
+            Figure 2: The AI Sidebar flow, showing how a user can either upload
+            a reference image or provide a textual prompt to direct AI-based
+            changes or additions. The user then can “Accept” or “Reject” these
+            changes, which reflect back into the Editing Interface.
+          </figcaption>
+        </figure>
+
+        <p>
+          The second diagram highlights the <strong>AI Sidebar</strong> and how
+          it processes user inputs to refine the layout. The AI Sidebar
+          represents a dedicated space where users can iteratively interact with
+          AI-driven suggestions for both small tweaks and large-scale design
+          changes. In the bigger picture, it meshes neatly with the
+          <em>First Page Creator</em>, as well as the
+          <strong>Properties Sidebar</strong>
+          in the main interface. This means that after generating an initial
+          layout—whether from text or a screenshot—users can always return to
+          the AI Sidebar for further enhancements, new component additions, or
+          style overhauls.
+        </p>
+
+        <p>Below is a more comprehensive breakdown of the steps illustrated:</p>
+
+        <ol>
+          <li>
+            <em>Reference Image Upload (optional)</em>:
+            <ul>
+              <li>
+                A user can upload a screenshot or smaller snippet that clarifies
+                the specific change they want. For instance, if they want their
+                existing navigation bar to mimic the style of a particular
+                website or a previously designed element, they can provide that
+                reference image here.
+              </li>
+              <li>
+                The <strong>AI</strong> uses <em>pythonBridge.ts</em> (if
+                needed) to tap into the EasyOCR-based flow for additional text
+                extraction, or it simply uses the raw image context if the goal
+                is a broad layout suggestion.
+              </li>
+              <li>
+                This “visual guidance” can prompt the AI to generate new layout
+                structures or incorporate visual cues—such as color palettes,
+                button styles, or headings—similar to those found in the
+                reference image.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <em>Textual Prompt</em>:
+            <ul>
+              <li>
+                Users type or paste a detailed description of the desired
+                changes. For example, they might say, “Transform the top banner
+                into a carousel with three rotating images,” or “Add a price
+                filter section under the navigation sidebar.”
+              </li>
+              <li>
+                Multiple elements on the canvas can be selected simultaneously.
+                The system will tag them (e.g., “BarChat1,” “BarChat2,” etc.) so
+                the AI can reference each component individually or in groups.
+                This helps the AI produce more targeted results, especially for
+                wide-scale updates.
+              </li>
+              <li>
+                The user can also specify how they want to handle existing text,
+                color palettes, or alignment constraints, giving the AI a
+                clearer creative boundary.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <em>Generate & AI Processing</em>:
+            <ul>
+              <li>
+                The AI Sidebar uses the function
+                <strong>handleGenerateClick()</strong> in
+                <em>AiSidebar.tsx</em> to collect the user’s prompt and any
+                image bytes. This payload is then sent via
+                <code>vsCode.postMessage</code> (under the command
+                <code>'blueprintAI.generateLayout'</code>) to the extension’s
+                backend or an AI service endpoint.
+              </li>
+              <li>
+                Internally, the system calls <em>getBlueprintLayout(...)</em>,
+                <em>getSummariesFromScreenshot(...)</em> (if an image is
+                present), and ultimately the <em>OpenAI</em> Large Language
+                Model. All AI responses come back in a format that can be
+                seamlessly translated into <strong>CraftJS JSON</strong>.
+              </li>
+              <li>
+                <strong>Model Selection</strong> is automatic: if a reference
+                screenshot is provided, a more robust model (e.g., “gpt-4o”)
+                might be chosen; otherwise, it defaults to “o3-mini-2025-01-31,”
+                per the project logic.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <em>Accept or Reject Changes</em>:
+            <ul>
+              <li>
+                Once the AI produces a suggested update (in strict JSON form),
+                the user is presented with a concise “diff” or
+                <strong>summary of changes</strong>. This summary highlights
+                which components have been added, modified, or removed.
+              </li>
+              <li>
+                The user can compare the proposed layout to the current one. If
+                it aligns with the user’s vision, they can
+                <strong>Accept</strong> the changes to immediately reflect them
+                on the <em>CraftJS Canvas</em>.
+              </li>
+              <li>
+                Optionally, users might <strong>upvote or downvote</strong> the
+                AI’s suggestions to guide future interactions. This helps refine
+                iterative improvements if the system is designed to learn from
+                feedback within the session.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <em>Updated Editing Interface</em>:
+            <ul>
+              <li>
+                After acceptance, the user is redirected back to the
+                <strong>Main Interface</strong>, where all the new or revised
+                components appear in real time. This is the same droppable
+                CraftJS canvas seen in the <em>First Page Creator</em> or
+                subsequent design sessions.
+              </li>
+              <li>
+                Users can then open the <strong>Properties Sidebar</strong> to
+                fine-tune the newly introduced (or altered) elements—adjusting
+                sizes, fonts, or alignment. Alternatively, the user might choose
+                to invoke the AI Sidebar again for additional modifications,
+                thus creating a continuous feedback loop between manual design
+                and AI-driven suggestions.
+              </li>
+              <li>
+                This cyclical approach—prompt AI, review, accept/reject, revise
+                in the Properties Sidebar, and prompt AI again—gradually
+                polishes the layout until the user is fully satisfied.
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+        <p>
+          Functionally, the AI Sidebar acts as a “live design assistant,” always
+          available for either global or micro-level changes to the canvas. It
+          works in tandem with the <strong>Properties Sidebar</strong> (for
+          direct property edits on individual components) and the
+          <strong>Layout/Pages Sidebars</strong> (for broader structural or
+          page-level manipulations). Specifically:
+        </p>
+
+        <ul>
+          <li>
+            The <strong>AI Sidebar</strong> is triggered when a user wants
+            higher-level or conceptual transformations (e.g., “Add new
+            navigation,” “Move the hero section above the search bar,”
+            “Restructure the footer,” etc.).
+          </li>
+          <li>
+            The <strong>Properties Sidebar</strong> is best for granular
+            details—tweaking fonts, color pickers, margin sliders, or toggling
+            advanced behaviors on a single selected component.
+          </li>
+          <li>
+            <strong>Integration:</strong> Because the AI Sidebar uses the
+            internal blueprintAI commands (like
+            <code>blueprintAI.generateLayout</code> or
+            <code>blueprintAI.generateLayoutSuggested</code>), everything stays
+            synchronized with the underlying data structures (<em>store.ts</em>
+            in the <em>webview-ui/src/store</em> directory). This ensures no
+            mismatch occurs between AI-suggested changes and what’s rendered
+            on-screen.
+          </li>
+        </ul>
+
+        <p>
+          Ultimately, the AI Sidebar stands as an essential bridge between
+          user-driven creativity and the system’s advanced generative AI
+          capabilities—empowering users to build or update web pages with fewer
+          manual steps, while still retaining control over the final outcome.
+        </p>
+
+        <!-- Diagram 3: Whole -->
+<figure>
+  <img
+    src="./system-architecture/Whole.png"
+    alt="System Architecture - Whole"
+    style="max-width: 100%; height: auto"
+  />
+  <figcaption>
+    Figure 3: A broad overview of the Left Sidebar structure and the
+    entire interface, including the editing steps for suggested pages,
+    reference images, textual prompts, saving/loading, exporting, and so
+    on.
+  </figcaption>
+</figure>
+
+<p>
+  This final diagram provides a more comprehensive bird’s-eye view of the
+  entire editing environment and <strong>Left Sidebar</strong>
+  functionality. It showcases how all the different sub-features
+  (Components, Layout, Pages, Undo/Redo, etc.) come together to form a
+  cohesive workflow. Below is an even more detailed breakdown of these
+  sections, clarifying both the user’s experience and how these elements
+  interconnect at a technical level.
+</p>
+
+<h3>1. Components</h3>
+<ul>
+  <li>
+    <strong>Search Components</strong>: Users can quickly locate desired
+    UI elements, such as Buttons, Containers, Text blocks, Image
+    placeholders, Navigations, Sliders, and more. As new custom
+    components are developed (like StarRatings or custom Navigations),
+    they appear in this searchable list.
+  </li>
+  <li>
+    <strong>Drag & Drop to Canvas</strong>: After finding a component,
+    the user drags it onto the CraftJS canvas. An “Indicator Box” helps
+    them place it accurately relative to other components. This box
+    highlights any valid insertion points or hover-based positions.
+  </li>
+  <li>
+    <strong>Customization</strong> happens either via the
+    <em>Properties Sidebar</em> (to adjust text, color, or advanced
+    logic) or by further AI-driven modifications (through the
+    <em>AI Sidebar</em>).
+  </li>
+</ul>
+
+<h3>2. Layout</h3>
+<ul>
+  <li>
+    <strong>Root Node Properties</strong>: Here, users can modify global
+    margins, padding, page width, or background color. This affects the
+    overarching layout container, sometimes known as the “root node.”
+  </li>
+  <li>
+    <strong>Layers Section</strong>: 
+    <ul>
+      <li>
+        Provides a hierarchical tree of all components on the canvas.
+        Components can be expanded or collapsed to view nested items.
+      </li>
+      <li>
+        <strong>Rename Components</strong>: Users can rename each
+        component (e.g., from “Container1” to “MainHeader”) to keep the
+        structure organized.
+      </li>
+      <li>
+        <strong>Toggle Visibility</strong>: Quickly hide or show certain
+        sections to test different designs or manage crowded layouts.
+      </li>
+      <li>
+        <strong>Reorder Items</strong>: Drag items around in the tree to
+        reposition them in the layout. Clicking on a component in the
+        tree also selects it on the canvas for further property edits.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3>3. Pages</h3>
+<ul>
+  <li>
+    <strong>Add Page</strong>: Generates a blank or AI-assisted new page,
+    defaulting to “Page X.” This triggers a fresh CraftJS layout
+    context, so the user can design multiple distinct pages within the
+    same project.
+  </li>
+  <li>
+    <strong>Rename Page</strong>: Allows the user to change the page’s
+    name to something meaningful (e.g., “Home,” “AboutUs,” “Contact”).
+  </li>
+  <li>
+    <strong>Delete Page</strong>: Removes an existing page and its
+    associated components from the project. A confirmation step may
+    ensure users don’t inadvertently lose work.
+  </li>
+  <li>
+    <strong>Reset Pages</strong>: Clears or resets all pages back to
+    default states, useful when starting over or discarding multiple
+    incomplete designs.
+  </li>
+  <li>
+    <strong>Suggested Pages</strong>: Displays AI-driven or
+    user-configured recommendations, such as “Login,” “Checkout,” or
+    “FAQ.” Clicking on one of these suggestions:
+    <ul>
+      <li>
+        Loads a <em>List of Suggested Pages</em> in a modal or list
+        format.
+      </li>
+      <li>
+        Lets the user specify a <em>Reference Image Upload</em> or
+        <em>Textual Prompt</em> to guide how that page is generated.
+      </li>
+      <li>
+        After submission, the system transitions to the
+        <strong>Updated Editing Interface</strong>, automatically
+        populating the newly created page’s layout via the AI flow.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3>4. Undo / Redo</h3>
+<p>
+  Offers version-control-like capabilities at the UI level, capturing
+  state snapshots each time the user adds, repositions, or deletes a
+  component. Particularly important for iterative experiments (e.g., to
+  quickly revert an unwanted AI change or a manual adjustment).
+</p>
+
+<h3>5. Download</h3>
+<p>
+  Provides a quick method to create a local backup of the current
+  project. Typically, “Download” might output a JSON snapshot that can
+  be instantly re-imported if users want to share their design or switch
+  machines. Unlike a full “Export,” it does not necessarily include
+  production-ready HTML/CSS/JS files—just the CraftJS layout data.
+</p>
+
+<h3>6. Save</h3>
+<ul>
+  <li>
+    <strong>View JSON</strong>: Displays the raw CraftJS-compatible JSON
+    that underlies the entire layout. This is handy for advanced users,
+    debugging AI-generated results, or verifying certain properties (e.g.
+    if the AI inserted the correct “data-id” attributes).
+  </li>
+  <li>
+    <strong>Save Data</strong>: Commits the project state to local
+    storage (e.g., browser localStorage) or a user-designated file path
+    via the extension’s backend. This ensures the user can close VS Code
+    and later resume where they left off.
+  </li>
+  <li>
+    <strong>Clear Data</strong>: Wipes out all locally saved states,
+    effectively resetting the system to a fresh environment.
+  </li>
+</ul>
+
+<h3>7. Import</h3>
+<ul>
+  <li>
+    <strong>Paste JSON</strong>: Lets the user copy raw layout JSON from
+    somewhere else (e.g., Slack, GitHub, or a snippet file) and paste it
+    directly into the interface. The system rebuilds the entire design,
+    preserving all components and their properties.
+  </li>
+  <li>
+    <strong>Upload JSON File</strong>: Allows importing from a .json file
+    on the user’s filesystem. This could be an earlier download from the
+    same project or a design from another user. Everything merges into
+    or replaces the current layout.
+  </li>
+</ul>
+
+<h3>8. Export</h3>
+<ul>
+  <li>
+    <strong>Select Pages</strong>: The user can choose which subset of
+    pages to include in the final export. For a large multi-page site,
+    they might only want to export the “Landing Page,” “About Us,” and
+    “Contact Us” to test or deploy first.
+  </li>
+  <li>
+    <strong>Code Editor</strong>: Some workflows allow the user to view a
+    code preview inside the VS Code extension before finalizing the
+    export. Future enhancements may include automatically generated unit
+    tests, advanced animations, or a .NET-based bundling pipeline.
+  </li>
+  <li>
+    <strong>Download ZIP</strong>: Packages the pages (HTML, CSS, JS) and
+    any associated media or comments into a single archive. The user
+    can then open it in a standard text editor or place it directly on a
+    server for hosting. 
+  </li>
+</ul>
+
+<p>
+  <strong>Practical Workflow Example:</strong> Suppose a user starts by
+  creating a “Home” page with <em>Text to Design</em>. They refine the
+  layout manually, then use <em>Suggested Pages</em> to add a “Features”
+  page, uploading a screenshot for guidance. They drag new
+  <strong>Components</strong> onto that page, rename them in the
+  <em>Layout &gt; Layers Section</em>, and reorder them using the
+  hierarchical tree. Next, they frequently <em>Undo/Redo</em> to test
+  different banner placements, saving progress occasionally via
+  <strong>Save Data</strong>. Once satisfied, they <em>Export</em> the
+  “Home” and “Features” pages in a single .zip to share with the team or
+  deploy.
+</p>
+
+<p>
+  The <strong>Editing Interface</strong> in the center is highly
+  flexible, enabling both manual design manipulations and AI-based
+  iterative changes:
+</p>
+<ul>
+  <li>
+    <em>Manual Edits</em>: The user can move, resize, or remove
+    components at will. The <strong>Properties Sidebar</strong> on the
+    right shows each component’s style or functional properties (fonts,
+    colors, interactions, etc.).
+  </li>
+  <li>
+    <em>AI Sidebar Integration</em>: For more sweeping or structural
+    changes—like adding an entire “Hero” section with a new design
+    theme—the user enters a textual prompt or uploads a reference image.
+    The AI proposes updates to the underlying JSON, and the user can
+    accept or reject them.
+  </li>
+  <li>
+    <em>Synchronizing to Pages Tab</em>: Each time a new page is added
+    (manually or via AI suggestions), the Pages sidebar updates. The
+    user can switch between pages, rename them, or clear them if the
+    design doesn’t meet requirements.
+  </li>
+</ul>
+
+<p>
+  Meanwhile, the entire pipeline leverages the <strong>AI Flow</strong>
+  behind the scenes. If the user supplies a screenshot, the system
+  triggers <em>runPythonOcr(...)</em> and subsequently
+  <em>getSummariesFromScreenshot(...)</em>, obtaining textual content
+  and layout suggestions to feed <em>getBlueprintLayout(...)</em>.
+  Otherwise, it simply sends user text instructions to the generative AI
+  for direct “CraftJS JSON” creation. All results are rendered in real
+  time, bridging the gap between a user’s broad design concepts and the
+  final, structured webpage code.
+</p>
+
+
+
+
+      <section id="design-patterns" class="mb-5" style="margin-bottom: 2rem">
+        <h2 style="font-size: 1.75rem; margin-bottom: 1rem">Design Patterns</h2>
+        <p style="margin-bottom: 1rem">
+          In Blueprint AI, we employ a variety of well-known software design
+          patterns to organize code, promote reusability, and ensure that
+          different parts of our AI-driven pipeline integrate smoothly. Below is
+          a comprehensive look at how each pattern is specifically implemented
+          within our system.
+        </p>
+
+        <!-- Table of Patterns -->
+        <table
+          style="width: 100%; border-collapse: collapse; margin-bottom: 1rem"
+        >
+          <thead>
+            <tr style="background-color: #f0f0f0">
+              <th
+                style="
+                  text-align: left;
+                  padding: 0.75rem;
+                  border-bottom: 1px solid #ccc;
+                "
+              >
+                Pattern
+              </th>
+              <th
+                style="
+                  text-align: left;
+                  padding: 0.75rem;
+                  border-bottom: 1px solid #ccc;
+                "
+              >
+                Description
+              </th>
+              <th
+                style="
+                  text-align: left;
+                  padding: 0.75rem;
+                  border-bottom: 1px solid #ccc;
+                "
+              >
+                Implementation in This Project
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- OBSERVER -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Observer</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Maintains a one-to-many dependency between objects so that when
+                one object changes state, all its dependents are notified and
+                updated automatically.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  In <code>AiSidebar.tsx</code>, we utilize
+                  <em>window.addEventListener('message', ...)</em>
+                  to observe changes from the AI back-end. Whenever the AI
+                  finishes processing (OCR text recognition or layout
+                  generation), it posts a message that triggers UI updates in
+                  real time. This allows the React editor to display the new
+                  CraftJS layout or error messages without manual polling.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  This observer mechanism is critical for the
+                  <strong>SuggestedPages</strong> flow as well—once the user
+                  picks a suggested page and the AI completes layout creation,
+                  the same event system updates the canvas. All dependent UI
+                  components (sidebars, preview thumbnails, page indicators)
+                  reflect the latest changes automatically.
+                </p>
+              </td>
+            </tr>
+            <!-- COMPOSITE -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Composite</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Composes objects into tree structures to represent part‐whole
+                hierarchies, allowing clients to treat individual objects and
+                compositions of objects uniformly.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  In the <strong>Droppable CraftJS Canvas</strong>, each React
+                  component can be a parent (e.g., Container) or child (e.g.,
+                  Text, Button). CraftJS nodes are internally stored as a
+                  hierarchical data structure, reflecting a “part-whole”
+                  relationship.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  The <strong>Layout Sidebar</strong> in the
+                  <em>LayoutTab</em> further demonstrates Composite by letting
+                  users expand or collapse child elements, rename them, and hide
+                  or delete them. By treating each node in the same way—whether
+                  it’s a single Text element or an entire Container with nested
+                  components—the editor achieves consistent operations across
+                  the tree.
+                </p>
+              </td>
+            </tr>
+            <!-- COMMAND -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Command</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Encapsulates a request as an object, thereby letting users
+                parameterize clients with different requests, queue or log
+                requests, and support undo operations.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  The main left sidebar includes <strong>Undo</strong> and
+                  <strong>Redo</strong>
+                  features that treat user actions—such as creating, moving, or
+                  deleting components— as discrete commands. Each action is
+                  recorded in a stack-like structure, allowing straightforward
+                  reversal or reapplication.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  When a user selects “Delete Icon” on a component, a
+                  <em>DeleteCommand</em> is issued, removing the target
+                  component from the CraftJS tree. This approach ensures changes
+                  can be reversed if needed. The same logic applies to “Hide
+                  Icon” actions, where toggling visibility can also be undone or
+                  repeated.
+                </p>
+              </td>
+            </tr>
+            <!-- FACADE -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Facade</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Provides a simplified interface to a complex subsystem, making
+                the subsystem easier to use.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  The <strong>BlueprintAiService</strong> in
+                  <code>BlueprintAiService.ts</code> and related files acts as a
+                  facade over multiple AI calls:
+                </p>
+                <ul
+                  style="
+                    margin-bottom: 0.5rem;
+                    margin-left: 1.5rem;
+                    list-style-type: disc;
+                  "
+                >
+                  <li>UI Summary Prompt (e.g., <code>getUiSummary</code>)</li>
+                  <li>GUI Layout Prompt (e.g., <code>getGuiSummary</code>)</li>
+                  <li>
+                    Final CraftJS Layout Prompt
+                    (<code>getFinalCraftJsLayout</code>)
+                  </li>
+                </ul>
+                <p style="margin-bottom: 0.5rem">
+                  Users or higher-level modules call a single function,
+                  <strong><em>getBlueprintLayout(...)</em></strong
+                  >, which under the hood orchestrates screenshot-based OCR,
+                  multiple AI prompts, and the final JSON layout assembly. This
+                  facade pattern shields the calling code (e.g.,
+                  <em>AiSidebar.tsx</em> or <em>SuggestedPages.tsx</em>) from
+                  the complexity of chaining multiple AI requests.
+                </p>
+              </td>
+            </tr>
+            <!-- STRATEGY -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Strategy</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Defines a family of algorithms, encapsulates each one, and makes
+                them interchangeable.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Within <code>callOpenAiChat(...)</code>, we choose among
+                  different OpenAI models based on context:
+                </p>
+                <ul
+                  style="
+                    margin-bottom: 0.5rem;
+                    margin-left: 1.5rem;
+                    list-style-type: disc;
+                  "
+                >
+                  <li><em>“gpt-4o”</em> for screenshot-based UI extraction</li>
+                  <li>
+                    <em>“o3-mini-2025-01-31”</em> for layout generation without
+                    screenshots
+                  </li>
+                </ul>
+                <p style="margin-bottom: 0.5rem">
+                  The calling code does not need to know which model is
+                  selected; it simply invokes a single function and receives
+                  AI-generated text or JSON layouts. Each model is effectively a
+                  “strategy” for generating text, applied interchangeably based
+                  on whether a screenshot was uploaded.
+                </p>
+              </td>
+            </tr>
+            <!-- BUILDER -->
+            <tr>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Builder</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                Separates the construction of a complex object from its
+                representation so that the same construction process can create
+                different representations.
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  <strong><em>getFinalCraftJsLayout(...)</em></strong>
+                  implements a builder-like approach: it receives raw user
+                  instructions, plus optional UI/GUI summaries, and
+                  incrementally merges them into a
+                  <strong>single-page JSON layout</strong> that the CraftJS
+                  editor can render. At each step, the function references AI
+                  responses that define container structures, text blocks, or
+                  design themes.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  Because the “construction” logic is separated from the final
+                  JSON representation, we can easily swap or extend steps
+                  without breaking the entire layout assembly— for example,
+                  introducing a new “theme” prompt or adding specialized
+                  components (like a StarRating widget). The same base building
+                  process still arrives at a coherent, valid CraftJS
+                  representation.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-bottom: 1rem">
+          By leveraging these design patterns—<strong>Observer</strong>,
+          <strong>Composite</strong>, <strong>Command</strong>,
+          <strong>Facade</strong>, <strong>Strategy</strong>, and
+          <strong>Builder</strong>—Blueprint AI achieves a consistent and
+          flexible architecture that handles complex AI tasks, organizes UI
+          elements in a hierarchical manner, and simplifies both user
+          interactions (e.g., drag-and-drop, undo/redo) and developer
+          maintenance efforts. Each pattern ensures that distinct concerns (like
+          AI prompts, component nesting, or editing actions) remain
+          well-structured, ultimately contributing to a more scalable and
+          intuitive codebase.
         </p>
       </section>
 
-      <section id="design-patterns" class="mb-5">
-        <h2>Design Patterns</h2>
-        <p>Discuss the design patterns used in the project.</p>
-      </section>
+      <section id="design-goals" class="mb-5" style="margin-bottom: 2rem">
+        <h2 style="font-size: 1.75rem; margin-bottom: 1rem">Design Goals</h2>
+        <p style="margin-bottom: 1rem">
+          Blueprint AI is built upon foundational goals that ensure a seamless
+          blend of AI-driven web page creation and user-friendly editing
+          workflows. These goals guide our architectural decisions, from how we
+          structure the Python OCR service to the layout of our CraftJS editor
+          in the VS Code extension. Below is a comprehensive look at each major
+          design goal and the specific actions we take to fulfill it.
+        </p>
 
-      <section id="class-diagrams" class="mb-5">
-        <h2>Class Diagrams</h2>
-        <p>
-          Provide UML class diagrams or other diagrams representing your data
-          structures.
+        <table
+          style="width: 100%; border-collapse: collapse; margin-bottom: 1rem"
+        >
+          <thead>
+            <tr style="background-color: #f0f0f0">
+              <th
+                style="
+                  text-align: left;
+                  padding: 0.75rem;
+                  border-bottom: 1px solid #ccc;
+                "
+              >
+                Design Goal
+              </th>
+              <th
+                style="
+                  text-align: left;
+                  padding: 0.75rem;
+                  border-bottom: 1px solid #ccc;
+                "
+              >
+                Actions to Take
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Seamless AI Integration -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Seamless AI Integration</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Ensure that the user’s text prompt and optional screenshots
+                  flow directly into
+                  <code>getBlueprintLayout(...)</code> without forcing multiple
+                  manual steps. The Python OCR script
+                  (<code>python-ocr/ocr_service.py</code>) processes any
+                  uploaded images, returning recognized text blocks with
+                  bounding boxes and confidence scores.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  Once this textual data is extracted, it’s passed into specific
+                  AI prompts:
+                  <em>UI Summaries</em> for textual content and
+                  <em>GUI Summaries</em> for layout structures. These prompts
+                  converge in the final <em>CraftJS layout</em>, ensuring that
+                  the editor’s canvas instantly reflects all recognized UI
+                  elements in a consistent manner.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  By centralizing the pipeline in
+                  <strong>getBlueprintLayout(...)</strong>, Blueprint AI can
+                  automatically handle complexities such as upscaling or
+                  grayscale conversion, screenshot text analysis, and layout
+                  generation—freeing users to focus on higher-level design
+                  inputs.
+                </p>
+              </td>
+            </tr>
+            <!-- User-Friendly Interface -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>User-Friendly Interface</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Provide clear expand/collapse mechanisms across the
+                  <em>Properties Sidebar</em>, <em>Component Sidebar</em>,
+                  <em>Layout Sidebar</em>, and <em>Pages Sidebar</em>
+                  to avoid clutter in the VS Code webview. In each sidebar,
+                  collapsible panels and intuitive icons guide the user toward
+                  the controls they need.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  The canvas allows drag-and-drop for user components (buttons,
+                  images, etc.) with direct visual feedback. We also enable
+                  upvote/downvote on AI responses in
+                  <strong>AiSidebar</strong>, allowing users to iterate or
+                  regenerate suggestions until they achieve the desired style.
+                  Each newly created page includes an organized summary of
+                  design choices, so users understand the rationale behind AI
+                  decisions.
+                </p>
+              </td>
+            </tr>
+            <!-- High-Level Layout Editing -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>High-Level Layout Editing</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  The droppable <em>CraftJS Canvas</em> must effectively display
+                  an <strong>Indicator Box</strong> whenever users hover or
+                  select a component. This box highlights the boundaries of the
+                  item, offering quick access to move, hide, or delete icons.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  Whenever components are dragged, hidden, or removed, the
+                  canvas refreshes in real time, letting users visually confirm
+                  changes. This ensures a user can reorganize entire sections of
+                  a page (e.g., moving a Hero component above the Navigation
+                  bar) within seconds.
+                </p>
+              </td>
+            </tr>
+            <!-- Undo/Redo Robustness -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Undo/Redo Robustness</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Incorporate a <em>Command pattern</em> approach for each
+                  layout modification, whether it’s dragging a component,
+                  deleting an element, or hiding it. Each action is packaged as
+                  a reversible operation, so clicking “Undo” seamlessly rolls
+                  back the latest change.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  This approach prevents complicated side effects: if a user
+                  accidentally removes an entire section (like a Container with
+                  multiple nested items), one Undo click restores it instantly.
+                  Similarly, Redo re-applies the last undone step without
+                  forcing the user to replicate prior actions.
+                </p>
+              </td>
+            </tr>
+            <!-- Modular & Maintainable Codebase -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Modular &amp; Maintainable Codebase</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Keep Python OCR functions in <code>python-ocr/</code>,
+                  centralize AI prompts in
+                  <code>ai/blueprintAiPrompts.ts</code>, and retain a clear
+                  separation between
+                  <em>extension code</em> (<code>src/extension.ts</code>) and
+                  the <em>webview UI</em>
+                  (<code>webview-ui/src</code>). This helps developers easily
+                  locate and update functionalities like OCR improvements or new
+                  AI prompt formats.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  Further, group related UI components in logical subfolders
+                  (e.g., <em>PropertiesSidebar</em> or <em>PrimarySidebar</em>)
+                  so that expansions to these features—like adding a new tab or
+                  property control—do not bloat a single directory.
+                </p>
+              </td>
+            </tr>
+            <!-- Flexible Export Options -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Flexible Export Options</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Provide an <em>ExportMenu</em> component that allows users to
+                  pick which pages to export, choose a target folder, and see an
+                  overview of total file size and lines of code. By default, it
+                  exports the project as <strong>HTML/CSS/JS</strong>, but we
+                  plan to expand to <em>.NET</em> or other frameworks in the
+                  future.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  Partial unit tests and commented code are bundled in the
+                  export, promoting easy extension. This includes any animations
+                  or custom logic added to components, so the resulting package
+                  is immediately usable in standard development workflows.
+                </p>
+              </td>
+            </tr>
+            <!-- Fast Page Creation & Iteration -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Fast Page Creation &amp; Iteration</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Use <em>SuggestedPages</em> to propose immediate ideas (like
+                  “About Us,” “Contact,” or “Services”). Then,
+                  <strong>CreateSelectedPage</strong> prompts the user for a
+                  textual description or optional screenshot. This data is
+                  passed to the AI for an almost instant layout generation in
+                  the <em>CraftJS editor</em>.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  By reducing manual steps—e.g., automatically switching to the
+                  new page after generation—users can iterate more rapidly
+                  through design ideas, quickly toggling or refining content,
+                  and obtaining immediate AI-driven updates.
+                </p>
+              </td>
+            </tr>
+            <!-- Clear Layout Structure Overview -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Clear Layout Structure Overview</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  Present a visual hierarchy of all components in the
+                  <strong>Layout Sidebar</strong>. The
+                  <em>Layers Section</em> enumerates containers, text blocks,
+                  and nested items, mirroring the underlying CraftJS tree. Users
+                  can rename each node (e.g., changing “Container1” to
+                  “HeaderContainer”), hide elements, and hover to see which part
+                  of the canvas is selected.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  This centralized overview is vital when working with deeply
+                  nested structures or multiple pages. A single glance reveals
+                  how containers and child elements interrelate, reducing
+                  confusion when rearranging layouts.
+                </p>
+              </td>
+            </tr>
+            <!-- Consistent Theming & Design Variants -->
+            <tr style="border-bottom: 1px solid #ccc">
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Consistent Theming &amp; Design Variants</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  In the <strong>First Page Creator</strong>, we offer multiple
+                  theme options (e.g., minimalistic, bold, modern) and short,
+                  AI-assisted suggestions (similar to ChatGPT) to help users
+                  shape their initial text input. Users can pick a style that
+                  resonates with their project or experiment with multiple
+                  variations to see different color schemes and layouts.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  As soon as a layout is generated, the user sees the chosen
+                  theme reflected in component spacing, color usage, and
+                  typography. They can quickly revert or pick another variant if
+                  they want to compare different aesthetics.
+                </p>
+              </td>
+            </tr>
+            <!-- Accurate OCR & Text Summarization -->
+            <tr>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <strong>Accurate OCR &amp; Text Summarization</strong>
+              </td>
+              <td style="vertical-align: top; padding: 0.75rem">
+                <p style="margin-bottom: 0.5rem">
+                  For screenshot-driven page creation,
+                  <strong>EasyOCR</strong> in the
+                  <code>python-ocr</code> directory extracts text blocks with
+                  bounding boxes and confidence scores. This data is then parsed
+                  by AI prompts in <code>BlueprintAiService.ts</code>
+                  to produce UI and GUI summaries.
+                </p>
+                <p style="margin-bottom: 0.5rem">
+                  We merge these summaries (e.g., bullet‐style outlines of nav
+                  items, textual content, layout sections) into the final
+                  CraftJS JSON, ensuring the textual portion is accurately
+                  represented. Users then see a page that faithfully reflects
+                  the textual structure of their screenshot, allowing them to
+                  edit or refine with minimal friction.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-bottom: 1rem">
+          By aligning the core system with these design goals, Blueprint AI
+          consistently delivers an accessible, fast, and intelligent web
+          development workflow inside VS Code. Users benefit from a smooth
+          AI-driven experience—combining robust OCR, flexible design
+          capabilities, and a clear, user-friendly interface—while developers
+          maintain a well-organized, extensible codebase.
         </p>
       </section>
 
       <section id="data-storage" class="mb-5">
         <h2>Data storage</h2>
         <p>
-          Explain how and where your data is stored (database model, cloud
-          storage, etc.).
+          In Blueprint AI, all persistent data is stored locally in the user's
+          browser via
+          <code>localStorage</code>—specifically keyed under
+          <code>"blueprint-ai-data"</code>. This local storage mechanism is
+          powered by the logic in our <code>store.ts</code> file and is designed
+          to conditionally load and save project data for every session of the
+          Blueprint AI extension. This allows for immediate retrieval of user
+          preferences and project details within the same browser environment,
+          without reliance on external databases or cloud services. Everything
+          below describes precisely how Blueprint AI performs, updates, and
+          retrieves these data fields from <code>localStorage</code>, always
+          conditioned on the logic in <code>store.ts</code>:
+
+          <br /><br />
+
+          1) <strong>BlueprintAI Store State Shape:</strong><br />
+          &nbsp;&nbsp;• Our local store is defined by the
+          <code>StoreState</code> interface in <code>store.ts</code>, which
+          includes <em>exactly</em> four fields: <code>pages</code>,
+          <code>selectedPageId</code>, <code>suggestedPages</code>, and
+          <code>userPrompt</code>.
+          <br />
+          &nbsp;&nbsp;• The <code>pages</code> array is an exhaustive list of
+          all the user-created or AI-suggested pages, each represented by the
+          <code>Page</code> interface (<code>id</code>, <code>name</code>, an
+          optional <code>thumbnail</code>, and the <code>layout</code> tree in
+          CraftJS JSON). By default, only one page exists (<code>id: 1</code>,
+          named “Page 1”). Blueprint AI conditionally populates this array each
+          time the user or the AI system adds or modifies a page.
+          <br />
+          &nbsp;&nbsp;• The <code>selectedPageId</code> indicates which page is
+          currently being edited in the Blueprint AI interface. This
+          <em>conditional pointer</em> ensures that the design canvas,
+          properties sidebar, and other features always reference the
+          appropriate page.
+          <br />
+          &nbsp;&nbsp;• The <code>suggestedPages</code> array holds additional
+          recommended page names (e.g., “Account,” “Buy Again,” “Best Sellers,”
+          “Returns &amp; Orders”) that Blueprint AI proposes to the user. These
+          suggestions are surfaced in the Pages Sidebar or within other modals
+          to guide potential new pages the user may want to generate.
+          <br />
+          &nbsp;&nbsp;• The <code>userPrompt</code> string is a flexible area
+          for saving any text prompt that the user entered in the AI-driven
+          flows (such as designing a new layout, adjusting an existing design,
+          or describing new features). Each time a user interacts with the
+          iterative AI chat or the “Create With Imagination” page builder,
+          Blueprint AI conditionally updates <code>userPrompt</code> so that it
+          remains accessible across sessions.
+
+          <br /><br />
+
+          2) <strong>Default Local State:</strong><br />
+          &nbsp;&nbsp;• The initial data structure is declared inside
+          <code>storeState</code> in <code>store.ts</code>. This default
+          includes one sample page and an empty <code>userPrompt</code>—ensuring
+          a consistent starting point for first-time or reset sessions in
+          Blueprint AI. The store is primed with four default suggested pages.
+          This ensures that even before the user creates or loads anything,
+          there's a clear reference in the UI to build from.
+          <br />
+          &nbsp;&nbsp;• Blueprint AI only populates local storage with these
+          defaults if no prior saved data exists under
+          <code>"blueprint-ai-data"</code>. If there is existing data, the store
+          merges the fields from local storage into memory conditionally.
+
+          <br /><br />
+
+          3) <strong>Conditional Loading at Startup:</strong><br />
+          &nbsp;&nbsp;• On every launch of the Blueprint AI extension, the code
+          attempts to retrieve the JSON string from
+          <code>localStorage.getItem(STORAGE_KEY)</code>. If
+          <code>savedData</code> is non-null, it conditionally parses the string
+          and merges each key into the current <code>storeState</code>. For
+          example, if the parsed data has <code>pages</code>, it updates
+          <code>storeState.pages</code>; if it has <code>selectedPageId</code>,
+          it sets that too, etc.
+          <br />
+          &nbsp;&nbsp;• If the user had previously created multiple pages or
+          typed in a multi-sentence prompt, all of that is immediately reloaded
+          into the Blueprint AI interface on extension open. This ensures a
+          frictionless user experience where previous session designs or AI
+          prompts are restored exactly as they left them.
+
+          <br /><br />
+
+          4) <strong>Accessing Stored Data (Getters):</strong><br />
+          &nbsp;&nbsp;• Blueprint AI uses dedicated
+          <em>getter functions</em> from <code>store.ts</code> to conditionally
+          read data from memory, such as <code>getPages()</code> for the full
+          pages list, <code>getSelectedPage()</code> for the currently active
+          page object, <code>getSuggestedPages()</code> for recommended page
+          names, and <code>getUserPrompt()</code> for the last user prompt.
+          Because the store synchronizes to local storage on demand, these
+          getter calls reflect precisely what's persisted in the browser when
+          saved.
+          <br />
+          &nbsp;&nbsp;• For example, when the user opens the
+          <strong>Pages Sidebar</strong> in Blueprint AI, the application calls
+          <code>getPages()</code> to render the entire list of local pages.
+          Likewise, the <strong>AI Chat Flow</strong> reads
+          <code>getUserPrompt()</code>
+          to show the user’s most recent text input in the chat or iteration
+          interface.
+
+          <br /><br />
+
+          5) <strong>Handling State Changes (Subscriptions):</strong><br />
+          &nbsp;&nbsp;• Multiple arrays of <em>listener functions</em> exist
+          within <code>store.ts</code>, each of which is notified conditionally
+          when a relevant section of the store changes (e.g.,
+          <code>pageListeners</code>, <code>selectedPageListeners</code>, and
+          <code>promptListeners</code>). This ensures that whenever the user or
+          the AI modifies the layout or updates the user prompt, the
+          corresponding parts of the Blueprint AI interface re-render
+          automatically.
+          <br />
+          &nbsp;&nbsp;• By subscribing to <code>pageListeners</code>, any UI or
+          logic that depends on the array of pages or suggested pages will be
+          refreshed. Similarly, components reliant on which page is currently
+          selected subscribe to <code>selectedPageListeners</code>, and features
+          tied to user input text watch <code>promptListeners</code>. This
+          subscription model helps maintain a dynamic, reactive environment for
+          the entire Blueprint AI design experience.
+
+          <br /><br />
+
+          6) <strong>Updating and Saving (Mutations):</strong><br />
+          &nbsp;&nbsp;• <code>setPages(newPages)</code> replaces the entire
+          local <code>pages</code> array with a new list. For example, the AI
+          might generate a fresh layout for the user’s “Buy Again” page, and in
+          response, <code>setPages</code> stores the updated structure. In
+          Blueprint AI, once the user finalizes or accepts an AI response, the
+          relevant page is replaced or appended.
+          <br />
+          &nbsp;&nbsp;• <code>updatePage(id, partialData)</code> merges changes
+          into a particular <code>Page</code> object, such as if the user
+          updates the name from “Page 1” to “Home Page,” or modifies the layout
+          JSON with an AI-generated snippet. This function is used heavily in
+          any direct manipulation of a single page (dragging a component in the
+          CraftJS canvas, etc.).
+          <br />
+          &nbsp;&nbsp;• <code>setSelectedPageId(id)</code> changes which page is
+          currently active. For instance, if the user navigates from “Page 1” to
+          “Best Sellers,” <code>setSelectedPageId</code> updates the local store
+          and triggers <code>selectedPageListeners</code> to recast the design
+          canvas.
+          <br />
+          &nbsp;&nbsp;• <code>setSuggestedPages(newPages)</code> is called
+          conditionally when the AI or user wants to refresh the recommended
+          page list. Blueprint AI might push new suggestions after seeing what
+          the user typed into the AI Chat. This ensures
+          <strong>Pages Sidebar</strong> always shows relevant next-page ideas.
+          <br />
+          &nbsp;&nbsp;• <code>setUserPrompt(newPrompt)</code> is invoked
+          whenever the user edits the text prompt or when the AI modifies it for
+          iterative flows. The store updates
+          <code>userPrompt</code> accordingly, and the entire system can respond
+          in real time.
+
+          <br /><br />
+
+          7) <strong>Local Persistence Workflow:</strong><br />
+          &nbsp;&nbsp;• At any point after these setter or updater functions
+          run, the
+          <code>saveStoreToLocalStorage()</code> function can be called to write
+          the current <code>storeState</code> object back into
+          <code>localStorage</code>. Internally, it uses
+          <code>JSON.stringify</code> on the entire store (pages,
+          selectedPageId, suggestedPages, userPrompt) and places it under the
+          key <code>STORAGE_KEY</code>, i.e. <code>"blueprint-ai-data"</code>.
+          <br />
+          &nbsp;&nbsp;• Because saving happens conditionally upon user
+          interactions or explicit calls, no large overhead or complex logic is
+          needed. The user can also trigger a “Save Locally” button from within
+          Blueprint AI’s main sidebar, which calls
+          <code>saveStoreToLocalStorage()</code> in the background.
+
+          <br /><br />
+
+          8) <strong>Resetting the Store:</strong><br />
+          &nbsp;&nbsp;• When the user requests a full reset—perhaps by hitting
+          “Refresh All Pages” or “Clear Storage”—Blueprint AI calls
+          <code>clearStoreFromLocalStorage()</code>. This removes the entire
+          key/value pair from <code>localStorage</code> and resets the in-memory
+          <code>storeState</code> to the default structure (one page named “Page
+          1,” default suggestions, and empty user prompt).
+          <br />
+          &nbsp;&nbsp;• Subscriptions are notified once again so that any UI
+          depending on the store quickly reverts to a blank state. This is
+          crucial for scenarios where the user wishes to begin a fresh project
+          or discard all AI-suggested designs.
+
+          <br /><br />
+
+          9) <strong>Blueprint AI Context-Specific Usage:</strong><br />
+          &nbsp;&nbsp;• <em>First Page Creator Flow:</em> By default, a single
+          “Page 1” is stored. As soon as the user types a text prompt (like
+          “Create an eCommerce homepage with a big hero banner”) or uploads an
+          image, the AI generates a new layout. The store’s
+          <code>pages</code> array is updated, and
+          <code>saveStoreToLocalStorage()</code> is invoked. If the user closes
+          the extension and reopens it, the generated page is restored from
+          <code>localStorage</code>.
+          <br />
+          &nbsp;&nbsp;• <em>Main Interface &amp; Canvas:</em> If the user
+          reorders a button or changes a text component inside the CraftJS
+          canvas, <code>updatePage()</code> merges the new layout structure. The
+          <strong>Properties Sidebar</strong> might also call
+          <code>updatePage()</code> when editing margins, backgrounds, or other
+          design attributes. Each modification can be saved locally so that the
+          user’s design is retained.
+          <br />
+          &nbsp;&nbsp;• <em>Pages Sidebar &amp; Suggested Pages:</em> The
+          <code>suggestedPages</code> field in <code>storeState</code> is
+          updated conditionally to reflect any new or removed suggestions. Once
+          the user picks one of these suggestions (“Returns &amp; Orders,” for
+          example) and requests an AI layout, the store adds a new page object.
+          No external DB is used; it is purely local to
+          <code>blueprint-ai-data</code>.
+          <br />
+          &nbsp;&nbsp;• <em>Export Menu:</em> The selected pages to export and
+          their layout data are all pulled from <code>store.ts</code>. Because
+          everything is stored locally, the user’s entire editing session is
+          readily available to transform into a downloadable zip. This is done
+          without sending any user design data to external services once it is
+          in the local store.
+
+          <br /><br />
+
+          Therefore, Blueprint AI ensures that every aspect of local data
+          management—from retrieving initial saved states on extension load, to
+          conditionally updating pages during the design process, to finalizing
+          or clearing data—is precisely handled through the
+          <code>store.ts</code> file. This local storage approach offers
+          immediate read/write access, zero external dependencies, and complete
+          user control over saving and resetting, reflecting Blueprint AI’s
+          mission to keep front-end development streamlined, private, and
+          user-friendly.
         </p>
       </section>
 
       <section id="packages-and-apis-defined" class="mb-5">
         <h2>Packages and APIs defined</h2>
+
         <p>
-          Detail the packages, modules, or APIs your system will expose or
-          utilize.
+          Below is a definitive list of the relevant packages, modules, and APIs
+          used throughout the system, as provided in the prompt. The project
+          consists of both Node.js packages (for the VS Code extension and web
+          UI) and Python packages (for the OCR functionality). It also defines
+          specific internal APIs and functions that handle AI requests, OCR, and
+          layout generation.
         </p>
+
+        <h3>Node.js Packages</h3>
+        <ul>
+          <li>@babel/core@7.26.0</li>
+          <li>@craftjs/core@0.2.11</li>
+          <li>@craftjs/layers@0.2.6</li>
+          <li>@emotion/react@11.14.0</li>
+          <li>@emotion/styled@11.14.0</li>
+          <li>@eslint/js@9.17.0</li>
+          <li>@fluentui/react@8.122.5</li>
+          <li>@fullhuman/postcss-purgecss@7.0.2</li>
+          <li>@monaco-editor/react@4.7.0</li>
+          <li>@mui/icons-material@6.3.1</li>
+          <li>@mui/material@6.3.1</li>
+          <li>@mui/system@6.4.0</li>
+          <li>@types/classnames@2.3.0</li>
+          <li>@types/file-saver@2.0.7</li>
+          <li>@types/js-beautify@1.14.3</li>
+          <li>@types/node@22.10.6</li>
+          <li>@types/react-color@3.0.13</li>
+          <li>@types/react-dom@18.3.5</li>
+          <li>@types/react-grid-layout@1.3.5</li>
+          <li>@types/react@18.3.18</li>
+          <li>@types/styled-components@5.1.34</li>
+          <li>@types/uuid@10.0.0</li>
+          <li>@vitejs/plugin-react-swc@3.7.2</li>
+          <li>autoprefixer@10.4.20</li>
+          <li>babel-plugin-inline-react-svg@2.0.2</li>
+          <li>classnames@2.5.1</li>
+          <li>cross-env@7.0.3</li>
+          <li>cssnano@7.0.6</li>
+          <li>debounce@2.2.0</li>
+          <li>eslint-plugin-react-hooks@5.1.0</li>
+          <li>eslint-plugin-react-refresh@0.4.16</li>
+          <li>eslint@9.17.0</li>
+          <li>file-saver@2.0.5</li>
+          <li>globals@15.14.0</li>
+          <li>js-beautify@1.15.4</li>
+          <li>jszip@3.10.1</li>
+          <li>konva@9.3.18</li>
+          <li>lzutf8@0.6.3</li>
+          <li>monaco-editor@0.52.2</li>
+          <li>postcss-import@16.1.0</li>
+          <li>postcss-preset-env@10.1.3</li>
+          <li>postcss@8.5.0</li>
+          <li>re-resizable@6.10.3</li>
+          <li>react-color@2.19.3</li>
+          <li>react-colorful@5.6.1</li>
+          <li>react-contenteditable@3.3.7</li>
+          <li>react-dom@18.3.1</li>
+          <li>react-grid-layout@1.5.0</li>
+          <li>react-icons@5.5.0</li>
+          <li>react-konva@18.2.10</li>
+          <li>react-loading@2.0.3</li>
+          <li>react-player@2.16.0</li>
+          <li>react-rnd@10.4.14</li>
+          <li>react-router-dom@7.1.1</li>
+          <li>react-router@7.1.1</li>
+          <li>react-youtube@10.1.0</li>
+          <li>react@18.3.1</li>
+          <li>sharp@0.33.5</li>
+          <li>styled-components@6.1.14</li>
+          <li>tailwindcss@3.4.17</li>
+          <li>typescript-eslint@8.19.1</li>
+          <li>typescript@5.6.3</li>
+          <li>uuid@11.0.4</li>
+          <li>vite@5.4.11</li>
+        </ul>
+
+        <h3>Python Packages (OCR Script)</h3>
+        <ul>
+          <li>numpy</li>
+          <li>opencv-python-headless</li>
+          <li>easyocr (installed automatically with PyTorch)</li>
+        </ul>
+
+        <h3>Internal AI and OCR APIs</h3>
+        <ul>
+          <li>
+            <strong>getBlueprintLayout(...)</strong><br />
+            Main entry point for AI-based layout generation. Accepts user text
+            and optional screenshot to produce a final single-page CraftJS
+            layout in JSON form.
+          </li>
+          <li>
+            <strong>getSummariesFromScreenshot(...)</strong><br />
+            Handles screenshot data by running OCR (via
+            <code>runPythonOcr(...)</code> and <code>ocr_service.py</code>) and
+            then generating <em>uiSummary</em> and <em>guiSummary</em> through
+            AI calls.
+          </li>
+          <li>
+            <strong>runPythonOcr(...)</strong><br />
+            Invokes the Python script <code>ocr_service.py</code> to extract
+            textual content from an image using EasyOCR.
+          </li>
+          <li>
+            <strong>getUiSummary(...)</strong> and
+            <strong>getGuiSummary(...)</strong><br />
+            Summaries of textual content (UI elements) and visual layout (GUI
+            structure) derived from screenshot OCR data. Uses OpenAI with
+            specialized prompts (<em>UI_SUMMARY_META_PROMPT</em> and
+            <em>GUI_SUMMARY_META_PROMPT</em>).
+          </li>
+          <li>
+            <strong>getFinalCraftJsLayout(...)</strong><br />
+            Synthesizes the final CraftJS layout JSON from user input and the
+            screenshot summaries, leveraging <em>FINAL_CRAFTJS_META_PROMPT</em>.
+          </li>
+          <li>
+            <strong>callOpenAiChat(...)</strong><br />
+            A helper for all OpenAI requests. Chooses the model based on whether
+            a screenshot is involved. Returns the raw text response from OpenAI.
+          </li>
+        </ul>
+
+        <h3>Key Frontend Modules (Selected)</h3>
+        <ul>
+          <li>
+            <strong>AiSidebar.tsx</strong>: Handles the user chat flow (prompt +
+            optional image). Sends messages to
+            <code>blueprintAI.generateLayout</code> and receives AI layout
+            results.
+          </li>
+          <li>
+            <strong>SuggestedPages.tsx</strong> and
+            <strong>CreateSelectedPage.tsx</strong>: Provide suggested page
+            names, allow prompting with text and an optional image, and post to
+            <code>blueprintAI.generateLayoutSuggested</code>.
+          </li>
+          <li>
+            <strong>BlueprintAiService.ts</strong>,
+            <strong>pythonBridge.ts</strong>, and
+            <strong>getSummariesFromScreenshot.ts</strong>: Coordinate calls to
+            OpenAI and the OCR Python script, returning final layout data.
+          </li>
+        </ul>
       </section>
     </main>
 
