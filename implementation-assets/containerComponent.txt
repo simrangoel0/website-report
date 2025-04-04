@@ -1,0 +1,274 @@
+/**
+ * This file is a minimal "guide" to how a Container component might be structured.
+ * It is NOT working code. Instead, it explains the purpose of each function or part 
+ * of the code in plain English.
+ */
+
+import React, { CSSProperties, FC, MouseEvent } from 'react';
+// The 'useNode' and 'Node' imports come from the @craftjs/core library. 
+// They help connect this component to the Craft.js editor environment.
+import { useNode, Node } from '@craftjs/core';
+
+/**
+ * Example placeholder: 
+ * Imagine there's a Resizer component that handles drag-resizing. 
+ * We won't implement it here, just note that it exists.
+ */
+import { Resizer } from '../Utils/Resizer';
+
+/**
+ * Example placeholder: 
+ * The ContainerProperties panel is a settings panel for editing 
+ * the container's properties (in the Craft.js editor).
+ */
+import { ContainerProperties } from './ContainerProperties';
+
+/** 
+ * A type representing four numbers for top, right, bottom, left spacing in px.
+ * Example: [10, 20, 10, 20]
+ */
+type FourNumberArray = [number, number, number, number];
+
+/**
+ * This defines the style of a border. 
+ * borderStyle: could be 'none', 'solid', 'dashed', or 'dotted'.
+ * borderColor: any valid CSS color string (e.g. "#333" or "red").
+ * borderWidth: numeric value in px.
+ */
+export interface IBorderProps {
+  borderStyle?: 'none' | 'solid' | 'dashed' | 'dotted';
+  borderColor?: string;
+  borderWidth?: number;
+}
+
+/**
+ * LayoutType is simply a union of string literal types that indicates 
+ * the "type" of layout this container might use.
+ */
+type LayoutType = 'container' | 'row' | 'section' | 'grid';
+
+/**
+ * These are the main properties a Container might accept, 
+ * ranging from background color to layout specifics like
+ * grid columns, flex direction, etc.
+ */
+export interface ContainerProps {
+  layoutType?: LayoutType;
+  background?: string;
+  fillSpace?: 'yes' | 'no';
+  width?: string;
+  height?: string;
+  margin?: FourNumberArray;
+  padding?: FourNumberArray;
+  shadow?: number;
+  radius?: number;
+  border?: IBorderProps;
+  children?: React.ReactNode;
+
+  // Flex layout properties
+  flexDirection?: 'row' | 'column';
+  alignItems?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'baseline'
+    | 'stretch'
+    | 'start'
+    | 'end';
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around';
+
+  // Row layout properties
+  gap?: number;
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+
+  // Grid layout properties
+  columns?: number;
+  rows?: number;
+  rowGap?: number;
+  columnGap?: number;
+  justifyItems?: 'start' | 'center' | 'end' | 'stretch';
+  alignGridItems?: 'start' | 'center' | 'end' | 'stretch';
+}
+
+/**
+ * defaultProps is a simple object holding default values for 
+ * each property of the Container.
+ */
+const defaultProps: Partial<ContainerProps> = {
+  // Basic layout
+  layoutType: 'container',
+  background: '#ffffff',
+  fillSpace: 'no',
+  width: 'auto',
+  height: 'auto',
+  margin: [10, 10, 10, 10],
+  padding: [20, 20, 20, 20],
+  shadow: 5,
+  radius: 8,
+  border: {
+    borderStyle: 'solid',
+    borderColor: '#cccccc',
+    borderWidth: 1,
+  },
+
+  // Flex-based defaults
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+
+  // Row layout
+  gap: 0,
+  flexWrap: 'nowrap',
+
+  // Grid layout
+  columns: 2,
+  rows: 2,
+  rowGap: 10,
+  columnGap: 10,
+  justifyItems: 'stretch',
+  alignGridItems: 'stretch',
+};
+
+/**
+ * The Container component is the main UI element. It uses the 'useNode' hook 
+ * to integrate with Craft.js. 
+ * 
+ * 1. It merges the default props with whatever props are passed into it.
+ * 2. It calculates the final CSS style object based on those props.
+ * 3. If it's the "root container," it may apply or skip certain styles (like shadows).
+ * 4. It returns the children within a Resizer (if not root) to allow 
+ *    manual resizing in the editor.
+ */
+export const Container: FC<ContainerProps> & { craft?: any } = (incomingProps) => {
+  // We use Craft.js's useNode to get data about the current node in the editor.
+  const { connectors, data } = useNode((node: Node) => ({
+    data: node.data,
+  }));
+
+  // This might be a special flag that indicates this Container is the root canvas.
+  const isRoot = data.custom?.isRootContainer === true;
+
+  // Merge the passed-in props with the defaultProps.
+  const mergedProps = { ...defaultProps, ...incomingProps };
+
+  // Potentially remove certain props if it's the root container (for example, 
+  // you don't want the user editing margin on the root).
+  if (isRoot) {
+    delete mergedProps.layoutType;
+    delete mergedProps.margin;
+    delete mergedProps.fillSpace;
+  }
+
+  // Access the final merged props in a typed manner.
+  const props = mergedProps as ContainerProps;
+
+  // We do a sanity check on margin and padding to ensure they are arrays 
+  // (just as an example).
+  const safeMargin: FourNumberArray = Array.isArray(props.margin) ? props.margin : [0, 0, 0, 0];
+  const safePadding: FourNumberArray = Array.isArray(props.padding) ? props.padding : [0, 0, 0, 0];
+
+  // Typically, we might compute the box shadow based on the 'shadow' prop.
+  // If it's the root, we might skip it or do something different.
+  const boxShadow = isRoot || !props.shadow
+    ? 'none'
+    : 'some box-shadow based on the shadow value';
+
+  // containerStyle is where we assemble all the CSS properties 
+  // that get applied to the container's outermost <div>.
+  const containerStyle: CSSProperties = {
+    // ...
+    // We omit the actual details here, but normally you'd set background, 
+    // margin, padding, etc. 
+  };
+
+  // Depending on the layoutType, we might apply specific display or flex/grid rules.
+  switch (props.layoutType) {
+    case 'row':
+      // If it's a row, we might set containerStyle.display = 'flex', etc.
+      break;
+    case 'section':
+      // If it's a "section", also a flex layout but conceptually different usage.
+      break;
+    case 'grid':
+      // If it's a grid, we do containerStyle.display = 'grid', etc.
+      break;
+    default:
+      // The default 'container' case, possibly also flex-based by default.
+      break;
+  }
+
+  // If we detect it's the root container, we might tweak the style to indicate 
+  // it's the "main canvas area."
+  if (isRoot) {
+    // e.g. containerStyle.border, containerStyle.boxShadow, etc.
+  } else {
+    // For non-root containers, we might limit their max-width or max-height to 
+    // not exceed their parent.
+  }
+
+  // The 'dropRef' function is used to attach the necessary Craft.js DOM 
+  // connectors to this component so it can handle drag, drop, etc.
+  const dropRef = (ref: HTMLDivElement | null) => {
+    if (ref) {
+      connectors.connect(ref);
+    }
+  };
+
+  // handleClick might be used to stop event propagation 
+  // so that clicks don't bubble up in the editor.
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  // If it's the root container, we might return a normal <div> without 
+  // the drag-resizing behavior.
+  if (isRoot) {
+    return (
+      <div style={containerStyle} ref={dropRef}>
+        {props.children}
+      </div>
+    );
+  }
+
+  // Otherwise, we wrap everything in a <Resizer /> component 
+  // that allows us to drag to adjust width/height in the editor.
+  return (
+    <Resizer
+      ref={(ref) => ref && connectors.connect(ref)}
+      propKey={{ width: 'width', height: 'height' }}
+      style={containerStyle}
+      onClick={handleClick}
+    >
+      {props.children}
+    </Resizer>
+  );
+};
+
+/**
+ * Container.craft includes various Craft.js configuration settings:
+ * 1. displayName: how this component is named in the editor.
+ * 2. props: defaultProps for when this component is first used.
+ * 3. isCanvas: indicates that this component can hold children.
+ * 4. rules: define what's allowed in terms of dragging, selection, etc.
+ * 5. related: specify that the ContainerProperties component is the "settings" panel 
+ *    in the Craft.js editor.
+ */
+Container.craft = {
+  displayName: 'Container',
+  props: defaultProps,
+  isCanvas: true,
+  rules: {
+    canDrag: (node: Node) => !node.data.custom?.isRootContainer,
+    canMove: (node: Node) => !node.data.custom?.isRootContainer,
+    canDelete: (node: Node) => !node.data.custom?.isRootContainer,
+    canSelect: (node: Node) => !node.data.custom?.isRootContainer,
+  },
+  related: {
+    settings: ContainerProperties,
+  },
+};

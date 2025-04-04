@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+import { PrimaryButton } from '@fluentui/react';
+import { html as beautifyHtml } from 'js-beautify';
+import ExportEditorView from './ExportEditorView';
+
+interface ExportMenuProps {
+  /** Callback when the menu should be closed. */
+  onClose: () => void;
+}
+
+/**
+ * A shortened export menu that:
+ * 1) Extracts outer HTML from #droppable-canvas-border.
+ * 2) Beautifies that HTML.
+ * 3) Passes the HTML (and some default CSS) to ExportEditorView.
+ */
+export default function ExportMenu({ onClose }: ExportMenuProps) {
+  const [showEditor, setShowEditor] = useState(false);
+
+  // State to hold the final HTML/CSS for passing into Editor
+  const [html, setHtml] = useState('');
+  const [css, setCss] = useState('');
+
+  /**
+   * Grabs raw HTML from the canvas, beautifies it, and sets default CSS.
+   */
+  function handleExport(): void {
+    const canvas = document.getElementById('droppable-canvas-border');
+    const rawHtml = canvas ? canvas.outerHTML : '<div>No Canvas Found</div>';
+
+    const prettyHtml = beautifyHtml(rawHtml, { indent_size: 2 });
+    setHtml(prettyHtml);
+
+    // Some default CSS as a starting point
+    setCss(`/* Default styles for exported page */\nbody { margin: 0; }`);
+
+    setShowEditor(true);
+  }
+
+  if (showEditor) {
+    return (
+      <ExportEditorView
+        pageId="1"
+        pageName="ShortPage"
+        initialHtml={html}
+        initialCss={css}
+        onBack={() => setShowEditor(false)}
+      />
+    );
+  }
+
+  return (
+    <div style={{ padding: '1rem' }}>
+      <h4>Export Menu (Shortened Version)</h4>
+      <PrimaryButton text="Export" onClick={handleExport} />
+      <button onClick={onClose} style={{ marginLeft: '1rem' }}>
+        Close
+      </button>
+    </div>
+  );
+}

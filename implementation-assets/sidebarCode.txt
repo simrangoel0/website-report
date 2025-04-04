@@ -1,0 +1,323 @@
+/**
+ * AiSidebar.tsx
+ *
+ * A minimized (but well-documented) version of the AiSidebar component.
+ * This component allows the user to:
+ *  - Upload an image (optional).
+ *  - Enter text prompts for AI generation.
+ *  - View and optionally accept/reject AI-generated changes.
+ *
+ * It uses Craft.js for detecting a selected element, and a global store
+ * (via getUserPrompt/setUserPrompt/subscribePromptChange) to persist the AI prompt.
+ */
+
+import React, { useState, useRef, useEffect } from 'react';
+import { useEditor } from '@craftjs/core';
+import {
+  getUserPrompt,
+  setUserPrompt,
+  subscribePromptChange,
+} from '../../store/store';
+
+/**
+ * Defines the props for the AiSidebar component.
+ *
+ * @property {boolean} isOpen - Whether the sidebar is visible.
+ * @property {() => void} [onClose] - Optional callback when sidebar closes.
+ * @property {boolean} [showAcceptChanges] - If true, display accept/reject panel.
+ * @property {(userInput: string, uploadedImage: File | null) => void} [onGenerate]
+ *   - Callback that fires after user clicks "Generate".
+ * @property {() => void} [onAcceptChanges] - Fires if user clicks "Accept".
+ * @property {() => void} [onRejectChanges] - Fires if user clicks "Reject".
+ */
+export interface AiSidebarProps {
+  isOpen: boolean;
+  onClose?: () => void;
+  showAcceptChanges?: boolean;
+  onGenerate?: (userInput: string, uploadedImage: File | null) => void;
+  onAcceptChanges?: () => void;
+  onRejectChanges?: () => void;
+}
+
+/**
+ * AiSidebar Component
+ *
+ * @param {AiSidebarProps} props - Props used to configure AiSidebar
+ * @returns {JSX.Element | null} Renders the AI Sidebar if isOpen is true, otherwise null.
+ */
+export const AiSidebar: React.FC<AiSidebarProps> = ({
+  isOpen,
+  onClose,
+  showAcceptChanges,
+  onGenerate,
+  onAcceptChanges,
+  onRejectChanges,
+}) => {
+  // CRAFT.JS selection details (name of selected element + whether something is selected)
+  const { selectedElementName, isSelected } = useEditor((state, query) => {
+    let elementName: string | undefined;
+    let selected = false;
+
+    if (state.events.selected && state.events.selected.size === 1) {
+      selected = true;
+      const nodeId = Array.from(state.events.selected)[0];
+      if (nodeId) {
+        const node = query.node(nodeId).get();
+        if (node?.data?.displayName) {
+          elementName = node.data.displayName;
+        }
+      }
+    }
+
+    return {
+      selectedElementName: elementName,
+      isSelected: selected,
+    };
+  });
+
+  // ---------- LOCAL STATE ----------
+  const [userInput, setUserInput] = useState('');               // Text from user
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [showGenerated, setShowGenerated] = useState(false);     // Whether to show generation preview
+  const [previewClosed, setPreviewClosed] = useState(false);     // If user closed the preview
+  const [isLoading, setIsLoading] = useState(false);             // Loading overlay indicator
+  const [storePrompt, setStorePrompt] = useState(getUserPrompt()); // Global store prompt
+
+  // Use a ref to access the file input programmatically
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Listen for changes to the global store prompt
+  useEffect(() => {
+    const unsubscribe = subscribePromptChange(() => {
+      setStorePrompt(getUserPrompt());
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Basic message displayed after "generation" completes.
+  const POST_GENERATE_MESSAGE =
+    'I have removed the Books category and replaced it with a Trending categories image with a call to action button as requested.';
+
+  /**
+   * Opens the hidden file input when user wants to upload an image.
+   */
+  const handleUploadClick = (): void => {
+    fileInputRef.current?.click();
+  };
+
+  /**
+   * Processes the uploaded file, validates it, and generates a preview.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The file input change event
+   */
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    if (!e.target.files || !e.target.files[0]) return;
+    const file = e.target.files[0];
+
+    // Validate file (type and size)
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload a valid image file.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size exceeds 5MB.');
+      return;
+    }
+
+    setUploadedImage(file);
+
+    // Generate base64 preview
+    const reader = new FileReader();
+    reader.onloadend = () => setImagePreviewUrl(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  /**
+   * Clears the uploaded image from state.
+   */
+  const removeImage = (): void => {
+    setUploadedImage(null);
+    setImagePreviewUrl(null);
+  };
+
+  /**
+   * Truncates a long file name, preserving its extension.
+   * @param {string} name - Original file name
+   * @param {number} maxLength - Max length to preserve
+   * @returns {string} - Truncated file name
+   */
+  const truncateFileName = (name: string, maxLength: number): string => {
+    if (name.length <= maxLength) return name;
+    const ext = name.slice(name.lastIndexOf('.'));
+    const truncated = name.slice(0, maxLength - ext.length - 3);
+    return `${truncated}...${ext}`;
+  };
+
+  /**
+   * Clears text prompt and uploaded image.
+   */
+  const handleClearAll = (): void => {
+    setUserInput('');
+    removeImage();
+  };
+
+  /**
+   * Initiates the AI generation process (mocked by a timeout).
+   * Persists the prompt in the global store, displays generation preview.
+   */
+  const handleGenerateClick = (): void => {
+    if (!userInput && !uploadedImage) {
+      alert('Please enter text or upload an image first.');
+      return;
+    }
+    setIsLoading(true);
+    setShowGenerated(false);
+    setPreviewClosed(false);
+
+    const localUserInput = userInput; // Copy current prompt
+    setTimeout(() => {
+      setIsLoading(false);
+      setUserPrompt(localUserInput);
+      setShowGenerated(true);
+      onGenerate?.(localUserInput, uploadedImage);
+    }, 3000);
+  };
+
+  /**
+   * Hides the AI-generated preview panel (after generation is done).
+   */
+  const handleCloseGeneratedView = (): void => {
+    setShowGenerated(false);
+    setPreviewClosed(true);
+  };
+
+  /**
+   * Accepts the generated changes.
+   */
+  const handleAccept = (): void => {
+    setShowGenerated(false);
+    setPreviewClosed(true);
+    onAcceptChanges?.();
+  };
+
+  /**
+   * Rejects the generated changes.
+   */
+  const handleReject = (): void => {
+    setShowGenerated(false);
+    setPreviewClosed(true);
+    onRejectChanges?.();
+  };
+
+  /**
+   * Checks if the generated preview should be visible:
+   * - Not closed manually
+   * - Either we generated something locally or parent says "showAcceptChanges"
+   */
+  const isPreviewVisible = !previewClosed && (showGenerated || showAcceptChanges);
+
+  // Return null if the sidebar is not open; otherwise render the AI UI.
+  if (!isOpen) return null;
+
+  return (
+    <div style={{ width: 300, border: '1px solid #ddd', background: '#fff' }}>
+      {/* ---------- Sidebar Header ---------- */}
+      <div>
+        <h2>Blueprint AI</h2>
+        <p>Generate or refine your designs.</p>
+        {onClose && <button onClick={onClose}>Close Sidebar</button>}
+      </div>
+
+      {/* ---------- Selected Element ---------- */}
+      <div>
+        <h4>Selected Element</h4>
+        {isSelected && selectedElementName ? (
+          <p>
+            Currently referencing: <strong>{selectedElementName}</strong>
+          </p>
+        ) : (
+          <p>No element selected</p>
+        )}
+      </div>
+
+      {/* ---------- Prompt UI (hidden if preview is shown) ---------- */}
+      {!isPreviewVisible && (
+        <>
+          {/* Image Upload */}
+          <div>
+            <h4>Image Upload</h4>
+            {uploadedImage ? (
+              <>
+                <img src={imagePreviewUrl || ''} alt="" />
+                <p>{truncateFileName(uploadedImage.name, 20)}</p>
+                <button onClick={removeImage}>Remove Image</button>
+              </>
+            ) : (
+              <button onClick={handleUploadClick}>Upload Image</button>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
+            />
+          </div>
+
+          {/* AI Prompt */}
+          <div>
+            <h4>AI Prompt</h4>
+            <textarea
+              placeholder="Describe your desired features..."
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+            />
+          </div>
+
+          {/* Generate / Clear */}
+          <button onClick={handleGenerateClick}>Generate</button>
+          <button onClick={handleClearAll}>Clear</button>
+        </>
+      )}
+
+      {/* ---------- Generated Preview Section ---------- */}
+      {isPreviewVisible && (
+        <div>
+          <div>
+            <h4>Generated Preview</h4>
+            <button onClick={handleCloseGeneratedView}>Close Preview</button>
+          </div>
+          <p>
+            <strong>Your Prompt:</strong> {storePrompt}
+          </p>
+          {uploadedImage && imagePreviewUrl && (
+            <img src={imagePreviewUrl} alt="Uploaded preview" />
+          )}
+          <p>{POST_GENERATE_MESSAGE}</p>
+        </div>
+      )}
+
+      {/* ---------- Accept / Reject Changes ---------- */}
+      {showAcceptChanges && (
+        <div>
+          <h4>Accept These Changes?</h4>
+          <button onClick={handleAccept}>Accept</button>
+          <button onClick={handleReject}>Reject</button>
+        </div>
+      )}
+
+      {/* ---------- Loading Overlay ---------- */}
+      {isLoading && (
+        <div
+          style={{
+            background: 'rgba(255,255,255,0.7)',
+            position: 'fixed',
+            inset: 0,
+          }}
+        >
+          <p>Generating...</p>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -336,252 +336,1720 @@
           </p>
         </section>
 
-        <!-- 1. First Page Creator -->
-        <section id="feature-first-page-creator" class="mb-5">
-          <h3>First Page Creator</h3>
-          <p>
-            <em
-              >Implementation details and explanation go here. Describe how the
-              system converts a text description or a screenshot into a design,
-              mentioning the libraries/plugins used, any challenges, and
-              relevant snippets.</em
-            >
+        <section id="ai-prompts" class="mb-5" style="text-align: left">
+          <h2 style="text-align: center">AI Prompts</h2>
+          <p style="text-align: center">
+            The AI prompts are designed to guide the AI in generating layouts
+            based on user input. Click on each prompt for more details.
+            <br /><br />
           </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for First Page Creator feature
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram that illustrates your First Page
-              Creator flow.]
-            </p>
+
+          <div class="accordion" id="aiPromptsAccordion">
+            <!-- UI_SUMMARY_META_PROMPT (Collapsed by Default) -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingUiSummary">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseUiSummary"
+                  aria-expanded="false"
+                  aria-controls="collapseUiSummary"
+                >
+                  UI Summary Prompt
+                </button>
+              </h2>
+              <div
+                id="collapseUiSummary"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingUiSummary"
+                data-bs-parent="#aiPromptsAccordion"
+              >
+                <div class="accordion-body" style="text-align: left">
+                  <pre
+                    style="
+                      white-space: pre-wrap;
+                      word-break: break-word;
+                      text-align: left;
+                    "
+                  >
+        You are a "UI Summarization AI" receiving raw OCR text from any type of website or application screenshot. The text may be partial, jumbled, or repeated. Your goal is to produce a **short, structured** list of lines that:
+        
+        1. **Identify the UI’s domain or purpose if possible** (e.g., “YouTube” if key lines appear like “Home,” “Subscriptions,” “Trending,” “Watch later,” etc.).  
+        2. **Group or unify lines** that are obviously connected—like a list of channel names under “Subscriptions,” or a set of recommended videos—and produce a small set of sample items.  
+        3. **Summarize or skip** lines that are purely repeated, out of scope, or contain large blocks of text. For instance:  
+          - If many channels are listed, show only 1–2 examples, then note “(other channels omitted).”  
+          - If there’s a big list of videos, produce 2–3 example items with short “snippet” lines.  
+        4. **Apply domain knowledge** for a known UI (e.g., YouTube has “Subscriptions” or “Trending”). If you detect “Home,” “Music,” “Gaming,” “Shorts,” it’s likely the YouTube homepage or a similar streaming/video service. Emphasize the main nav items.  
+        5. **Redact** personal info or large amounts of text. E.g., if an OCR line includes a user’s handle or partial personal data, keep just the handle if it’s relevant as a channel name. Omit or anonymize anything sensitive.  
+        6. **No disclaimers**: do not mention “I removed data” or “lines omitted.” Instead, incorporate placeholders or short summaries for repeated items.  
+        7. **Avoid extraneous lines**. For example:  
+          - If you see “History” repeated multiple times, keep only one instance if it’s obviously the same nav item.  
+          - If multiple lines show partial text from overlapping UI sections or random text lumps, unify or skip them if they’re not relevant to the interface structure.  
+        8. **Format** the final output as a short bullet or line-by-line list that reveals:  
+          - The main UI nav items (e.g., “Home,” “Subscriptions,” “Trending,” “Shorts,” “Search,” etc.).  
+          - Possibly 1–2 “example content” lines if there’s a large repeated list (channels, videos, emails).  
+          - Summaries for big blocks of text. For example, “Sample video #1: ‘Visiting the Most Expensive Grocery Store…’ snippet” or “Channel #1: Mrwhosetheboss.”  
+          - Domain-specific placeholders if recognized (like “YouTube recommended videos,” “Breaking news highlights,” etc.).  
+        9. **Don’t** output raw lines that are obviously partial or leftover. Merge them if you can interpret them, or ignore them if they’re irrelevant.  
+        10. **No final commentary** or disclaimers. The final output is only a short cleaned list that best represents the key UI elements plus a small set of example data.
+        
+        ### Special Considerations / Edge Cases:
+        - If the screenshot text suggests “Gmail” or a “mail client,” then:
+          - Keep nav items like “Inbox,” “Sent,” “Drafts,” “Compose.”  
+          - Summarize multiple emails as “Email #1: subject snippet…,” “Email #2: subject snippet…,” etc.  
+        - If it’s YouTube (lines like “Home,” “Shorts,” “Subscriptions,” channel names, video titles):
+          - Group them under a short heading or keep them in bullet points, e.g., “Main navigation: Home, Shorts, Subscriptions…”  
+          - Summarize recommended videos with 1–2 examples.  
+        - If lines contain references to personal or partial data, like phone #s, credit card info, or references to partial addresses:
+          - Omit or anonymize them (“[REDACTED]” or skip).  
+        - If the text strongly implies a certain domain (like “Breaking news,” “LA wildfires,” “Trending,” “Sky News”), it might be a news site:
+          - Keep main nav items or top stories in short bullet points.  
+        - If multiple lines are obviously random or worthless (like “2.13 20.13 Eh? Um:. 0.54”), skip them unless you can unify them into “some numeric data” relevant to the UI.
+        
+        ### Final Output Example:
+        - A bullet/line list:
+          1) “YouTube UI recognized” (or no explicit mention if you prefer, just keep the lines)
+          2) “Search,” “Home,” “Shorts,” “Subscriptions,” “Library,” etc.
+          3) “Channel #1: Mrwhosetheboss,” “Channel #2: MoreSidemen,” …(others omitted)
+          4) “Video #1: ‘We Tried EVERY TYPE OF POTATO’ snippet,” “Video #2: ‘Visiting the Most Expensive Grocery Store…’ snippet,” etc.
+          5) Possibly “News section: LA wildfires,” “Trending,” etc.
+        
+        **No disclaimers, no code fences, no mention of how you summarized**—just the cleaned lines that best reveal the UI structure plus a few key content examples.
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- GUI_SUMMARY_META_PROMPT (Collapsed by Default) -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingGuiSummary">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseGuiSummary"
+                  aria-expanded="false"
+                  aria-controls="collapseGuiSummary"
+                >
+                  GUI Summary Prompt
+                </button>
+              </h2>
+              <div
+                id="collapseGuiSummary"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingGuiSummary"
+                data-bs-parent="#aiPromptsAccordion"
+              >
+                <div class="accordion-body" style="text-align: left">
+                  <pre
+                    style="
+                      white-space: pre-wrap;
+                      word-break: break-word;
+                      text-align: left;
+                    "
+                  >
+        YOU ARE A “GUI EXTRACTION AI,” SPECIALIZED IN ANALYZING WEBPAGE SCREENSHOTS.
+        
+        OBJECTIVE:
+        Receive text or descriptive clues about a screenshot. From that, produce a **concise yet complete** breakdown of the **visual GUI structure**, focusing on:
+        - Layout sections (header, banners, sidebars, main content columns, footers).
+        - Approximate positions, relative sizes (e.g., “a full‐width banner at the top, about 300px tall”).
+        - Prominent graphical or navigational elements (search bars, logos, key nav links).
+        - High‐level grouping of content (“3 columns of product panels,” “left sidebar with vertical menu,” etc.).
+        - Color themes or brand cues (“dominant orange accent,” “black header,” etc.).
+        - Redacting any personal or sensitive data (names, personal messages) in the screenshot (or replacing them with generic placeholders if needed).
+        
+        IGNORE:
+        - Detailed textual content beyond what is needed to identify the GUI element. (E.g., if you see “Your credit card ending in 5901” text, do not quote it; mention only “Payment method line in the top bar, redacted.”)
+        - Exhaustive paragraphs or fluff from email bodies or personal data. We only care about the **interface structure**.
+        
+        FORMAT & STYLE:
+        - Provide a **single, structured text** (a brief, high‐level summary) that enumerates major regions. 
+        - Each region might look like:  
+          - “**Header** (approx 70px tall, white background, logo on left, search input in center, user icon on right).”
+          - “**Main Banner** (full width, colorful promotional image with a short slogan).”
+          - “**Column #1** (left side, ~1/3rd width), shows vertical product list…”
+          - etc.
+        - Avoid disclaimers or extraneous commentary; just outline the interface.
+        - Keep the final text **under ~300 words** if possible, focusing on the layout’s core details.
+        
+        EXAMPLES OF DESCRIPTIONS FOR A WEBPAGE:
+        1. “**Top Navigation Bar**: black background, includes left‐aligned site logo, center‐aligned search field, right‐aligned ‘Sign In’ + ‘Basket’ icons. ~60–80px tall.”
+        2. “**Secondary Nav**: a horizontal bar of categories below the main nav (‘All’, ‘Grocery’, ‘Electronics’). ~40px tall, dark background.”
+        3. “**Hero Banner**: wide, ~300–400px tall, large product image on the right, main headline on the left, orange accent color.”
+        4. “**Below Banner**: 3 columns of product suggestions, each ~300px wide, with white backgrounds.”
+        5. “**Footer**: references site disclaimers and links. ~200px tall, repeated site menu links.”
+        
+        NO EXTRA OUTPUT:
+        - Do not output disclaimers, developer notes, or code.
+        - Provide only the organized GUI layout summary, **redacting** personal user info or large private content.
+        
+        REMEMBER:
+        - You are summarizing the layout in a screenshot: mention major sections, approximate positioning, color scheme, any brand cues, and relevant nav or product placeholders. 
+        - If personal data is recognized, omit or genericize it.
+        - Keep it concise and structured.
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- FINAL_CRAFTJS_META_PROMPT (Collapsed by Default) -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFinalCraftJs">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFinalCraftJs"
+                  aria-expanded="false"
+                  aria-controls="collapseFinalCraftJs"
+                >
+                  CraftJS Final Prompt
+                </button>
+              </h2>
+              <div
+                id="collapseFinalCraftJs"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFinalCraftJs"
+                data-bs-parent="#aiPromptsAccordion"
+              >
+                <div class="accordion-body" style="text-align: left">
+                  <pre
+                    style="
+                      white-space: pre-wrap;
+                      word-break: break-word;
+                      text-align: left;
+                    "
+                  >
+        YOU ARE "BLUEPRINT AI," A HIGHLY ADVANCED SYSTEM FOR CRAFTJS LAYOUT GENERATION.
+        
+        OBJECTIVE:
+        Produce a SINGLE-PAGE layout for CraftJS as **strictly valid JSON** using only the following components (exact names):
+          - Button
+          - Container
+          - Navigation
+          - SearchBox
+          - Slider
+          - StarRating
+          - Text
+          - Video
+        
+        Your output must be a single JSON object with a top-level key "layout". Within it, define "type", "props", and optional "children" objects, recursively, in valid JSON. No other top-level keys are allowed besides "layout".
+        
+        -------------------------------------------------------------------------------
+        STRUCTURE:
+        {
+          "layout": {
+            "type": "OneOfTheAllowedComponents",
+            "props": {
+              // e.g. style, text, color, data, etc.
+            },
+            "children": [
+              // zero or more child objects, each with the same structure
+            ]
+          }
+        }
+        
+        -------------------------------------------------------------------------------
+        CRITICAL REQUIREMENTS:
+        1) Strictly Valid JSON  
+           - No code fences or additional commentary in the final output.  
+           - Only one top-level key: "layout".
+        
+        2) Single Static Page  
+           - No multi-page references or navigation to other pages.  
+           - Everything must be in one JSON object under "layout".
+        
+        3) Text/Data  
+           - Combine user instructions with relevant points from the GUI summary and OCR summary.  
+           - If there are conflicts, user instructions override.  
+           - If user instructions are minimal, rely on GUI/OCR for content.  
+           - If all sources are minimal, produce a reasonable single-page layout (e.g., a typical homepage).
+        
+        4) Color & Style  
+           - Use any brand or style cues indicated by user, GUI, or OCR.  
+           - Do not leave placeholders (like "#FFFFFF") if a specific color scheme is given or implied.  
+           - If a brand is mentioned (e.g., eBay, Amazon), you may incorporate typical brand colors or styling.
+        
+        5) User Instructions Have Highest Priority  
+           - If the user explicitly says "make it like X," prioritize that over any conflicting details.  
+           - In absence of detail, infer or invent coherent design choices.
+        
+        6) GUI Summary  
+           - May describe layout structure, color scheme, etc.  
+           - If provided, interpret it as guidelines for how to structure containers, headings, etc.  
+           - If missing, focus on user instructions and OCR text.
+        
+        7) OCR Summary  
+           - Text from a screenshot may hint at brand, features, or layout.  
+           - Incorporate relevant text if it aligns with user instructions.  
+           - You can omit or shorten extraneous lines if not explicitly required.
+        
+        8) Charts/Data  
+           - Since only the specified 9 components are allowed, do not add chart components (BarChart, PieChart, etc.) even if the OCR or user mentions them.  
+           - If they request a chart, you cannot fulfill that request here because those components are not in this list.
+        
+        9) Images or Icons  
+           - If a brand logo or icon is relevant, use the "Icon" component with a suitable iconName.  
+           - If images are forbidden or not relevant, skip them.
+        
+        10) No Extra Output  
+           - Only return valid JSON with the single "layout" key (plus any child objects).  
+           - No disclaimers or placeholders.
+        
+        -------------------------------------------------------------------------------
+        IF ANY SOURCE IS MISSING:
+        - If no user instructions, rely on GUI/OCR.  
+        - If no GUI summary, rely on user/OCR.  
+        - If no OCR text, rely on user/GUI.  
+        - If everything is minimal, produce a simple layout with typical branding or a basic homepage.
+        
+        -------------------------------------------------------------------------------
+        USER’S TEXTUAL INSTRUCTIONS:
+        "${userText}"
+        
+        GUI SUMMARY (IF ANY):
+        ${guiExtractionData}
+        
+        OCR TEXT SUMMARY (IF ANY):
+        ${ocrTextSummary}
+        
+        -------------------------------------------------------------------------------
+        DETAILED COMPONENT REFERENCE (use exactly these component names):
+        
+        1) Button
+           Props:
+             label: string (default "Click Me")
+             variant: "button" | "radio" (default "button")
+             color: string (CSS color, default "#ffffff")
+             background: string (CSS color, default "#007bff")
+             width: string ("auto", "100px", etc., default "auto")
+             height: string ("auto", "40px", etc., default "auto")
+             margin: [number, number, number, number] (default [5, 5, 5, 5])
+             padding: [number, number, number, number] (default [10, 20, 10, 20])
+             radius: number (default 4)
+             shadow: number (default 5, 0 = no shadow)
+             border: {
+               borderStyle?: "none" | "solid" | "dashed" | "dotted";
+               borderColor?: string;
+               borderWidth?: number;
+             } (default { borderStyle: "solid", borderColor: "#cccccc", borderWidth: 1 })
+             checked: boolean (default false, only if variant="radio")
+             onClick: (e: MouseEvent) => void (no-op in JSON)
+           Notes:
+             - Renders "button" unless variant="radio", which renders a radio input with a label.
+        
+        2) Container
+           Props:
+             layoutType: "container" | "row" | "section" | "grid" (default "container")
+             background: string (CSS color, default "#ffffff")
+             fillSpace: "yes" | "no" (default "no")
+             width: string (default "auto")
+             height: string (default "auto")
+             margin: [number, number, number, number] (default [10, 10, 10, 10])
+             padding: [number, number, number, number] (default [20, 20, 20, 20])
+             shadow: number (default 5)
+             radius: number (default 8)
+             border: {
+               borderStyle?: "none" | "solid" | "dashed" | "dotted";
+               borderColor?: string;
+               borderWidth?: number;
+             } (default { borderStyle: "solid", borderColor: "#cccccc", borderWidth: 1 })
+             flexDirection: "row" | "column" (default "row")
+             alignItems: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | "start" | "end" (default "flex-start")
+             justifyContent: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" (default "center")
+             gap: number (default 0, relevant if layoutType="row")
+             flexWrap: "nowrap" | "wrap" | "wrap-reverse" (default "nowrap", relevant if layoutType="row")
+             columns: number (default 2, relevant if layoutType="grid")
+             rows: number (default 2, relevant if layoutType="grid")
+             rowGap: number (default 10, relevant if layoutType="grid")
+             columnGap: number (default 10, relevant if layoutType="grid")
+             justifyItems: "start" | "center" | "end" | "stretch" (default "stretch")
+             alignGridItems: "start" | "center" | "end" | "stretch" (default "stretch")
+           Notes:
+             - For layoutType="grid", columns/rows define the grid.  
+             - For layoutType="row", gap/flexWrap apply.
+        
+        3) Navigation
+           Props:
+             navType: "navbar" | "sidebar" (default "navbar")
+             displayName: string (default "MySite")
+             background: string (CSS color, default "#ffffff")
+             collapsible: boolean (default true)
+             collapsedWidth: string (default "60px")
+             expandedWidth: string (default "250px")
+             width: string (default "200px")
+             height: string (default "100%")
+             linkStyle: object (default {})
+             highlightSelected: boolean (default true)
+             textColor: string (CSS color, default "#333")
+             margin: string (default "0")
+             padding: string (default "10px")
+             pageDisplayNames: Record"number, string" (optional)
+           Notes:
+             - Renders horizontal navbar or vertical sidebar.  
+             - If sidebar + collapsible=true, toggles between collapsed/expanded widths.  
+             - Do not reference multiple pages in the final layout JSON.
+        
+        4) SearchBox
+           Props:
+             placeholder: string (default "Search...")
+             searchText: string (default "")
+             backgroundColor: string (CSS color, default "#ffffff")
+             textColor: string (CSS color, default "#000000")
+             borderColor: string (CSS color, default "#cccccc")
+             borderWidth: number (default 1)
+             borderStyle: string (default "solid")
+             borderRadius: number (default 4)
+             padding: [number, number, number, number] (default [4, 8, 4, 8])
+             margin: [number, number, number, number] (default [0, 0, 0, 0])
+             shadow: number (default 0)
+             width: string (default "200px")
+             height: string (default "auto")
+           Notes:
+             - Renders an "input" inside a styled container.
+        
+        5) Slider
+           Props:
+             min: number (default 0)
+             max: number (default 100)
+             step: number (default 1)
+             currentValue: number (default 50)
+             orientation: "horizontal" | "vertical" (default "horizontal")
+             width: string (default "300px")
+             height: string (default "40px")
+             thumbColor: string (default "#ffffff")
+             trackColor: string (default "#0078d4")
+             marginTop: string (default "0px")
+             marginRight: string (default "0px")
+             marginBottom: string (default "0px")
+             marginLeft: string (default "0px")
+             paddingTop: string (default "0px")
+             paddingRight: string (default "0px")
+             paddingBottom: string (default "0px")
+             paddingLeft: string (default "0px")
+             trackThickness: number (default 8)
+             showValue: boolean (default true)
+             valueColor: string (default "#000000")
+             valueFontSize: string (default "14px")
+             valueFontWeight: string (default "normal")
+           Notes:
+             - A simple Fluent UI-based slider.
+        
+        6) StarRating
+           Props:
+             rating: number (default 3)
+             maxRating: number (default 5)
+             starColor: string (default "#FFD700")
+             starSpacing: number (default 4)
+             background: string (default "#ffffff")
+             width: string (default "150px")
+             height: string (default "50px")
+             margin: [number, number, number, number] (default [0, 0, 0, 0])
+             padding: [number, number, number, number] (default [0, 0, 0, 0])
+           Notes:
+             - Displays filled vs. empty stars.  
+             - Not interactive in the given code snippet.
+        
+        7) Text
+           Props:
+             renderMode: "textbox" | "link" | "dropdown" (default "textbox")
+             fontSize: number (default 15)
+             textAlign: "left" | "right" | "center" | "justify" (default "left")
+             fontWeight: string (default "500")
+             textColor: string | { r: number; g: number; b: number; a: number } (default "#5c5a5a")
+             shadow: number (default 0)
+             text: string (default "Text")
+             selectedValue: string (dropdown mode only)
+             margin: [number, number, number, number] (default [0, 0, 0, 0])
+             padding: [number, number, number, number] (default [5, 5, 5, 5])
+             placeholder: string (default "Enter text...")
+             fontFamily: string (default "Arial, sans-serif")
+             background: string (default "#ffffff")
+             multiline: boolean (default false)
+             disabled: boolean (default false)
+             readOnly: boolean (default false)
+             radius: number (default 0)
+             borderColor: string (default "#000000")
+             borderStyle: string (default "solid")
+             borderWidth: number (default 1)
+             width: string (default "auto")
+             height: string (default "auto")
+             maxLength: number (optional)
+             rows: number (optional)
+             cols: number (optional)
+             autoFocus: boolean (default false)
+             spellCheck: boolean (default true)
+             href: string (default "#")
+             linkType: "externalUrl" | "page" (default "externalUrl")
+             pageId: number (optional)
+             linkTitle: string (optional)
+             ariaLabel: string (optional)
+             hasCheckbox: boolean (default false)
+             checked: boolean (default false, if hasCheckbox=true)
+             checkboxPosition: "left" | "right" (default "left")
+             enableResizer: boolean (default true)
+           Notes:
+             - renderMode="textbox" => "input" or "textarea" if multiline=true.  
+             - renderMode="link" => "a" with href or page link.  
+             - renderMode="dropdown" => "select" from items in text split by "||".  
+             - If hasCheckbox=true, a checkbox is shown next to the text.
+        
+        8) Video
+           Props:
+             videoId: string (default "91_ZULhScRc")
+             width: string (default "400px")
+             height: string (default "225px")
+             autoplay: boolean (default false)
+             controls: boolean (default true)
+             interactable: boolean (default false)
+           Notes:
+             - Embeds a YouTube player with react-player.
+        
+        -------------------------------------------------------------------------------
+        IMPORTANT:
+        - Replace "\${userText}", \${guiExtractionData}, and \${ocrTextSummary} in your final code with the actual user input, GUI summary, and OCR text if applicable.
+        - Output ONLY the JSON with a single "layout" key and any nested children. No disclaimers, no extra keys.
+        - Merge references from user, GUI, and OCR. If brand cues are given, incorporate them logically.
+        - If minimal data, create a sensible layout with the above components in typical sections (e.g., header Navigation, main Container, optional SearchBox, etc.).
+        - The final layout text must be in English.
+        
+        -------------------------------------------------------------------------------
+        ADDITIONAL INSTRUCTION:
+        After you produce the final CraftJS JSON layout with the single top-level "layout" key, also provide a separate output containing "suggestedPageNames". This output should be in the form of an array-like structure, for example: {"Home", "AboutUs", "ContactUs"}. These are future page ideas relevant to the design. Do NOT reference them within the final CraftJS JSON layout itself. They should appear as a separate data structure after the JSON layout is complete.
+                  </pre>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- 2. Main Interface -->
-        <section id="feature-main-interface" class="mb-5">
-          <h3>Main Interface</h3>
+        <section id="prompt-explanations" class="mb-5">
+          <h2>Prompt Explanations</h2>
           <p>
-            <em
-              >Implementation details for the main editing UI. Discuss the
-              frameworks/libraries used (e.g., React, CraftJS), how the
-              interface is rendered, and any challenges or solutions.</em
-            >
+            <strong>1) UI Summarization Prompt</strong><br />
+            This prompt is used when Blueprint AI needs a concise text outline
+            of elements discovered through OCR on a website or application
+            screenshot. It instructs the AI to analyze raw or possibly jumbled
+            lines of text (such as navigation items or repeated labels) and turn
+            them into a short, bullet-style breakdown of relevant UI features.
+            Specifically, it groups similar lines (e.g., channel names, repeated
+            links), filters out duplicates and large text blocks, and redacts
+            personal or sensitive data. Everything is kept minimal and
+            domain-focused, illustrating key UI items like “Home,”
+            “Subscriptions,” or “Recommended Videos” when the domain is
+            recognized. The end result is a compact textual summary that
+            captures main interface elements without disclaimers or extraneous
+            commentary.
           </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Main Interface feature
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram of the Main Interface layout
-              hierarchy.]
-            </p>
-          </div>
+
+          <p>
+            <strong>2) GUI Summarization Prompt</strong><br />
+            This prompt targets a higher-level, visual or structural overview of
+            the screenshot. Rather than focusing on text lines, it describes the
+            general layout (headers, footers, banners, columns, color themes),
+            approximate positioning, and major sections (e.g., a full-width hero
+            banner, left sidebar, or row of product cards). Sensitive or
+            personal text is either omitted or replaced with generic
+            placeholders. The response intentionally concentrates on the graphic
+            design elements, mentioning the presence of search boxes,
+            navigational bars, or color highlights. The resulting summary is
+            kept short but thoroughly outlines the GUI structure, ensuring
+            developers or users have a clear visual map of the screenshot’s
+            layout.
+          </p>
+
+          <p>
+            <strong>3) Final CraftJS Layout Prompt</strong><br />
+            This is the core directive that merges everything into a valid,
+            single-page CraftJS layout in strict JSON format. It tells the AI
+            how to create a final “layout” object using only the allowed
+            components (e.g., <em>Container</em>, <em>Button</em>,
+            <em>Text</em>, <em>Navigation</em>, etc.). The AI must synthesize
+            user instructions, plus any prior OCR or GUI summaries, to build a
+            single JSON object that stands for one complete page design. All
+            style, positioning, and text content stems from either the user
+            prompt or the summarized data. The output must be valid JSON with no
+            code fences or extra keys beyond “layout.” In addition, there is a
+            secondary array-like structure indicating suggested page names for
+            future expansions, but these are provided outside the main “layout”
+            JSON. This final prompt ensures the design is strictly formed,
+            referencing props for each component according to the project’s
+            requirements, and it also respects the user’s highest-priority
+            instructions if conflicts arise.
+          </p>
+        </section>
+        <!-- Create a new section about AI Calls -->
+        <section id="backend-explained" class="mb-5">
+          <h2>The “Backend” Explained</h2>
+          <p>
+            In Blueprint AI, the entire system responsible for OCR extraction, AI prompting,
+            and final layout generation exists behind the scenes as a “backend” flow that
+            orchestrates multiple key steps. Though the user primarily sees a visual editor
+            and a chat-like interaction, a collection of TypeScript modules and a Python script
+            coordinate to deliver final results. Below is an extensive, step-by-step explanation
+            of how each relevant piece is structured, without showing full code, so you can
+            understand precisely what happens whenever you request an AI-generated layout:
+          </p>
+        
+          <p>
+            <strong>Overall Conceptual Flow</strong><br>
+            At a high level, the user’s textual instructions and optional screenshot enter the
+            system via <code>getBlueprintLayout(...)</code>. This triggers a multi-stage process:
+            <em>(1)</em> We run OCR on the screenshot if provided, <em>(2)</em> we generate short
+            textual summaries of both the UI (from OCR) and the GUI structure, and <em>(3)</em> we
+            combine everything (including user instructions) into a single, final CraftJS layout
+            JSON. The “backend” is what executes these steps, calling the appropriate prompts
+            and bridging to Python for OCR as needed.
+          </p>
+        
+          <p>
+            <strong>1) <em>blueprintAiClient.ts</em> </strong><br>
+            This file contains three main functions—<code>getUiSummary</code>,
+            <code>getGuiSummary</code>, and <code>getFinalCraftJsLayout</code>—each referencing
+            a distinct “meta prompt” from <code>blueprintAiPrompts.ts</code>. It also has a small
+            helper named <code>callChatGPT</code> that handles Axios-based API calls to OpenAI.
+            Together, these pieces let the backend dispatch prompts with the correct system
+            instructions and user content:
+            <ul>
+              <li>
+                <strong><code>getUiSummary(...)</code>:</strong> Sends raw OCR text (and possibly
+                a truncated, base64-encoded screenshot) to OpenAI with the
+                <code>UI_SUMMARY_META_PROMPT</code>, receiving back a short bullet-style summary
+                of the recognized interface text. This is specifically meant to highlight items
+                like “navigation,” “list of categories,” or “footer links,” while skipping
+                extraneous lines.
+              </li>
+              <li>
+                <strong><code>getGuiSummary(...)</code>:</strong> Concentrates on layout structure.
+                It encodes only the screenshot in base64 (again truncated, if too large) and
+                applies the <code>GUI_SUMMARY_META_PROMPT</code>, retrieving a high-level
+                description of the visual design (e.g., “a tall header, left sidebar, multi-column
+                content”). This text is more about structure and color or brand cues, less about
+                the line-by-line text content.
+              </li>
+              <li>
+                <strong><code>getFinalCraftJsLayout(...)</code>:</strong> The culminating step
+                that merges <em>user instructions</em>, <em>UI summary</em>, and <em>GUI summary</em>
+                into a valid JSON layout for CraftJS. It uses the <code>FINAL_CRAFTJS_META_PROMPT</code>
+                as a “system” prompt and injects all relevant textual data. The AI’s response is
+                strictly JSON, containing a “layout” key with nested CraftJS components like
+                <code>Container</code>, <code>Button</code>, <code>Text</code>, etc.
+              </li>
+            </ul>
+            Additionally, <code>callChatGPT</code> is a simple utility that sets up the “system” and
+            “user” roles, along with the chosen OpenAI model (<em>e.g. gpt-3.5-turbo</em>), and
+            handles returning the raw text from ChatGPT’s response.
+          </p>
+        
+          <p>
+            <strong>2) <em>BlueprintAiService.ts</em></strong><br>
+            This file defines an exported function named <code>getBlueprintLayout(...)</code> that
+            acts as the project’s main AI entry point. Whenever the user wants a new CraftJS layout
+            (possibly with a screenshot for reference), we do:
+            <em>(a)</em> call <code>getSummariesFromScreenshot</code> to produce both the UI
+            summary and GUI summary, then <em>(b)</em> pass those summaries along with the user’s
+            text to <code>getFinalCraftJsLayout</code>. Here is its conceptual structure:
+            <ul>
+              <li>
+                <em>Calls <code>getSummariesFromScreenshot</code></em>: If a screenshot was provided,
+                it runs OCR to get the raw text lines, then uses <code>getUiSummary</code> and
+                <code>getGuiSummary</code> to convert them into two distinct short-form texts. If
+                no screenshot is passed in, the UI summary is minimal and the GUI summary is empty.
+              </li>
+              <li>
+                <em>Calls <code>getFinalCraftJsLayout</code></em>: Takes <code>userText</code> plus
+                those two summaries, feeding them into the <code>FINAL_CRAFTJS_META_PROMPT</code>.
+                The AI returns strictly valid JSON in the shape of a single-page CraftJS layout.
+              </li>
+              <li>
+                <em>Returns the final JSON</em>: The raw string (with “layout”: { ... } ) can then be
+                used by the front-end to render or store the new design.
+              </li>
+            </ul>
+            Essentially, <em>BlueprintAiService.ts</em> is the bridging code that orchestrates the
+            summarization steps and the final layout generation.
+          </p>
+        
+          <p>
+            <strong>3) <em>getSummariesFromScreenshot.ts</em></strong><br>
+            This is where the extension decides how to handle the screenshot, if any:
+            <ul>
+              <li>
+                <code>runPythonOcr</code> is called if <code>rawScreenshot</code> was provided,
+                returning an array of recognized text objects. These text items (with bounding box
+                info and confidence scores) are joined into a single string. If no screenshot is
+                present, we skip OCR altogether.
+              </li>
+              <li>
+                <code>getUiSummary</code> is invoked with that joined text and the screenshot
+                buffer. The AI returns a condensed bullet list describing text-based UI elements.
+              </li>
+              <li>
+                <code>getGuiSummary</code> is invoked only if a screenshot is actually there, to
+                produce the layout-based summary. If the screenshot is missing, we leave the GUI
+                summary empty.
+              </li>
+              <li>
+                Both summaries are returned in an object so the caller can decide how to apply them
+                next—most often passing them to the final layout generation step.
+              </li>
+            </ul>
+            Any errors during OCR or summarization are captured and returned as textual error
+            messages, ensuring the front-end can display an appropriate notification if something
+            fails.
+          </p>
+        
+          <p>
+            <strong>4) <em>pythonBridge.ts</em></strong><br>
+            This TypeScript file encapsulates how Blueprint AI triggers a Python script for OCR:
+            <ul>
+              <li>
+                <em>Locating Python & the Script</em>: We check for a local Python environment
+                (under <code>python-ocr/venv/Scripts/python.exe</code>) and the presence of
+                <code>ocr_service.py</code> in the same folder. If either is missing, an error is
+                thrown.
+              </li>
+              <li>
+                <em>Writing a Temporary Screenshot</em>: The raw <code>Buffer</code> from
+                <code>rawScreenshot</code> is written to a random temp filename in the
+                <code>globalStoragePath</code>, ensuring we have a real image file for the Python
+                script to process. Once done, the file is removed.
+              </li>
+              <li>
+                <em>Spawning the OCR Process</em>: We run the Python script with the temp image
+                path, collecting <code>stdout</code> and <code>stderr</code>. If the script
+                completes with exit code 0, <code>stdout</code> is parsed as JSON to produce an
+                array of OCR result objects. If there's an error or non-zero exit code, we handle
+                it gracefully, optionally showing a VSCode error message.
+              </li>
+            </ul>
+            By encapsulating all of these steps, we keep the front-end logic free from direct Python
+            calls. <em>pythonBridge.ts</em> is the only TypeScript file that knows how to spawn the
+            OCR script, parse the results, and handle errors.
+          </p>
+        
+          <p>
+            <strong>5) <em>ocr_service.py</em></strong><br>
+            This Python script forms the final link in the OCR chain. It:
+            <ul>
+              <li>
+                <em>Loads and optionally upscales the image</em> to help with small fonts, then
+                converts it to grayscale.
+              </li>
+              <li>
+                <em>Runs EasyOCR</em> in paragraph mode, returning recognized lines with confidence
+                scores. Each recognized block contains bounding box coordinates plus the text
+                itself.
+              </li>
+              <li>
+                <em>Outputs JSON</em> to <code>stdout</code>, which the TypeScript code then
+                parses. This JSON array represents each recognized line or block of text that
+                might factor into the subsequent UI summarization.
+              </li>
+            </ul>
+            Because Python’s EasyOCR can handle many image scenarios, it’s well-suited for capturing
+            textual details from user-provided screenshots. Combined with minimal pre-processing
+            (grayscale, optional upscaling), it typically extracts text for a wide range of UI
+            designs.
+          </p>
+        
+          <p>
+            <strong>Putting It All Together</strong><br>
+            The chain of function calls and modules described above is what drives the “backend”
+            logic for Blueprint AI. The user sees a single “Generate Layout” action, but behind the
+            scenes:
+            <ul>
+              <li>
+                If a screenshot is included, the system writes it to disk, calls Python OCR, and
+                obtains the recognized text lines.
+              </li>
+              <li>
+                We pass that text and the screenshot to <code>getUiSummary</code> (which uses the
+                <code>UI_SUMMARY_META_PROMPT</code>) and <code>getGuiSummary</code> (which uses
+                <code>GUI_SUMMARY_META_PROMPT</code>) for more refined summarizations.
+              </li>
+              <li>
+                Finally, we merge everything with the user’s instructions in
+                <code>getFinalCraftJsLayout</code> (guided by <code>FINAL_CRAFTJS_META_PROMPT</code>)
+                to produce a single-page CraftJS layout in JSON form.
+              </li>
+            </ul>
+            This approach ensures that text-based clues from OCR and visual layout hints from the
+            screenshot can be combined with the user’s explicit requests—resulting in a
+            high-fidelity design that closely reflects the screenshot or user concept. By
+            maintaining each piece (OCR, UI summarization, GUI summarization, final layout
+            generation) as its own step, we keep the entire process modular and easier to debug or
+            update in the future.
+          </p>
         </section>
 
-        <!-- 2.1. Droppable CraftJS Canvas -->
-        <section id="feature-craftjs-canvas" class="mb-5">
-          <h4>Droppable CraftJS Canvas</h4>
-          <p>
-            <em
-              >Implementation details on how the draggable/interactable
-              components are handled, references to the indicator box, move/hide
-              icons, etc.</em
-            >
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for CraftJS Canvas feature
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a flow diagram of how components are
-              dropped/placed on the canvas.]
+        <section id="mini-code-samples" class="mb-5">
+          <h2>Code Samples</h2>
+        
+            <section id="improved-blueprint-ai-client" class="mb-5">
+            <h2>blueprintAiClient.ts</h2>
+            <div class="container text-start">
+              <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>            
+            import axios from 'axios';
+            import {
+            UI_SUMMARY_META_PROMPT,
+            GUI_SUMMARY_META_PROMPT,
+            FINAL_CRAFTJS_META_PROMPT,
+            } from './blueprintAiPrompts';
+            
+            /**
+             * Simple helper to call OpenAI ChatGPT with Axios.
+             * - Expects process.env.OPENAI_API_KEY to be defined.
+             * - Uses the gpt-3.5-turbo (or gpt-4 if you have access).
+             */
+            async function callChatGPT(
+            systemPrompt: string,
+            userPrompt: string
+            ): Promise<string> {
+            const apiKey = process.env.OPENAI_API_KEY;
+            if (!apiKey) {
+              throw new Error('Missing OPENAI_API_KEY environment variable.');
+            }
+            
+            // Example: using GPT-3.5-Turbo
+            const model = 'gpt-3.5-turbo';
+            
+            try {
+              const response = await axios.post(
+              'https://api.openai.com/v1/chat/completions',
+              {
+                model,
+                messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userPrompt },
+                ],
+                temperature: 0.7,
+              },
+              {
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${apiKey}`,
+                },
+              }
+              );
+            
+              const rawText = response.data.choices?.[0]?.message?.content;
+              return rawText ? rawText.trim() : '';
+            } catch (error: any) {
+              console.error('Error calling ChatGPT:', error?.response?.data || error);
+              throw new Error(
+              `OpenAI API error: ${
+                error?.response?.data?.error?.message || error.message
+              }`
+              );
+            }
+            }
+            
+            /**
+             * If needed, convert the screenshot to a truncated base64 string.
+             * Helps avoid huge prompts that might exceed token limits.
+             */
+            function maybeBase64EncodeScreenshot(screenshot?: Buffer): string | undefined {
+            if (!screenshot) {
+              return undefined;
+            }
+            const base64 = screenshot.toString('base64');
+            
+            // Truncate the base64 string if it's too large.
+            // E.g. limit to 100k characters (arbitrary).
+            const maxLength = 100_000;
+            if (base64.length > maxLength) {
+              return base64.slice(0, maxLength) + '...[TRUNCATED BASE64]';
+            }
+            
+            return base64;
+            }
+            
+            /**
+             * Summarizes OCR text as a short, structured list of UI lines.
+             * Uses the UI_SUMMARY_META_PROMPT plus optional screenshot data.
+             */
+            export async function getUiSummary(params: {
+            text: string;
+            screenshot?: Buffer;
+            }): Promise<string> {
+            const { text, screenshot } = params;
+            const base64Screenshot = maybeBase64EncodeScreenshot(screenshot);
+            
+            // We'll treat UI_SUMMARY_META_PROMPT as the "system" role for guidance,
+            // and the user content includes both the OCR text and optional base64 data.
+            const systemPrompt = UI_SUMMARY_META_PROMPT;
+            const userPrompt = `
+            Screenshot (base64, optional): 
+            ${base64Screenshot ? base64Screenshot : '[No screenshot provided]'}
+            
+            === RAW OCR TEXT ===
+            ${text}
+            `;
+            
+            return await callChatGPT(systemPrompt, userPrompt);
+            }
+            
+            /**
+             * Extracts or summarizes the GUI structure from a screenshot only.
+             * Uses the GUI_SUMMARY_META_PROMPT plus the screenshot in base64 form.
+             */
+            export async function getGuiSummary(params: {
+            screenshot: Buffer;
+            }): Promise<string> {
+            const { screenshot } = params;
+            const base64Screenshot = maybeBase64EncodeScreenshot(screenshot);
+            
+            const systemPrompt = GUI_SUMMARY_META_PROMPT;
+            const userPrompt = `
+            Screenshot (base64):
+            ${base64Screenshot}
+            
+            [No OCR text provided for GUI extraction—just the screenshot structure.]
+            `;
+            
+            return await callChatGPT(systemPrompt, userPrompt);
+            }
+            
+            /**
+             * Generates a single-page CraftJS layout JSON using the final meta prompt.
+             * Combines user instructions + the extracted UI & GUI summaries (if any).
+             * - userText: the user's own instructions
+             * - uiSummary: result from getUiSummary (possibly empty)
+             * - guiSummary: result from getGuiSummary (possibly empty)
+             */
+            export async function getFinalCraftJsLayout(params: {
+            userText: string;
+            uiSummary: string;
+            guiSummary: string;
+            }): Promise<string> {
+            const { userText, uiSummary, guiSummary } = params;
+            
+            // We'll treat FINAL_CRAFTJS_META_PROMPT as the "system" role again.
+            // Then pass in the placeholders via the user prompt.
+            const systemPrompt = FINAL_CRAFTJS_META_PROMPT;
+            
+            // Insert the relevant data into the "user" content:
+            const userPrompt = `
+            USER’S TEXTUAL INSTRUCTIONS:
+            "${userText}"
+            
+            GUI SUMMARY (IF ANY):
+            ${guiSummary}
+            
+            OCR TEXT SUMMARY (IF ANY):
+            ${uiSummary}
+            `;
+            
+            return await callChatGPT(systemPrompt, userPrompt);
+            }
+              </code></pre>
+            </div>
+            </section>
+          
+            <p class="text-sm">
+               This TypeScript file provides a set of utility functions 
+              that enable interaction with OpenAI for multiple tasks. It imports three dedicated 
+              prompts—<strong>UI_SUMMARY_META_PROMPT</strong>, <strong>GUI_SUMMARY_META_PROMPT</strong>, 
+              and <strong>FINAL_CRAFTJS_META_PROMPT</strong>—to guide the AI in producing either a text-based 
+              UI summary, a structural GUI summary, or a final CraftJS layout. The core function 
+              <code>callChatGPT</code> handles Axios-based requests, ensuring we properly supply 
+              system and user role messages. Additionally, <code>maybeBase64EncodeScreenshot</code> 
+              helps prepare screenshot data in manageable chunks for the prompt to avoid input size 
+              overloads. With <code>getUiSummary</code>, we specifically format and send the OCR 
+              text plus any screenshot snippet to OpenAI, while <code>getGuiSummary</code> focuses 
+              purely on structural representation. Finally, <code>getFinalCraftJsLayout</code> is 
+              where all prior context (user instructions, UI text, and GUI structure) are merged 
+              and passed to OpenAI to receive a valid JSON layout. This interplay of prompts ensures 
+              each step is distinct and optimized for its respective summarization or generation 
+              goal.
             </p>
-          </div>
-        </section>
+          </section>
+          
+        
+          <section id="mini-blueprint-ai-service" class="mb-4">
+            <h3>2) BlueprintAiService.ts</h3>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>
+          /*
+           * BlueprintAiService.ts
+           * Demonstrates orchestrating:
+           *  1) Summaries from screenshot (OCR + UI + GUI).
+           *  2) CraftJS layout generation.
+           */
+          
+          // import { getSummariesFromScreenshot } from './getSummariesFromScreenshot';
+          // import { getFinalCraftJsLayout } from './blueprintAiClient';
+          
+          /**
+           * Main function that drives the AI generation of a final CraftJS layout.
+           * @param params.userText - The user's textual instructions or prompt.
+           * @param params.rawScreenshot - An optional Buffer of the screenshot.
+           * @returns A Promise<string> containing the final JSON layout for CraftJS.
+           */
+          export async function getBlueprintLayout(params: {
+            userText: string;
+            rawScreenshot?: Buffer;
+          }): Promise<string> {
+            // 1) Gather UI + GUI summaries from the screenshot (if provided).
+            //    - getSummariesFromScreenshot internally calls Python OCR for recognized text
+            //      and uses the AI prompts (UI_SUMMARY_META_PROMPT, GUI_SUMMARY_META_PROMPT).
+            const { uiSummary, guiSummary } = await getSummariesFromScreenshot({
+              rawScreenshot: params.rawScreenshot,
+            });
+          
+            // 2) Pass the user instructions plus the two summaries into the final CraftJS meta prompt,
+            //    returning a single-page JSON layout that references any brand or structural clues.
+            const craftJsJson = await getFinalCraftJsLayout({
+              userText: params.userText,
+              uiSummary,
+              guiSummary,
+            });
+          
+            // 3) Return the JSON string, typically used by the front-end to render or store the new layout.
+            return craftJsJson;
+          }
+            </code></pre>
+            <p class="text-sm">
+              This service file coordinates all backend actions for generating
+              the final layout. It first calls <code>getSummariesFromScreenshot</code>, which
+              handles OCR and AI summarizations (UI text analysis and GUI structure), then sends
+              those results to <code>getFinalCraftJsLayout</code>. The combined data—user
+              instructions, UI summary, and GUI summary—allows Blueprint AI to produce a valid,
+              single‐page CraftJS JSON layout that reflects both the content and design cues
+              extracted from the screenshot.
+            </p>
+          </section>
+          
+        
+          <section id="mini-get-summaries" class="mb-4">
+            <h3>3) getSummariesFromScreenshot.tsx</h3>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>
+          /*
+           * getSummariesFromScreenshot.tsx
+           * This file orchestrates how we extract and interpret screenshot data
+           * for both textual (UI) and structural (GUI) summaries.
+           */
+          
+          // import { runPythonOcr } from './pythonBridge';
+          // import { getUiSummary, getGuiSummary } from './blueprintAiClient';
+          
+          // interface OcrResult {
+          //   text: string;
+          //   confidence: number;
+          //   bbox: [number, number, number, number];
+          // }
+          
+          // interface SummariesRequest {
+          //   // Optional screenshot buffer provided by the user.
+          //   rawScreenshot?: Buffer;
+          // }
+          
+          // interface SummariesResponse {
+          //   // Summarized text from recognized lines (e.g., nav links, category lists).
+          //   uiSummary: string;
+          //   // Summarized layout structure (e.g., columns, header, color scheme).
+          //   guiSummary: string;
+          // }
+          
+          /**
+           * Main function for extracting and summarizing content from a screenshot.
+           * 1) Optionally runs Python-based OCR (if rawScreenshot is provided).
+           * 2) Calls getUiSummary to transform recognized text into a short bullet list.
+           * 3) Calls getGuiSummary to describe the overall GUI layout (header, columns, etc.).
+           * 4) Returns both summaries to the caller for further usage (e.g., final layout generation).
+           */
+          export async function getSummariesFromScreenshot(
+            request: SummariesRequest
+          ): Promise<SummariesResponse> {
+            let recognizedText = '';
+          
+            if (request.rawScreenshot) {
+              // 1) OCR step: This typically involves spawning Python, reading the image,
+              // and returning recognized lines. We'll store the joined text in recognizedText.
+              recognizedText = 'Extracted text lines via runPythonOcr...';
+            }
+          
+            // 2) The UI summary is a short bullet-style text capturing the major interface items.
+            const uiSummary = await getUiSummary({
+              text: recognizedText,
+              screenshot: request.rawScreenshot,
+            });
+          
+            // 3) The GUI summary focuses on layout and visual structure. We only run it if we have an actual screenshot.
+            let guiSummary = '';
+            if (request.rawScreenshot) {
+              guiSummary = await getGuiSummary({ screenshot: request.rawScreenshot });
+            }
+          
+            // 4) Return both summaries, so higher-level code can decide how to merge them into a final layout.
+            return { uiSummary, guiSummary };
+          }
+            </code></pre>
+            <p class="text-sm">
+              This module begins by determining whether a screenshot is present.
+              If yes, it invokes <code>runPythonOcr</code> to obtain recognized text lines. That text
+              is then passed to <code>getUiSummary</code> for a concise bullet list of UI elements
+              (like navigation items). Simultaneously, if the screenshot is available, we generate
+              a high‐level layout description via <code>getGuiSummary</code>. The caller ultimately
+              receives two summaries—one for UI text, another for structural layout—allowing the
+              system to combine both in the final layout generation step.
+            </p>
+          </section>
+          
+        
+          <section id="python-bridge-section" class="mb-4">
+            <h3>4) pythonBridge.ts</h3>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code>        
+          import * as vscode from 'vscode';
+          import * as fs from 'fs';
+          import * as path from 'path';
+          import { spawn } from 'child_process';
+          import { randomBytes } from 'crypto';
+          import { getExtensionContext } from '../utils/extensionContext'; // <--- IMPORTANT
+          
+          /**
+           * Runs the Python OCR script using the screenshot buffer as input.
+           *
+           * Expects:
+           *   <extensionRoot>/python-ocr/venv/Scripts/python.exe
+           *   <extensionRoot>/python-ocr/ocr_service.py
+           *
+           * Returns an array of OCR result objects parsed from the Python script's stdout,
+           * where each object typically includes:
+           *   - text: The recognized string from the image
+           *   - confidence: A floating-point confidence score
+           *   - bbox: An array [minX, minY, maxX, maxY] bounding the recognized text
+           */
+          export async function runPythonOcr(screenshotBuffer: Buffer): Promise<any[]> {
+            // 1) Retrieve our extension context from the shared manager.
+            //    This helps us access the extension's installation root and storage paths.
+            const extensionContext = getExtensionContext();
+          
+            // 2) The extension's root directory where python-ocr folder resides.
+            const extensionRoot = extensionContext.extensionUri.fsPath;
+          
+            // 3) Build the full paths to the Python executable & the OCR script:
+            //    python.exe is assumed under the venv, while ocr_service.py performs EasyOCR.
+            const pythonPath = path.join(
+              extensionRoot,
+              'python-ocr',
+              'venv',
+              'Scripts',
+              'python.exe'
+            );
+            const scriptPath = path.join(extensionRoot, 'python-ocr', 'ocr_service.py');
+          
+            // 3A) Verify both python.exe and the script exist to avoid runtime issues.
+            if (!fs.existsSync(pythonPath)) {
+              throw new Error(\`Cannot find Python interpreter at: \${pythonPath}\`);
+            }
+            if (!fs.existsSync(scriptPath)) {
+              throw new Error(\`Cannot find OCR script at: \${scriptPath}\`);
+            }
+          
+            // 4) Generate a unique temporary file name for the screenshot (PNG).
+            const tempName = \`temp_screenshot_\${randomBytes(4).toString('hex')}.png\`;
+          
+            // By using globalStoragePath, we ensure a consistent place to store files,
+            // even if a user has no local workspace open.
+            const tempFilePath = path.join(extensionContext.globalStoragePath, tempName);
+          
+            // 4A) Create the globalStoragePath folder if it doesn't exist, to ensure we can write a file.
+            if (!fs.existsSync(extensionContext.globalStoragePath)) {
+              fs.mkdirSync(extensionContext.globalStoragePath, { recursive: true });
+            }
+          
+            // 4B) Write the screenshot data to the temp file so the Python script has a real image to read.
+            try {
+              fs.writeFileSync(tempFilePath, screenshotBuffer);
+            } catch (err) {
+              throw new Error(\`Failed to write temp file at \${tempFilePath}: \${err}\`);
+            }
+          
+            // 5) Spawn the Python process, passing the script and the temp file path as arguments.
+            return new Promise((resolve, reject) => {
+              const pyProcess = spawn(pythonPath, [scriptPath, tempFilePath], {
+                cwd: extensionRoot, // Ensures correct working directory for the script
+              });
+          
+              let stdoutData = '';
+              let stderrData = '';
+          
+              pyProcess.stdout.on('data', (chunk) => {
+                stdoutData += chunk.toString();
+              });
+          
+              pyProcess.stderr.on('data', (chunk) => {
+                stderrData += chunk.toString();
+              });
+          
+              // Handle the script's exit event:
+              pyProcess.on('close', (code) => {
+                // Attempt to remove the temp file, whether success or fail.
+                try {
+                  fs.unlinkSync(tempFilePath);
+                } catch (cleanupErr) {
+                  console.warn(\`Warning: Failed to remove temp file: \${tempFilePath}\`, cleanupErr);
+                }
+          
+                if (code === 0) {
+                  // If exit code 0, parse JSON from stdout.
+                  try {
+                    const results = JSON.parse(stdoutData);
+                    resolve(results);
+                  } catch (err) {
+                    reject(
+                      new Error(
+                        \`Failed to parse JSON output from Python OCR script.\n\` +
+                        \`Error: \${err}\n\nRaw stdout:\n\${stdoutData}\`
+                      )
+                    );
+                  }
+                } else {
+                  // Non-zero exit code => some error occurred during OCR or script execution.
+                  const errorMessage =
+                    \`Python OCR script exited with code \${code}.\n\` +
+                    \`stderr:\n\${stderrData.trim()}\n\` +
+                    \`stdout:\n\${stdoutData.trim()}\n\` +
+                    \`Check that your python-ocr setup is correct.\`;
+          
+                  // Optionally display a VSCode UI message for clarity.
+                  vscode.window.showErrorMessage(errorMessage);
+                  reject(new Error(errorMessage));
+                }
+              });
+          
+              // If the Python process fails to spawn at all:
+              pyProcess.on('error', (err) => {
+                try {
+                  fs.unlinkSync(tempFilePath);
+                } catch (cleanupErr) {
+                  console.warn(\`Warning: Failed to remove temp file: \${tempFilePath}\`, cleanupErr);
+                }
+                reject(new Error(\`Failed to spawn Python OCR process: \${err}\`));
+              });
+            });
+          }
+            </code></pre>
+            <p class="text-sm">
+              This file provides the link between Blueprint AI and its Python-based
+              OCR workflow. After writing the screenshot buffer to a temporary file, the <code>runPythonOcr</code>
+              function spawns a Python process to run <code>ocr_service.py</code>. That script uses
+              EasyOCR to detect text in the image, returning a JSON array of recognized lines (including
+              confidence scores and bounding boxes). Upon successful completion, the resulting text
+              blocks are parsed and sent back to the TypeScript layer for further summarization by
+              the AI prompts. Any error or Python exit code mismatch is handled gracefully, ensuring
+              the system can surface useful debug info if something goes wrong.
+            </p>
+          </section>
+          
+        
+          <section id="python-ocr-service" class="mb-4">
+            <h3>5) ocr_service.py</h3>
+            <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin:0 auto;"><code>
+          import sys
+          import json
+          import cv2
+          import numpy as np
+          import easyocr
+          
+          def upscale_if_needed(img_bgr, min_width=1200):
+              """
+              If the image width is below min_width, scale it up by a factor
+              that ensures at least min_width. Helps EasyOCR see small fonts better.
+              """
+              h, w = img_bgr.shape[:2]
+              if w < min_width:
+                  scale_factor = min_width / w
+                  new_w = int(w * scale_factor)
+                  new_h = int(h * scale_factor)
+                  img_bgr = cv2.resize(img_bgr, (new_w, new_h), interpolation=cv2.INTER_CUBIC)
+              return img_bgr
+          
+          def minimal_preprocess(image_path: str):
+              """
+              Minimal approach:
+              1) Load color image with OpenCV
+              2) If width < 1200, upscale
+              3) Convert to grayscale
+              (No further morphological or thresholding to avoid corrupting simpler images.)
+              """
+              img_bgr = cv2.imread(image_path, cv2.IMREAD_COLOR)
+              if img_bgr is None:
+                  raise ValueError(f"Could not load image from: {image_path}")
+          
+              # 1) Upscale if needed
+              img_bgr = upscale_if_needed(img_bgr, min_width=1200)
+          
+              # 2) Convert to grayscale
+              gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+              return gray
+          
+          def run_easyocr(numpy_image):
+              """
+              Use EasyOCR with GPU if available (fallback CPU).
+              paragraph=True merges lines into blocks for complicated text.
+              """
+              # ‘verbose=False’ to skip progress bars that sometimes cause Unicode issues on Windows
+              reader = easyocr.Reader(['en'], gpu=True, verbose=False)
+              results = reader.readtext(numpy_image, detail=1, paragraph=True)
+              return results
+          
+          def main():
+              # Attempt to set stdout to UTF-8 on Windows, in case the console is CP1252
+              try:
+                  sys.stdout.reconfigure(encoding='utf-8')
+              except Exception:
+                  pass
+          
+              if len(sys.argv) < 2:
+                  print("Usage: ocr_service.py <IMAGE_PATH>", file=sys.stderr)
+                  sys.exit(1)
+          
+              image_path = sys.argv[1]
+          
+              # 1) Minimal Preprocessing
+              processed = minimal_preprocess(image_path)
+          
+              # 2) Perform OCR
+              ocr_results = run_easyocr(processed)
+          
+              # 3) Build structured results, handling variable output formats
+              output_data = []
+              for result in ocr_results:
+                  # result might be (coords, text) or (coords, text, conf)
+                  if not isinstance(result, (list, tuple)):
+                      continue
+                  if len(result) < 2:
+                      continue
+          
+                  coords = result[0]
+                  text = result[1]
+                  confidence = result[2] if len(result) >= 3 else 1.0
+          
+                  # coords => bounding box corners
+                  xs = [pt[0] for pt in coords]
+                  ys = [pt[1] for pt in coords]
+                  min_x, max_x = int(min(xs)), int(max(xs))
+                  min_y, max_y = int(min(ys)), int(max(ys))
+          
+                  output_data.append({
+                      "text": text,
+                      "confidence": float(confidence),
+                      "bbox": [min_x, min_y, max_x, max_y],
+                  })
+          
+              # 4) Print JSON to stdout
+              print(json.dumps(output_data, ensure_ascii=False))
+          
+          if __name__ == "__main__":
+              main()
+            </code></pre>
+          
+            <p class="text-sm">
+              This Python script performs OCR using EasyOCR in a
+              stepwise fashion. It first upscales images below a certain width (improving recognition
+              on small fonts), then converts them to grayscale to simplify processing. The
+              <code>run_easyocr</code> function is configured with <code>paragraph=True</code> to
+              merge lines into blocks for more coherent results. Finally, each recognized line is
+              collected along with its bounding box and confidence score, and output as structured
+              JSON to <code>stdout</code>. This JSON is then consumed by the TypeScript layer via
+              <code>pythonBridge.ts</code>.
+            </p>
+          
+            
+          
+            <section id="mini-code-samples" class="mb-5">
+              <h2>The Frontend</h2>
 
-        <!-- 2.2. Properties Sidebar -->
-        <section id="feature-properties-sidebar" class="mb-5">
-          <h4>Properties Sidebar</h4>
-          <p>
-            <em>
-              Implementation details on the right-hand sidebar, how properties
-              are generated for the selected component, toggles for AI iterative
-              chat, etc.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Properties Sidebar
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram showing the flow for property updates
-              in the sidebar.]
-            </p>
-          </div>
-        </section>
+              <section id="ai-sidebar-section" class="mb-5">
+                <h2>AiSidebar Component</h2>
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="sidebar-code-display">
+                Loading sidebar code...
+                </code></pre>
+                <script>
+                  fetch('/implementation-assets/sidebarCode.txt')
+                    .then(response => response.text())
+                    .then(data => {
+                      document.getElementById('sidebar-code-display').textContent = data;
+                    })
+                    .catch(err => {
+                      document.getElementById('sidebar-code-display').textContent = 'Error loading sidebar code.';
+                    });
+                </script>
+                <p class="text-sm">
+                  The AiSidebar component is a sophisticated, interactive module designed to streamline the integration of AI-driven design enhancements within the Craft.js editor.
+                </p>
 
-        <!-- 2.3. Component Sidebar -->
-        <section id="feature-component-sidebar" class="mb-5">
-          <h4>Component Sidebar</h4>
-          <p>
-            <em>
-              Implementation details on the left-hand component list, including
-              search/filter logic, how draggable components are set up, etc.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Component Sidebar
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram illustrating how components are listed
-              and dragged.]
-            </p>
-          </div>
-        </section>
+                <p class="text-sm">
+                  It establishes a mini “AI workflow” that seamlessly combines multiple input modalities and real-time feedback mechanisms. Specifically, the component leverages Craft.js to continuously monitor and reflect the currently selected element in the editor, ensuring that any AI-generated modifications are contextually relevant. Additionally, it interfaces with a global store to persist and synchronize user prompts, guaranteeing that changes remain consistent across sessions.
+                </p>
 
-        <!-- 2.4. Layout Sidebar -->
-        <section id="feature-layout-sidebar" class="mb-5">
-          <h4>Layout Sidebar</h4>
-          <p>
-            <em>
-              Implementation details for margin/padding, the layers section,
-              expand/collapse of components, renaming, hiding, and reordering.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Layout Sidebar
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram showing how the Layout tab or Layers
-              section operates.]
-            </p>
-          </div>
-        </section>
+                <p class="text-sm">
+                  Users can input their design intentions through a text area or by uploading an image. The image undergoes client-side validation and is converted into a base64-encoded preview for immediate visual confirmation.
+                </p>
 
-        <!-- 2.5. Pages Sidebar -->
-        <section id="feature-pages-sidebar" class="mb-5">
-          <h4>Pages Sidebar</h4>
-          <p>
-            <em>
-              Implementation details for the multi-page handling: creating,
-              selecting, renaming, deleting pages, and suggested pages flow.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Pages Sidebar
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram illustrating page creation and
-              switching flow.]
-            </p>
-          </div>
-        </section>
+                <p class="text-sm">
+                  When the “Generate” button is triggered, the component simulates an asynchronous AI process that processes the user’s input—whether textual, visual, or a combination of both—to produce a preliminary design layout. This process is visually supported by a loading overlay that informs the user of ongoing operations.
+                </p>
 
-        <!-- 2.6. Undo/Redo, Save Locally, Upload, Download -->
-        <section id="feature-undo-redo-save" class="mb-5">
-          <h4>Undo/Redo, Save, Upload, Download</h4>
-          <p>
-            <em>
-              Implementation details about version control at the UI level,
-              local storage or file-based saving, re-importing JSON, etc.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Undo/Redo & Save logic
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram demonstrating the save/load cycle.]
-            </p>
-          </div>
-        </section>
+                <p class="text-sm">
+                  Upon completion of the AI generation, the component presents a generated preview of the proposed changes. If the <code>showAcceptChanges</code> property is enabled, the interface dynamically reveals accept and reject options, allowing users to finalize or discard the AI modifications with granular control.
+                </p>
 
-        <!-- 2.7. Export Menu -->
-        <section id="feature-export-menu" class="mb-5">
-          <h4>Export Menu</h4>
-          <p>
-            <em>
-              Implementation details for exporting pages, including selecting
-              pages, generating HTML/CSS/JS, counting lines, time estimates,
-              etc.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for Export Menu
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram illustrating the export flow and
-              bundling steps.]
-            </p>
-          </div>
-        </section>
+                <p class="text-sm">
+                  This feedback loop not only promotes rapid prototyping but also empowers designers and developers to iteratively refine their projects with minimal disruption. Overall, the AiSidebar is engineered to bridge manual design input with automated AI enhancements, thereby fostering an efficient, user-centric, and adaptive design process.
+                </p>
+                
+              </section>
+              
+              <!-- Add new section importing exportMenu.txt -->
+          
+            <section id="export-menu-section" class="mb-5">
+                <h2>ExportMenu Component</h2>
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="export-menu-code-display">
+                Loading export menu code...
+                </code></pre>
+                <script>
+                  fetch('/implementation-assets/exportMenu.txt')
+                    .then(response => response.text())
+                    .then(data => {
+                      document.getElementById('export-menu-code-display').textContent = data;
+                    })
+                    .catch(err => {
+                      document.getElementById('export-menu-code-display').textContent = 'Error loading export menu code.';
+                    });
+                </script>
+                <p class="text-sm">
+                  The <strong>ExportMenu</strong> component is designed to capture the current layout from the Craft.js editor’s canvas, transform it into clean HTML, and prepare a basic CSS template for further editing. This is achieved by identifying the DOM element labeled <code>#droppable-canvas-border</code> and extracting its HTML structure to ensure that any user-configured elements and styles are preserved during export.
+                </p>
+                
+                <p class="text-sm">
+                  In its simplified form, the component maintains two key pieces of state: one for the generated HTML and another for a default CSS snippet. When the user clicks the <em>Export</em> button, the raw HTML is retrieved, beautified for readability, and saved in a React state variable. This streamlined HTML is then paired with minimal CSS to offer a starting point for any future design modifications.
+                </p>
+                
+                <p class="text-sm">
+                  Once the HTML and CSS are prepared, the <strong>ExportMenu</strong> transitions to the <code>ExportEditorView</code>, passing along the captured code. This ensures a seamless handoff, enabling the user to continue refining and customizing the exported layout within a more comprehensive editor interface. The <strong>ExportMenu</strong> thereby simplifies the process of extracting a layout from the editor for external usage.
+                </p>
+                
+                <p class="text-sm">
+                  Finally, the <strong>ExportMenu</strong> provides a concise yet effective user experience by combining clear layout extraction, basic styling defaults, and an intuitive UI flow. This minimalistic structure allows for straightforward integration with broader functionality, such as folder selection and multi-page exports, while maintaining clarity in its core export purpose.
+                </p>
+                
 
-        <!-- 3. AI Iterative Chat Menu -->
-        <section id="feature-ai-iterative-chat" class="mb-5">
-          <h3>AI Iterative Chat Menu</h3>
-          <p>
-            <em>
-              Implementation details for how the AI chat merges user prompts
-              with referencing multiple selected canvas elements, how upvoting
-              or downvoting responses works, etc.
-            </em>
-          </p>
-          <div style="margin-top: 10px">
-            <strong>Code Snippet (Placeholder):</strong>
-            <pre><code>// Example snippet for AI Iterative Chat Menu
-      // Insert relevant code here...
-      </code></pre>
-          </div>
-          <div style="margin-top: 10px">
-            <strong>Diagram (Placeholder):</strong>
-            <p>
-              [Add or reference a diagram showing how user prompts connect to
-              the AI generation flow and how the changes are applied to the
-              canvas.]
-            </p>
-          </div>
-        </section>
+            </section>
+
+            <!-- Add new section importing exportEditorView.txt -->
+            <section id="export-editor-view-section" class="mb-5">
+                <h2>ExportEditorView Component</h2>
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="export-editor-view-code-display">
+                Loading export editor view code...
+                </code></pre>
+                <script>
+                  fetch('/implementation-assets/exportEditorView.txt')
+                    .then(response => response.text())
+                    .then(data => {
+                      document.getElementById('export-editor-view-code-display').textContent = data;
+                    })
+                    .catch(err => {
+                      document.getElementById('export-editor-view-code-display').textContent = 'Error loading export editor view code.';
+                    });
+                </script>
+                <p class="text-sm">
+                  The <strong>ExportEditorView</strong> component serves as a post-processing workspace where users can review, refine, and finalize the HTML/CSS code generated by the <code>ExportMenu</code>. Upon receiving the initial HTML and CSS, it uses <strong>Monaco Editor</strong> to provide a rich, code-centric editing environment. This approach facilitates direct manipulation of the exported layout, giving developers the flexibility to tweak or enhance their pages before saving.
+                </p>
+                
+                <p class="text-sm">
+                  Beyond simply displaying the raw code, the <strong>ExportEditorView</strong> runs a specialized routine that gathers computed styles from every element within <code>#droppable-canvas-border</code>. These styles, which include the precise browser-calculated CSS properties, are then beautified and appended to the existing stylesheet. This ensures that any responsive or dynamic changes made during the design process are accurately captured in the final export.
+                </p>
+                
+                <p class="text-sm">
+                  The component also features a <em>download as ZIP</em> function, bundling the updated HTML and CSS files into a compressed archive. This allows users to conveniently store and share their designs. By incorporating <strong>JSZip</strong> and <strong>FileSaver</strong>, the <strong>ExportEditorView</strong> automates the packaging process, minimizing manual file handling.
+                </p>
+                
+                <p class="text-sm">
+                  Ultimately, the <strong>ExportEditorView</strong> component bridges the gap between raw layout output and a polished, ready-to-use design asset. It elevates the user experience by integrating real-time code editing and practical file export capabilities, thereby enhancing the efficiency and completeness of the Craft.js editor’s export workflow.
+                </p>
+              </section>
+
+              <!-- Add a section importing containerComponent.txt -->
+              <section id="container-component-section" class="mb-5">
+                <h2>ContainerComponent</h2>
+                <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="container-component-code-display">
+                Loading container component code...
+                </code></pre>
+                <script>
+                  fetch('/implementation-assets/containerComponent.txt')
+                    .then(response => response.text())
+                    .then(data => {
+                      document.getElementById('container-component-code-display').textContent = data;
+                    })
+                    .catch(err => {
+                      document.getElementById('container-component-code-display').textContent = 'Error loading container component code.';
+                    });
+                </script>
+                <p class="text-sm"> The <strong>Container</strong> component is a flexible, multi-purpose layout element specifically designed for use with Craft.js. It supports four distinct layout types (<em>container</em>, <em>row</em>, <em>section</em>, and <em>grid</em>) to accommodate various design scenarios—ranging from basic flex boxes to more complex grid structures. By merging default properties and user-defined settings, the <strong>Container</strong> makes it straightforward to configure margins, padding, borders, shadows, and background colors, ensuring visually appealing and well-organized interfaces. </p> <p class="text-sm"> This component leverages Craft.js hooks like <code>useNode</code> to integrate seamlessly with the editor environment, allowing developers to drag, drop, and resize elements within a live editing interface. For instance, if the <strong>Container</strong> is not the root element, it wraps its contents in a custom <code>Resizer</code> component, enabling users to manually adjust its dimensions. If it <em>is</em> the root, it enforces constraints and styles that differentiate it from child containers. </p> <p class="text-sm"> Each layout type is accompanied by relevant style properties—like gap, flex direction, grid columns, or row gap—giving precise control over element alignment and spacing. This approach keeps your layouts adaptable and modular, while the <strong>Container</strong> component’s user-friendly settings panel (exposed through <code>ContainerProperties</code>) simplifies customization.
+        
+                  <section id="data-storage" class="mb-5">
+                    <h2>Data storage</h2>
+                    <pre style="background-color:#f8f8f8; padding:1rem; overflow:auto; text-align:left; margin: 0 auto;"><code id="dataStore-code-display">
+                      Loading dataStore code...
+                    </code></pre>
+                    <script>
+                      fetch('/implementation-assets/dataStore.txt')
+                        .then(response => response.text())
+                        .then(data => {
+                          document.getElementById('dataStore-code-display').textContent = data;
+                        })
+                        .catch(err => {
+                          document.getElementById('dataStore-code-display').textContent = 'Error loading dataStore code.';
+                        });
+                    </script>
+                    <p>
+                      In Blueprint AI, all persistent data is stored locally in the user's
+                      browser via
+                      <code>localStorage</code>—specifically keyed under
+                      <code>"blueprint-ai-data"</code>. This local storage mechanism is
+                      powered by the logic in our <code>store.ts</code> file and is designed
+                      to conditionally load and save project data for every session of the
+                      Blueprint AI extension. This allows for immediate retrieval of user
+                      preferences and project details within the same browser environment,
+                      without reliance on external databases or cloud services. Everything
+                      below describes precisely how Blueprint AI performs, updates, and
+                      retrieves these data fields from <code>localStorage</code>, always
+                      conditioned on the logic in <code>store.ts</code>:
+            
+                      <br /><br />
+            
+                      1) <strong>BlueprintAI Store State Shape:</strong><br />
+                      &nbsp;&nbsp;• Our local store is defined by the
+                      <code>StoreState</code> interface in <code>store.ts</code>, which
+                      includes <em>exactly</em> four fields: <code>pages</code>,
+                      <code>selectedPageId</code>, <code>suggestedPages</code>, and
+                      <code>userPrompt</code>.
+                      <br />
+                      &nbsp;&nbsp;• The <code>pages</code> array is an exhaustive list of
+                      all the user-created or AI-suggested pages, each represented by the
+                      <code>Page</code> interface (<code>id</code>, <code>name</code>, an
+                      optional <code>thumbnail</code>, and the <code>layout</code> tree in
+                      CraftJS JSON). By default, only one page exists (<code>id: 1</code>,
+                      named “Page 1”). Blueprint AI conditionally populates this array each
+                      time the user or the AI system adds or modifies a page.
+                      <br />
+                      &nbsp;&nbsp;• The <code>selectedPageId</code> indicates which page is
+                      currently being edited in the Blueprint AI interface. This
+                      <em>conditional pointer</em> ensures that the design canvas,
+                      properties sidebar, and other features always reference the
+                      appropriate page.
+                      <br />
+                      &nbsp;&nbsp;• The <code>suggestedPages</code> array holds additional
+                      recommended page names (e.g., “Account,” “Buy Again,” “Best Sellers,”
+                      “Returns &amp; Orders”) that Blueprint AI proposes to the user. These
+                      suggestions are surfaced in the Pages Sidebar or within other modals
+                      to guide potential new pages the user may want to generate.
+                      <br />
+                      &nbsp;&nbsp;• The <code>userPrompt</code> string is a flexible area
+                      for saving any text prompt that the user entered in the AI-driven
+                      flows (such as designing a new layout, adjusting an existing design,
+                      or describing new features). Each time a user interacts with the
+                      iterative AI chat or the “Create With Imagination” page builder,
+                      Blueprint AI conditionally updates <code>userPrompt</code> so that it
+                      remains accessible across sessions.
+            
+                      <br /><br />
+            
+                      2) <strong>Default Local State:</strong><br />
+                      &nbsp;&nbsp;• The initial data structure is declared inside
+                      <code>storeState</code> in <code>store.ts</code>. This default
+                      includes one sample page and an empty <code>userPrompt</code>—ensuring
+                      a consistent starting point for first-time or reset sessions in
+                      Blueprint AI. The store is primed with four default suggested pages.
+                      This ensures that even before the user creates or loads anything,
+                      there's a clear reference in the UI to build from.
+                      <br />
+                      &nbsp;&nbsp;• Blueprint AI only populates local storage with these
+                      defaults if no prior saved data exists under
+                      <code>"blueprint-ai-data"</code>. If there is existing data, the store
+                      merges the fields from local storage into memory conditionally.
+            
+                      <br /><br />
+            
+                      3) <strong>Conditional Loading at Startup:</strong><br />
+                      &nbsp;&nbsp;• On every launch of the Blueprint AI extension, the code
+                      attempts to retrieve the JSON string from
+                      <code>localStorage.getItem(STORAGE_KEY)</code>. If
+                      <code>savedData</code> is non-null, it conditionally parses the string
+                      and merges each key into the current <code>storeState</code>. For
+                      example, if the parsed data has <code>pages</code>, it updates
+                      <code>storeState.pages</code>; if it has <code>selectedPageId</code>,
+                      it sets that too, etc.
+                      <br />
+                      &nbsp;&nbsp;• If the user had previously created multiple pages or
+                      typed in a multi-sentence prompt, all of that is immediately reloaded
+                      into the Blueprint AI interface on extension open. This ensures a
+                      frictionless user experience where previous session designs or AI
+                      prompts are restored exactly as they left them.
+            
+                      <br /><br />
+            
+                      4) <strong>Accessing Stored Data (Getters):</strong><br />
+                      &nbsp;&nbsp;• Blueprint AI uses dedicated
+                      <em>getter functions</em> from <code>store.ts</code> to conditionally
+                      read data from memory, such as <code>getPages()</code> for the full
+                      pages list, <code>getSelectedPage()</code> for the currently active
+                      page object, <code>getSuggestedPages()</code> for recommended page
+                      names, and <code>getUserPrompt()</code> for the last user prompt.
+                      Because the store synchronizes to local storage on demand, these
+                      getter calls reflect precisely what's persisted in the browser when
+                      saved.
+                      <br />
+                      &nbsp;&nbsp;• For example, when the user opens the
+                      <strong>Pages Sidebar</strong> in Blueprint AI, the application calls
+                      <code>getPages()</code> to render the entire list of local pages.
+                      Likewise, the <strong>AI Chat Flow</strong> reads
+                      <code>getUserPrompt()</code>
+                      to show the user’s most recent text input in the chat or iteration
+                      interface.
+            
+                      <br /><br />
+            
+                      5) <strong>Handling State Changes (Subscriptions):</strong><br />
+                      &nbsp;&nbsp;• Multiple arrays of <em>listener functions</em> exist
+                      within <code>store.ts</code>, each of which is notified conditionally
+                      when a relevant section of the store changes (e.g.,
+                      <code>pageListeners</code>, <code>selectedPageListeners</code>, and
+                      <code>promptListeners</code>). This ensures that whenever the user or
+                      the AI modifies the layout or updates the user prompt, the
+                      corresponding parts of the Blueprint AI interface re-render
+                      automatically.
+                      <br />
+                      &nbsp;&nbsp;• By subscribing to <code>pageListeners</code>, any UI or
+                      logic that depends on the array of pages or suggested pages will be
+                      refreshed. Similarly, components reliant on which page is currently
+                      selected subscribe to <code>selectedPageListeners</code>, and features
+                      tied to user input text watch <code>promptListeners</code>. This
+                      subscription model helps maintain a dynamic, reactive environment for
+                      the entire Blueprint AI design experience.
+            
+                      <br /><br />
+            
+                      6) <strong>Updating and Saving (Mutations):</strong><br />
+                      &nbsp;&nbsp;• <code>setPages(newPages)</code> replaces the entire
+                      local <code>pages</code> array with a new list. For example, the AI
+                      might generate a fresh layout for the user’s “Buy Again” page, and in
+                      response, <code>setPages</code> stores the updated structure. In
+                      Blueprint AI, once the user finalizes or accepts an AI response, the
+                      relevant page is replaced or appended.
+                      <br />
+                      &nbsp;&nbsp;• <code>updatePage(id, partialData)</code> merges changes
+                      into a particular <code>Page</code> object, such as if the user
+                      updates the name from “Page 1” to “Home Page,” or modifies the layout
+                      JSON with an AI-generated snippet. This function is used heavily in
+                      any direct manipulation of a single page (dragging a component in the
+                      CraftJS canvas, etc.).
+                      <br />
+                      &nbsp;&nbsp;• <code>setSelectedPageId(id)</code> changes which page is
+                      currently active. For instance, if the user navigates from “Page 1” to
+                      “Best Sellers,” <code>setSelectedPageId</code> updates the local store
+                      and triggers <code>selectedPageListeners</code> to recast the design
+                      canvas.
+                      <br />
+                      &nbsp;&nbsp;• <code>setSuggestedPages(newPages)</code> is called
+                      conditionally when the AI or user wants to refresh the recommended
+                      page list. Blueprint AI might push new suggestions after seeing what
+                      the user typed into the AI Chat. This ensures
+                      <strong>Pages Sidebar</strong> always shows relevant next-page ideas.
+                      <br />
+                      &nbsp;&nbsp;• <code>setUserPrompt(newPrompt)</code> is invoked
+                      whenever the user edits the text prompt or when the AI modifies it for
+                      iterative flows. The store updates
+                      <code>userPrompt</code> accordingly, and the entire system can respond
+                      in real time.
+            
+                      <br /><br />
+            
+                      7) <strong>Local Persistence Workflow:</strong><br />
+                      &nbsp;&nbsp;• At any point after these setter or updater functions
+                      run, the
+                      <code>saveStoreToLocalStorage()</code> function can be called to write
+                      the current <code>storeState</code> object back into
+                      <code>localStorage</code>. Internally, it uses
+                      <code>JSON.stringify</code> on the entire store (pages,
+                      selectedPageId, suggestedPages, userPrompt) and places it under the
+                      key <code>STORAGE_KEY</code>, i.e. <code>"blueprint-ai-data"</code>.
+                      <br />
+                      &nbsp;&nbsp;• Because saving happens conditionally upon user
+                      interactions or explicit calls, no large overhead or complex logic is
+                      needed. The user can also trigger a “Save Locally” button from within
+                      Blueprint AI’s main sidebar, which calls
+                      <code>saveStoreToLocalStorage()</code> in the background.
+            
+                      <br /><br />
+            
+                      8) <strong>Resetting the Store:</strong><br />
+                      &nbsp;&nbsp;• When the user requests a full reset—perhaps by hitting
+                      “Refresh All Pages” or “Clear Storage”—Blueprint AI calls
+                      <code>clearStoreFromLocalStorage()</code>. This removes the entire
+                      key/value pair from <code>localStorage</code> and resets the in-memory
+                      <code>storeState</code> to the default structure (one page named “Page
+                      1,” default suggestions, and empty user prompt).
+                      <br />
+                      &nbsp;&nbsp;• Subscriptions are notified once again so that any UI
+                      depending on the store quickly reverts to a blank state. This is
+                      crucial for scenarios where the user wishes to begin a fresh project
+                      or discard all AI-suggested designs.
+            
+                      <br /><br />
+            
+                      9) <strong>Blueprint AI Context-Specific Usage:</strong><br />
+                      &nbsp;&nbsp;• <em>First Page Creator Flow:</em> By default, a single
+                      “Page 1” is stored. As soon as the user types a text prompt (like
+                      “Create an eCommerce homepage with a big hero banner”) or uploads an
+                      image, the AI generates a new layout. The store’s
+                      <code>pages</code> array is updated, and
+                      <code>saveStoreToLocalStorage()</code> is invoked. If the user closes
+                      the extension and reopens it, the generated page is restored from
+                      <code>localStorage</code>.
+                      <br />
+                      &nbsp;&nbsp;• <em>Main Interface &amp; Canvas:</em> If the user
+                      reorders a button or changes a text component inside the CraftJS
+                      canvas, <code>updatePage()</code> merges the new layout structure. The
+                      <strong>Properties Sidebar</strong> might also call
+                      <code>updatePage()</code> when editing margins, backgrounds, or other
+                      design attributes. Each modification can be saved locally so that the
+                      user’s design is retained.
+                      <br />
+                      &nbsp;&nbsp;• <em>Pages Sidebar &amp; Suggested Pages:</em> The
+                      <code>suggestedPages</code> field in <code>storeState</code> is
+                      updated conditionally to reflect any new or removed suggestions. Once
+                      the user picks one of these suggestions (“Returns &amp; Orders,” for
+                      example) and requests an AI layout, the store adds a new page object.
+                      No external DB is used; it is purely local to
+                      <code>blueprint-ai-data</code>.
+                      <br />
+                      &nbsp;&nbsp;• <em>Export Menu:</em> The selected pages to export and
+                      their layout data are all pulled from <code>store.ts</code>. Because
+                      everything is stored locally, the user’s entire editing session is
+                      readily available to transform into a downloadable zip. This is done
+                      without sending any user design data to external services once it is
+                      in the local store.
+            
+                      <br /><br />
+            
+                      Therefore, Blueprint AI ensures that every aspect of local data
+                      management—from retrieving initial saved states on extension load, to
+                      conditionally updating pages during the design process, to finalizing
+                      or clearing data—is precisely handled through the
+                      <code>store.ts</code> file. This local storage approach offers
+                      immediate read/write access, zero external dependencies, and complete
+                      user control over saving and resetting, reflecting Blueprint AI’s
+                      mission to keep front-end development streamlined, private, and
+                      user-friendly.
+                    </p>
+                  </section>
+        <!--  -->
       </section>
 
       <section

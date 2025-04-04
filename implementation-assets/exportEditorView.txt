@@ -1,0 +1,115 @@
+import React, { useEffect, useState } from 'react';
+import Editor from '@monaco-editor/react';
+import { DefaultButton, PrimaryButton } from '@fluentui/react';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+import { css as beautifyCss } from 'js-beautify';
+
+interface ExportEditorViewProps {
+  /** Unique page identifier. */
+  pageId: string;
+  /** Page display name. */
+  pageName: string;
+  /** Initial HTML to show in the editor. */
+  initialHtml: string;
+  /** Initial CSS to show in the editor. */
+  initialCss: string;
+  /** Callback when user navigates back. */
+  onBack: () => void;
+}
+
+/**
+ * Shows two Monaco editors (for HTML & CSS), then lets user download a .zip
+ * containing those two files. Some 'computed styles' logic is also demonstrated.
+ */
+export default function ExportEditorView({
+  pageId,
+  pageName,
+  initialHtml,
+  initialCss,
+  onBack,
+}: ExportEditorViewProps) {
+  const [htmlCode, setHtmlCode] = useState(initialHtml);
+  const [cssCode, setCssCode] = useState(initialCss);
+
+  /**
+   * On mount, gather computed CSS from #droppable-canvas-border,
+   * beautify it, and append to existing CSS.
+   */
+  useEffect(() => {
+    const container = document.getElementById('droppable-canvas-border');
+    if (!container) return;
+
+    let computedCss = '';
+    const elements = [container, ...container.querySelectorAll('*')];
+
+    elements.forEach((el, idx) => {
+      const selector = idx === 0
+        ? '#droppable-canvas-border'
+        : `#droppable-canvas-border *:nth-child(${idx})`;
+
+      const styles = window.getComputedStyle(el);
+      let rule = `${selector} {\n`;
+      Array.from(styles).forEach((prop) => {
+        rule += `  ${prop}: ${styles.getPropertyValue(prop)};\n`;
+      });
+      rule += '}\n\n';
+      computedCss += rule;
+    });
+
+    const beautified = beautifyCss(computedCss, { indent_size: 2 });
+    setCssCode((prev) => `${prev}\n\n/* Computed CSS Below */\n${beautified}`);
+  }, []);
+
+  /**
+   * Packs the current HTML/CSS into a .zip file and downloads it.
+   */
+  async function downloadAsZip(): Promise<void> {
+    const zip = new JSZip();
+    zip.file(`${pageName}.html`, htmlCode);
+    zip.file(`${pageName}.css`, cssCode);
+
+    const content = await zip.generateAsync({ type: 'blob' });
+    saveAs(content, `${pageName}.zip`);
+  }
+
+  return (
+    <div style={{ width: '90vw', margin: '0 auto' }}>
+      <h3>
+        {pageName} (ID: {pageId})
+      </h3>
+
+      {/* Minimal two-editor setup */}
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ flex: 1 }}>
+          <h5>HTML Editor</h5>
+          <Editor
+            height="40vh"
+            language="html"
+            value={htmlCode}
+            onChange={(v) => v && setHtmlCode(v)}
+          />
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <h5>CSS Editor</h5>
+          <Editor
+            height="40vh"
+            language="css"
+            value={cssCode}
+            onChange={(v) => v && setCssCode(v)}
+          />
+        </div>
+      </div>
+
+      <div style={{ marginTop: '1rem' }}>
+        <DefaultButton text="Back" onClick={onBack} />
+        <PrimaryButton
+          text="Download Zip"
+          style={{ marginLeft: '1rem' }}
+          onClick={downloadAsZip}
+        />
+      </div>
+    </div>
+  );
+}
