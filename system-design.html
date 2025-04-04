@@ -1,159 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blueprint AI - System Design</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Your Custom CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <!-- Font Awesome (if needed) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body class="d-flex flex-column min-vh-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blueprint AI - System Design</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome (if needed) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header>
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <!-- Logo/Brand -->
+          <a class="navbar-brand" href="index.html">
+            <img
+              src="logoText.png"
+              alt="Blueprint AI Logo"
+              class="navbar-logo"
+            />
+          </a>
+          <!-- Toggle for mobile view -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-  <header>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <!-- Logo/Brand -->
-        <a class="navbar-brand" href="index.html">
-          <img src="logoText.png" alt="Blueprint AI Logo" class="navbar-logo">
-        </a>
-        <!-- Toggle for mobile view -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <!-- Nav links -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <!-- Home Link -->
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="requirements.html">Requirements</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="research.html">Research</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ui-design.html">UI Design</a>
+              </li>
 
-        <!-- Nav links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <!-- Home Link -->
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="requirements.html">Requirements</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="research.html">Research</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="ui-design.html">UI Design</a>
-            </li>
+              <!-- System Design link marked as active with a dropdown -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle active"
+                  href="system-design.html"
+                  id="systemDesignDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  System Design
+                </a>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="systemDesignDropdown"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#system-architecture-diagram"
+                      >System architecture diagram</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="system-design.html#site-map"
+                      >Site Map</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#sequence-diagrams"
+                      >Sequence Diagrams</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#design-patterns"
+                      >Design Patterns</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#class-diagrams"
+                      >Class Diagrams</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#data-storage"
+                      >Data storage</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="system-design.html#packages-and-apis-defined"
+                      >Packages and APIs defined</a
+                    >
+                  </li>
+                </ul>
+              </li>
 
-            <!-- System Design link marked as active with a dropdown -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active"
-                 href="system-design.html"
-                 id="systemDesignDropdown"
-                 role="button"
-                 data-bs-toggle="dropdown"
-                 aria-expanded="false">
-                System Design
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="systemDesignDropdown">
-                <li><a class="dropdown-item" href="system-design.html#system-architecture-diagram">System architecture diagram</a></li>
-                <li><a class="dropdown-item" href="system-design.html#site-map">Site Map</a></li>
-                <li><a class="dropdown-item" href="system-design.html#sequence-diagrams">Sequence Diagrams</a></li>
-                <li><a class="dropdown-item" href="system-design.html#design-patterns">Design Patterns</a></li>
-                <li><a class="dropdown-item" href="system-design.html#class-diagrams">Class Diagrams</a></li>
-                <li><a class="dropdown-item" href="system-design.html#data-storage">Data storage</a></li>
-                <li><a class="dropdown-item" href="system-design.html#packages-and-apis-defined">Packages and APIs defined</a></li>
-              </ul>
-            </li>
-
-            <!-- Remaining nav links -->
-            <li class="nav-item">
-              <a class="nav-link" href="implementation.html">Implementation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="testing.html">Testing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="evaluation.html">Evaluation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appendices.html">Appendices</a>
-            </li>
-            <li class="nav-item">
+              <!-- Remaining nav links -->
+              <li class="nav-item">
+                <a class="nav-link" href="implementation.html"
+                  >Implementation</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="testing.html">Testing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="evaluation.html">Evaluation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="appendices.html">Appendices</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="blog.html">Blog</a>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+
+      <!-- Page Title/Intro -->
+      <h1 class="my-5">System Design</h1>
+      <p>
+        Specifies the system architecture and structural components critical to
+        the software’s functionality.
+      </p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container flex-grow-1">
+      <!-- Sections inside the same container -->
+      <section
+        id="system-architecture-diagram"
+        class="mb-5"
+        style="margin-bottom: 2rem"
+      >
+        <h2 style="font-size: 1.75rem; margin-bottom: 1rem">
+          System Architecture Diagram
+        </h2>
+        <p style="margin-bottom: 1.5rem">
+          Below is a high-level diagram illustrating our AI-powered web page
+          creation workflow, the VS Code extension wrapper, and the internal
+          components—ranging from the Python OCR service to the CraftJS React
+          interface. Each subsystem plays a unique role in converting user
+          instructions and optional screenshots into finalized web pages.
+        </p>
+        <figure style="margin-bottom: 1.5rem">
+          <img
+            src="/system-architecture/system-architecture.png"
+            alt="System Architecture Diagram"
+            style="max-width: 100%; border: 1px solid #ccc"
+          />
+          <figcaption style="margin-top: 0.5rem; font-style: italic">
+            An overview of the VS Code extension, webview React editor, AI
+            services, and export pipeline
+          </figcaption>
+        </figure>
+        <p style="margin-bottom: 1rem">
+          The <strong>VS Code Extension Wrapper</strong> is responsible for
+          seamlessly embedding our React-based editor into the Visual Studio
+          Code environment. It provides a communication layer between front-end
+          interfaces (HTML/JS) and back-end Python services. When users open the
+          extension, they see a <strong>webview</strong> containing our
+          interactive <strong>React Editor</strong>, which includes:
+        </p>
+        <ul
+          style="margin-bottom: 1rem; list-style-type: disc; margin-left: 2rem"
+        >
+          <li>
+            <strong>CraftJS Editor:</strong> The drag-and-drop canvas where
+            pages are visually built using components such as containers,
+            buttons, text fields, images, and more.
+          </li>
+          <li>
+            <strong>Multiple Pages Support:</strong> Users can switch between or
+            create new pages, each represented as a distinct CraftJS layout.
+          </li>
+          <li>
+            <strong>Component Editing & Sidebar Panels:</strong> Allows setting
+            properties (color, text, size, etc.) and advanced layout controls.
+          </li>
+          <li>
+            <strong>Suggested Pages & Blueprint AI:</strong> Automated prompts
+            from the AI that recommend next pages to create or refine existing
+            layouts.
+          </li>
+          <li>
+            <strong>Message Listeners:</strong> Monitor data flow between the
+            front-end and extension back-end for tasks like saving, loading, and
+            exporting.
+          </li>
+        </ul>
+        <p style="margin-bottom: 1rem">
+          On the <strong>AI Generation</strong> side, there are multiple
+          functionalities that interface with the VS Code webview:
+        </p>
+        <ul
+          style="margin-bottom: 1rem; list-style-type: disc; margin-left: 2rem"
+        >
+          <li>
+            <strong>Image Generation & Text-to-Website:</strong> Enables users
+            to upload screenshots or text descriptions, which the AI then
+            transforms into structured CraftJS layouts.
+          </li>
+          <li>
+            <strong>Generative Blueprint AI:</strong> A model that synthesizes
+            front-end elements (navigation bars, footers, hero sections, etc.)
+            based on recognized text, user prompts, or both, returning a
+            well-structured JSON tree conforming to CraftJS specifications.
+          </li>
+          <li>
+            <strong>Screenshot to Website:</strong> Ties together the Python OCR
+            service with advanced AI summarization. The recognized text from
+            EasyOCR is fed to specialized prompts that summarize UI content and
+            overall layout (GUI structure), culminating in a full-fledged page
+            blueprint.
+          </li>
+        </ul>
+        <p style="margin-bottom: 1rem">
+          The <strong>OCR</strong> process is invoked whenever a user supplies a
+          screenshot. Our Python OCR script utilizes EasyOCR to extract textual
+          content, returning recognized lines, bounding boxes, and confidence
+          scores. Depending on the presence of a screenshot, different OpenAI
+          models are used:
+        </p>
+        <ul
+          style="margin-bottom: 1rem; list-style-type: disc; margin-left: 2rem"
+        >
+          <li>
+            <strong>4o for UI Extraction:</strong> Called when screenshot data
+            needs to be parsed for interface labels and textual content.
+          </li>
+          <li>
+            <strong>o3 for CraftJS JSON Layout:</strong> Typically engaged when
+            generating a final structured page layout from textual instructions
+            or summarized UI components.
+          </li>
+        </ul>
+        <p style="margin-bottom: 1rem">
+          Once the AI outputs a <strong>Layout JSON Tree</strong>, the data is
+          passed back to the <strong>React Editor</strong>, updating the CraftJS
+          canvas in real time. Users can further refine and interact with these
+          elements, making design edits or adding custom content without leaving
+          VS Code.
+        </p>
+        <p style="margin-bottom: 1rem">
+          Finally, the system supports
+          <strong>Local Save & Load Utilities</strong> for versioning and
+          offline editing, along with robust <strong>Export Options</strong> to
+          produce production-ready <strong>HTML, JS, and CSS</strong> files.
+          These files, as well as any generated images and additional resources,
+          can be saved to a user-specified folder (the
+          <strong>Current Workspace</strong> in VS Code), making the created
+          pages immediately deployable or further editable in a standard
+          development workflow.
+        </p>
+        <p style="margin-bottom: 1rem">
+          By combining Python-driven OCR, AI-based layout generation, and a
+          feature-rich React/CraftJS editor under a unified VS Code extension,
+          our system provides a streamlined experience for converting raw
+          ideas—or entire screenshots—into functional, multi-page websites.
+          Every layer is designed to be modular, ensuring that future
+          enhancements like improved AI models, more sophisticated screenshot
+          transformations, or expanded export capabilities can be integrated
+          without disrupting the overall architecture.
+        </p>
+      </section>
+
+      <section id="site-map" class="mb-5">
+        <h2>Site Map</h2>
+        <p>Show the overall navigation or sitemap structure here.</p>
+      </section>
+
+      <section id="sequence-diagrams" class="mb-5">
+        <h2>Sequence Diagrams</h2>
+        <p>
+          Include any sequence diagrams representing interactions between
+          components.
+        </p>
+      </section>
+
+      <section id="design-patterns" class="mb-5">
+        <h2>Design Patterns</h2>
+        <p>Discuss the design patterns used in the project.</p>
+      </section>
+
+      <section id="class-diagrams" class="mb-5">
+        <h2>Class Diagrams</h2>
+        <p>
+          Provide UML class diagrams or other diagrams representing your data
+          structures.
+        </p>
+      </section>
+
+      <section id="data-storage" class="mb-5">
+        <h2>Data storage</h2>
+        <p>
+          Explain how and where your data is stored (database model, cloud
+          storage, etc.).
+        </p>
+      </section>
+
+      <section id="packages-and-apis-defined" class="mb-5">
+        <h2>Packages and APIs defined</h2>
+        <p>
+          Detail the packages, modules, or APIs your system will expose or
+          utilize.
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 mt-auto">
+      <div
+        class="footer-logos d-flex justify-content-center align-items-center"
+      >
+        <a href="https://www.ucl.ac.uk" target="_blank">
+          <img src="ucl.png" alt="UCL Logo" class="footer-logo" />
+        </a>
+        <a href="https://www.microsoft.com" target="_blank">
+          <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo" />
+        </a>
+        <a href="https://github.com/YOUR_GITHUB" target="_blank">
+          <i class="fa-brands fa-square-github"></i>
+        </a>
       </div>
-    </nav>
+    </footer>
 
-    <!-- Page Title/Intro -->
-    <h1 class="my-5">System Design</h1>
-    <p>Specifies the system architecture and structural components critical to the software’s functionality.</p>
-  </header>
-
-  <!-- Main Content -->
-  <main class="container flex-grow-1">
-    <!-- Sections inside the same container -->
-    <section id="system-architecture-diagram" class="mb-5">
-      <h2>System architecture diagram</h2>
-      <p>Add your system architecture diagram and explanation here.</p>
-    </section>
-
-    <section id="site-map" class="mb-5">
-      <h2>Site Map</h2>
-      <p>Show the overall navigation or sitemap structure here.</p>
-    </section>
-
-    <section id="sequence-diagrams" class="mb-5">
-      <h2>Sequence Diagrams</h2>
-      <p>Include any sequence diagrams representing interactions between components.</p>
-    </section>
-
-    <section id="design-patterns" class="mb-5">
-      <h2>Design Patterns</h2>
-      <p>Discuss the design patterns used in the project.</p>
-    </section>
-
-    <section id="class-diagrams" class="mb-5">
-      <h2>Class Diagrams</h2>
-      <p>Provide UML class diagrams or other diagrams representing your data structures.</p>
-    </section>
-
-    <section id="data-storage" class="mb-5">
-      <h2>Data storage</h2>
-      <p>Explain how and where your data is stored (database model, cloud storage, etc.).</p>
-    </section>
-
-    <section id="packages-and-apis-defined" class="mb-5">
-      <h2>Packages and APIs defined</h2>
-      <p>Detail the packages, modules, or APIs your system will expose or utilize.</p>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center py-4 mt-auto">
-    <div class="footer-logos d-flex justify-content-center align-items-center">
-      <a href="https://www.ucl.ac.uk" target="_blank">
-        <img src="ucl.png" alt="UCL Logo" class="footer-logo">
-      </a>
-      <a href="https://www.microsoft.com" target="_blank">
-        <img src="microsoft.png" alt="Microsoft Logo" class="footer-logo">
-      </a>
-      <a href="https://github.com/YOUR_GITHUB" target="_blank">
-        <i class="fa-brands fa-square-github"></i>
-      </a>
-    </div>
-  </footer>
-
-  <!-- Bootstrap JS Bundle (includes Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Optional custom scripts -->
-  <script src="script.js"></script>
-</body>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional custom scripts -->
+    <script src="script.js"></script>
+  </body>
 </html>
